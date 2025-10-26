@@ -26287,3 +26287,8 @@ dl li {
   flex-grow: 1;
 }
 /*# sourceMappingURL=maps/style.css.map */
+
+/* === Selalu tampilkan scrollbar di halaman === */
+html {
+    overflow-y: scroll !important;
+}

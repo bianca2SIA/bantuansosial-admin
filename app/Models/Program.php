@@ -1,19 +1,18 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ProgramBantuan extends Model
+class Program extends Model
 {
     use HasFactory;
 
-    // Tambahkan baris ini:
+                                  // Tambahkan baris ini:
     protected $table = 'program'; // sesuai migration kamu!
 
     protected $primaryKey = 'program_id';
-    public $timestamps = true;
+    public $timestamps    = true;
 
     protected $fillable = [
         'kode',

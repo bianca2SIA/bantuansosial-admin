@@ -1,0 +1,69 @@
+/* ==================== CUSTOM SIDEBAR ACTIVE COLOR ==================== */
+
+/* Warna utama ungu (Bina Desa) */
+:root {
+    --bina-ungu: #9C27B0;
+}
+
+/* Menu aktif di sidebar */
+.sidebar .nav .nav-item.active > .nav-link,
+.sidebar .nav .nav-item.active > .nav-link .menu-title,
+.sidebar .nav .nav-item.active > .nav-link .menu-icon {
+    color: var(--bina-ungu) !important;
+    font-weight: 500; /* lebih halus daripada 600 */
+    letter-spacing: 0.2px; /* biar kelihatan rapi */
+}
+
+/* Latar belakang lembut untuk menu aktif */
+.sidebar .nav .nav-item.active {
+    background-color: rgba(156, 39, 176, 0.08);
+    border-radius: 8px;
+   /* ==================== CUSTOM SIDEBAR ACTIVE COLOR ==================== */
+
+/* Warna utama ungu (Bina Desa) */
+:root {
+    --bina-ungu: #9C27B0;
+}
+
+/* Menu aktif di sidebar */
+.sidebar .nav .nav-item.active > .nav-link,
+.sidebar .nav .nav-item.active > .nav-link .menu-title,
+.sidebar .nav .nav-item.active > .nav-link .menu-icon {
+    color: var(--bina-ungu) !important;
+    font-weight: 500; /* lebih halus daripada 600 */
+    letter-spacing: 0.2px; /* biar kelihatan rapi */
+}
+
+/* Latar belakang lembut untuk menu aktif */
+.sidebar .nav .nav-item.active {
+    background-color: rgba(156, 39, 176, 0.08);
+    border-radius: 8px;
+}
+
+/* Efek hover lembut */
+.sidebar .nav .nav-item:hover > .nav-link {
+    background-color: rgba(156, 39, 176, 0.04);
+    color: var(--bina-ungu) !important;
+    transition: 0.3s;
+}
+
+/* Ikon menu aktif juga jadi ungu */
+.sidebar .nav .nav-item.active > .nav-link i {
+    color: var(--bina-ungu) !important;
+}
+
+}
+
+/* Efek hover lembut */
+.sidebar .nav .nav-item:hover > .nav-link {
+    background-color: rgba(156, 39, 176, 0.04);
+    color: var(--bina-ungu) !important;
+    transition: 0.3s;
+}
+
+/* Ikon menu aktif juga jadi ungu */
+.sidebar .nav .nav-item.active > .nav-link i {
+    color: var(--bina-ungu) !important;
+}
+
+
