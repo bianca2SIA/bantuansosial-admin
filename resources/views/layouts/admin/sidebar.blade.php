@@ -31,6 +31,15 @@
             </a>
         </li>
 
+        {{-- Warga --}}
+        <li class="nav-item {{ request()->is('warga*') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ route('warga.index') }}">
+                <span class="menu-title">Warga</span>
+                <i class="menu-icon mdi mdi-account-multiple"></i>
+            </a>
+        </li>
+
+
         {{-- Program Bantuan --}}
         <li class="nav-item {{ request()->is('program*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('program.index') }}">
