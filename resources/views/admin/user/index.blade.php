@@ -34,7 +34,7 @@
                                 <tr>
                                     <th>Nama</th>
                                     <th>Email</th>
-                                    <th>Password</th>
+                                    <th>Role</th>
                                     <th class="text-center">Aksi</th>
                                 </tr>
                             </thead>
@@ -43,7 +43,7 @@
                                     <tr>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
-                                        <td>{{ $item->password }}</td>
+                                        <td>{{ $item->role }}</td>
 
 
                                         <td class="text-center">

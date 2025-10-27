@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
     <title>{{ isset($success) ? 'Login Berhasil - BINA DESA' : 'Login - BINA DESA' }}</title>
@@ -23,9 +24,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background:
-                linear-gradient(rgba(245, 240, 250, 0.1), rgba(215, 195, 247, 0.8)),
-                url("{{ asset('assets-admin/images/bansos.jpg') }}") no-repeat center center/cover;
+            background: #f3e8ff !important;
             overflow: hidden;
             position: relative;
         }
@@ -55,8 +54,15 @@
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .app-title {
@@ -99,7 +105,8 @@
             outline: none;
         }
 
-        button, .btn {
+        button,
+        .btn {
             width: 100%;
             background: linear-gradient(to right, #9b5de5, #7b2cbf);
             color: white;
@@ -114,7 +121,8 @@
             display: inline-block;
         }
 
-        button:hover, .btn:hover {
+        button:hover,
+        .btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 14px rgba(123, 44, 191, 0.3);
         }
@@ -191,4 +199,5 @@
         </div>
     @endif
 </body>
+
 </html>

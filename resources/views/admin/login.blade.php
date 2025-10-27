@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
     <meta charset="UTF-8">
-    <title>{{ isset($success) ? 'Login Berhasil - BINA DESA' : 'Login - BINA DESA' }}</title>
+    <title>Login Berhasil - KITAPEDULI</title>
 
     {{-- 🔗 Load CSS dari template admin --}}
     <link rel="stylesheet" href="{{ asset('assets-admin/vendors/mdi/css/materialdesignicons.min.css') }}">
@@ -10,8 +11,7 @@
     <link rel="stylesheet" href="{{ asset('assets-admin/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('assets-admin/css/custom.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets-admin/images/favicon.png') }}" />
-
-    {{-- 🎨 CSS tambahan halaman login & success --}}
+    
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
@@ -23,190 +23,124 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background:
-                linear-gradient(rgba(245, 240, 250, 0.4), rgba(215, 195, 247, 0.5)),
-                url("{{ asset('assets-admin/images/bansos.jpg') }}") no-repeat center center/cover;
+            background: #f3e8ff !important;
             overflow: hidden;
             position: relative;
         }
 
+        /* ✨ Efek blur lembut di background */
         body::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(3px);
-            -webkit-backdrop-filter: blur(3px);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 0;
         }
 
-        /* ✨ Card dasar (form login & success) */
-        .card-container, .success-container {
+        /* ✨ Container utama */
+        .success-container {
             position: relative;
             z-index: 2;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            border-radius: 20px;
-            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.15);
-            width: 380px;
-            padding: 40px 35px;
+            background: rgba(255, 255, 255, 0.55);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-radius: 24px;
+            box-shadow: 0 12px 40px rgba(123, 44, 191, 0.2);
+            width: 400px;
+            padding: 50px 40px;
             text-align: center;
-            animation: fadeIn 0.6s ease-in-out;
+            animation: fadeIn 0.7s ease-in-out;
         }
 
+        /* ✨ Animasi masuk lembut */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .app-title {
-            font-size: 28px;
-            font-weight: 700;
-            color: #7b2cbf;
-            margin-bottom: 8px;
-        }
-
-        h2 {
-            font-size: 18px;
-            font-weight: 600;
-            color: #9b5de5;
-            margin-bottom: 25px;
-        }
-
-        label {
-            display: block;
-            text-align: left;
-            font-weight: 500;
-            color: #5a189a;
-            margin-bottom: 6px;
-            font-size: 14px;
-        }
-
-        input {
-            width: 100%;
-            padding: 12px;
-            margin-bottom: 16px;
-            border-radius: 10px;
-            border: 1px solid #d1b3ff;
-            background: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-
-        input:focus {
-            border-color: #7b2cbf;
-            box-shadow: 0 0 8px rgba(123, 44, 191, 0.3);
-            outline: none;
-        }
-
-        button, .btn {
-            width: 100%;
-            background: linear-gradient(to right, #9b5de5, #7b2cbf);
-            color: white;
-            border: none;
-            padding: 14px;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s ease;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        button:hover, .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 14px rgba(123, 44, 191, 0.3);
-        }
-
-        .error-box {
-            color: #b00020;
-            background: #fdecea;
-            border: 1px solid #f5b7b1;
-            border-radius: 8px;
-            padding: 10px;
-            margin-bottom: 20px;
-            text-align: left;
-            font-size: 13px;
-        }
-
-        .footer {
-            margin-top: 15px;
-            font-size: 13px;
-            color: #7b2cbf;
-        }
-
-        /* ✨ Ikon sukses */
+        /* ✅ Ikon sukses */
         .icon {
-            font-size: 60px;
+            font-size: 70px;
             color: #7b2cbf;
-            margin-bottom: 20px;
-            animation: bounceIn 0.6s ease-in-out;
+            margin-bottom: 25px;
+            animation: bounceIn 0.7s ease-in-out;
         }
 
         @keyframes bounceIn {
-            0% { transform: scale(0); opacity: 0; }
-            60% { transform: scale(1.2); opacity: 1; }
-            100% { transform: scale(1); }
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            60% {
+                transform: scale(1.2);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+            }
         }
 
-        .success-container h2 {
+        /* 🎉 Teks */
+        h2 {
+            font-size: 22px;
+            font-weight: 700;
             color: #7b2cbf;
+            margin-bottom: 12px;
         }
 
-        .success-container p {
-            color: #5a189a;
-            margin-bottom: 25px;
+        p {
+            font-size: 15px;
+            color: #333;
+            margin-bottom: 35px;
         }
 
-        /* Hover efek lembut */
-        .card-container:hover, .success-container:hover {
-            box-shadow: 0 10px 45px rgba(123, 44, 191, 0.25);
+        /* 💜 Tombol Dashboard */
+        .btn {
+            display: inline-block;
+            background: linear-gradient(to right, #9b5de5, #7b2cbf);
+            color: white;
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 280px;
+            font-size: 15px;
+            letter-spacing: 0.3px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(123, 44, 191, 0.3);
+        }
+
+        /* ✨ Hover lembut untuk card */
+        .success-container:hover {
+            box-shadow: 0 14px 50px rgba(123, 44, 191, 0.25);
         }
     </style>
+
 </head>
 
 <body>
-    {{-- 🔐 Jika login berhasil --}}
-    @if (isset($success))
-        <div class="success-container">
-            <div class="icon">✅</div>
-            <div class="app-title">BINA DESA</div>
-            <h2>Login Berhasil!</h2>
-            <p>Selamat datang kembali, <b>{{ Auth::user()->name ?? 'Admin' }}</b> 🎉</p>
-            <a href="{{ url('/dashboard') }}" class="btn">Masuk ke Dashboard</a>
-            <div class="footer">© 2025 BINA DESA — Bantuan Sosial Digital</div>
-        </div>
-    @else
-        {{-- 🪄 Form login --}}
-        <div class="card-container">
-            <div class="app-title">BINA DESA</div>
-            <h2>Login Admin</h2>
-
-            @if ($errors->any())
-                <div class="error-box">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
-            <form method="POST" action="{{ route('auth.login') }}">
-                @csrf
-                <label>Username</label>
-                <input type="text" name="username" value="{{ old('username') }}" placeholder="Masukkan username">
-
-                <label>Password</label>
-                <input type="password" name="password" placeholder="Masukkan password">
-
-                <button type="submit">Masuk</button>
-            </form>
-
-            <div class="footer">© 2025 BINA DESA — Bantuan Sosial Digital</div>
-        </div>
-    @endif
+    <div class="success-container">
+        <div class="icon">✅</div>
+        <h2>Login Berhasil!</h2>
+        <p>Selamat datang kembali, <b>{{ Auth::user()->name ?? 'Admin' }}</b> 🎉</p>
+        <a href="{{ url('/dashboard') }}" class="btn">Masuk ke Dashboard</a>
+    </div>
 </body>
+
 </html>
