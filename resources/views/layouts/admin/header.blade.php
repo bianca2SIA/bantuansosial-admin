@@ -10,10 +10,9 @@
 
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
         <!-- Tombol Sidebar -->
-        <button class="navbar-toggler align-self-center" type="button" data-toggle="minimize">
+        <button class="navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
             <span class="mdi mdi-menu"></span>
         </button>
-
         <div class="search-field d-none d-md-block">
             <form class="d-flex align-items-center h-100" action="#">
                 <div class="input-group">
@@ -28,7 +27,9 @@
         <ul class="navbar-nav navbar-nav-right">
 
             <li class="nav-item nav-profile dropdown">
-                <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
+                <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
+                    id="profileDropdown">
+
                     <div class="nav-profile-img">
                         <img src="{{ asset('assets-admin/images/faces/face1.jpg') }}" alt="image">
                         <span class="availability-status online"></span>
@@ -144,7 +145,7 @@
         </ul>
 
         <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-            data-toggle="offcanvas">
+            data-bs-toggle="offcanvas">
             <span class="mdi mdi-menu"></span>
         </button>
     </div>
