@@ -32,10 +32,10 @@
                         <table class="table table-bordered table-striped">
                             <thead class="bg-gradient-primary text-white">
                                 <tr>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th class="text-center">Aksi</th>
+                                    <th class="text-center fw-bold">Nama</th>
+                                    <th class="text-center fw-bold">Email</th>
+                                    <th class="text-center fw-bold">Role</th>
+                                    <th class="text-center fw-bold">Aksi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -43,7 +43,19 @@
                                     <tr>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
-                                        <td>{{ $item->role }}</td>
+                                        <td class="text-center">
+                                            @php $role = strtolower($item->role ?? ''); @endphp
+
+                                            @if ($role == 'admin')
+                                                <label class="badge badge-gradient-success">ADMIN</label>
+                                            @elseif ($role == 'user')
+                                                <label class="badge badge-gradient-info">USER</label>
+                                            @elseif ($role == 'guest')
+                                                <label class="badge badge-gradient-warning">GUEST</label>
+                                            @else
+                                                <label class="badge badge-gradient-secondary">BELUM DISET</label>
+                                            @endif
+                                        </td>
 
 
                                         <td class="text-center">

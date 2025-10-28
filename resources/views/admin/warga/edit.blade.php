@@ -44,7 +44,8 @@
                         <div class="card-body">
                             <h4 class="card-title mb-4">Form Edit Warga</h4>
 
-                            <form class="forms-sample" method="POST" action="{{ route('warga.update', $warga->warga_id) }}">
+                            <form class="forms-sample" method="POST"
+                                action="{{ route('warga.update', $warga->warga_id) }}">
                                 @csrf
                                 @method('PUT')
                                 <div class="form-group">

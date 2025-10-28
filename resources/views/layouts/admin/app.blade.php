@@ -32,18 +32,18 @@
 
             {{-- start main content --}}
             @yield('content')
-                {{-- end main content --}}
+            {{-- end main content --}}
 
-                {{-- start footer --}}
-                @include('layouts.admin.footer')
-                {{-- end footer --}}
-            </div>
+            {{-- start footer --}}
+            @include('layouts.admin.footer')
+            {{-- end footer --}}
         </div>
+    </div>
     </div>
     {{-- start js --}}
     @include('layouts.admin.js')
     {{-- end js --}}
-    
+
 </body>
 
 </html>

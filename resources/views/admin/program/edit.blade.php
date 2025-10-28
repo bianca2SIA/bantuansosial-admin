@@ -75,4 +75,4 @@
 
         </div>
         {{-- end main content --}}
-@endsection
+    @endsection

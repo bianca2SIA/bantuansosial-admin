@@ -9,7 +9,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('warga', function (Blueprint $table) {
-            $table->increments('warga_id'); // Primary Key, auto increment
+            $table->increments('warga_id');         // Primary Key, auto increment
             $table->string('no_ktp', 20)->unique(); // Nomor KTP unik
             $table->string('nama', 100);
             $table->enum('jenis_kelamin', ['Laki-laki', 'Perempuan'])->nullable();

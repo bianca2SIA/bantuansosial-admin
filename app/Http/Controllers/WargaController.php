@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Warga;
@@ -30,19 +29,19 @@ class WargaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'no_ktp' => 'required|unique:warga,no_ktp|max:20',
-            'nama' => 'required|string|max:100',
+            'no_ktp'        => 'required|unique:warga,no_ktp|max:20',
+            'nama'          => 'required|string|max:100',
             'jenis_kelamin' => 'nullable|in:Laki-laki,Perempuan',
-            'agama' => 'nullable|string|max:50',
-            'pekerjaan' => 'nullable|string|max:100',
-            'telp' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:100',
+            'agama'         => 'nullable|string|max:50',
+            'pekerjaan'     => 'nullable|string|max:100',
+            'telp'          => 'nullable|string|max:20',
+            'email'         => 'nullable|email|max:100',
         ]);
 
         Warga::create($request->all());
 
         return redirect()->route('warga.index')
-                         ->with('success', 'Data warga berhasil ditambahkan!');
+            ->with('success', 'Data warga berhasil ditambahkan!');
     }
 
     /**
@@ -71,19 +70,19 @@ class WargaController extends Controller
         $warga = Warga::findOrFail($id);
 
         $request->validate([
-            'no_ktp' => 'required|max:20|unique:warga,no_ktp,' . $warga->warga_id . ',warga_id',
-            'nama' => 'required|string|max:100',
+            'no_ktp'        => 'required|max:20|unique:warga,no_ktp,' . $warga->warga_id . ',warga_id',
+            'nama'          => 'required|string|max:100',
             'jenis_kelamin' => 'nullable|in:Laki-laki,Perempuan',
-            'agama' => 'nullable|string|max:50',
-            'pekerjaan' => 'nullable|string|max:100',
-            'telp' => 'nullable|string|max:20',
-            'email' => 'nullable|email|max:100',
+            'agama'         => 'nullable|string|max:50',
+            'pekerjaan'     => 'nullable|string|max:100',
+            'telp'          => 'nullable|string|max:20',
+            'email'         => 'nullable|email|max:100',
         ]);
 
         $warga->update($request->all());
 
         return redirect()->route('warga.index')
-                         ->with('success', 'Data warga berhasil diperbarui!');
+            ->with('success', 'Data warga berhasil diperbarui!');
     }
 
     /**
@@ -95,6 +94,6 @@ class WargaController extends Controller
         $warga->delete();
 
         return redirect()->route('warga.index')
-                         ->with('success', 'Data warga berhasil dihapus!');
+            ->with('success', 'Data warga berhasil dihapus!');
     }
 }

@@ -325,28 +325,28 @@
                     </div>
                 </li>
                 <li class="nav-item {{ request()->is('warga*') ? 'active' : '' }}">
-    <a class="nav-link {{ request()->is('warga*') ? '' : 'collapsed' }}" data-bs-toggle="collapse"
-        data-bs-target="#warga-menu" role="button"
-        aria-expanded="{{ request()->is('warga*') ? 'true' : 'false' }}" aria-controls="warga-menu"
-        onclick="window.location='{{ route('warga.index') }}'">
+                    <a class="nav-link {{ request()->is('warga*') ? '' : 'collapsed' }}" data-bs-toggle="collapse"
+                        data-bs-target="#warga-menu" role="button"
+                        aria-expanded="{{ request()->is('warga*') ? 'true' : 'false' }}" aria-controls="warga-menu"
+                        onclick="window.location='{{ route('warga.index') }}'">
 
-        <span class="menu-title">Warga</span>
-        <i class="mdi mdi-account-multiple menu-icon"></i>
-    </a>
+                        <span class="menu-title">Warga</span>
+                        <i class="mdi mdi-account-multiple menu-icon"></i>
+                    </a>
 
-    <div class="collapse {{ request()->is('warga*') ? 'show' : '' }}" id="warga-menu">
-        <ul class="nav flex-column sub-menu">
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('warga') ? 'active' : '' }}"
-                    href="{{ route('warga.index') }}">Daftar Warga</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link {{ request()->is('warga/create') ? 'active' : '' }}"
-                    href="{{ route('warga.create') }}">Tambah Warga</a>
-            </li>
-        </ul>
-    </div>
-</li>
+                    <div class="collapse {{ request()->is('warga*') ? 'show' : '' }}" id="warga-menu">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('warga') ? 'active' : '' }}"
+                                    href="{{ route('warga.index') }}">Daftar Warga</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {{ request()->is('warga/create') ? 'active' : '' }}"
+                                    href="{{ route('warga.create') }}">Tambah Warga</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
                 <li class="nav-item {{ request()->is('program*') ? 'active' : '' }}">
                     <a class="nav-link {{ request()->is('program*') ? '' : 'collapsed' }}" data-bs-toggle="collapse"

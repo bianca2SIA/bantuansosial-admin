@@ -32,14 +32,15 @@
                         <table class="table table-bordered table-striped">
                             <thead class="bg-gradient-primary text-white">
                                 <tr>
-                                    <th>No_ktp</th>
-                                    <th>Nama</th>
-                                    <th>Jenis Kelamin</th>
-                                    <th>Agama</th>
-                                    <th>Pekerjaan</th>
-                                    <th>Telp</th>
-                                    <th>Email</th>
-                                    <th class="text-center">Aksi</th>
+                                    <th class="text-center fw-bold">No_KTP</th>
+                                    <th class="text-center fw-bold">Nama</th>
+                                    <th class="text-center fw-bold">Jenis Kelamin</th>
+                                    <th class="text-center fw-bold">Agama</th>
+                                    <th class="text-center fw-bold">Pekerjaan</th>
+                                    <th class="text-center fw-bold">Telp</th>
+                                    <th class="text-center fw-bold">Email</th>
+                                    <th class="text-center fw-bold">Aksi</th>
+
                                 </tr>
                             </thead>
                             <tbody>

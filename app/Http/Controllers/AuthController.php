@@ -1,8 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -18,22 +18,17 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'username' => 'required',
-            'password' => ['required','min:3','regex:/[A-Z]/'],
-        ], [
-            'username.required' => 'Username wajib diisi.',
-            'password.required' => 'Password wajib diisi.',
-            'password.min' => 'Password minimal 3 karakter.',
-            'password.regex' => 'Password harus mengandung huruf kapital.',
+            'email'    => 'required|email',
+            'password' => ['required', 'min:3'],
         ]);
 
-        if ($request->username === $request->password) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             return view('admin.login', [
-                'username' => $request->username
+                'email' => $request->email,
             ]);
         }
 
-        return back()->withErrors(['admin.login' => 'Username dan Password harus sama.']);
+        return back()->withErrors(['login' => 'Email atau Password salah.']);
     }
 
     /**
