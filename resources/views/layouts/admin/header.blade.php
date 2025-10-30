@@ -31,7 +31,7 @@
                     id="profileDropdown">
 
                     <div class="nav-profile-img">
-                        <img src="{{ asset('assets-admin/images/faces/face1.jpg') }}" alt="image">
+                        <img src="{{ asset('assets-admin/images/faces/face6.jpg') }}" alt="image">
                         <span class="availability-status online"></span>
                     </div>
                     <div class="nav-profile-text d-flex align-items-center">
@@ -132,8 +132,9 @@
             </li>
 
             <li class="nav-item d-none d-lg-block">
-                <a class="nav-link" href="#">
-                    <i class="mdi mdi-power"></i>
+                <a class="nav-link" href="https://wa.me/6281234567890?text=Halo%20Admin%20BINA%20DESA"
+                    target="_blank" title="Chat via WhatsApp">
+                    <i class="mdi mdi-whatsapp" style="color:inherit; font-size:22px;"></i>
                 </a>
             </li>
 

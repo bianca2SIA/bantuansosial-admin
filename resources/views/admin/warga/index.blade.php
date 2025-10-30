@@ -23,9 +23,10 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="card-title mb-0">List Data Seluruh Warga</h4>
-                        <a href="{{ route('warga.create') }}" class="btn btn-gradient-primary text-white">
-                            + Tambah Warga
+                        <a href="{{ route('warga.create') }}" class="btn btn-primary">
+                            <i class="mdi mdi-plus"></i> Tambah Warga
                         </a>
+
                     </div>
 
                     <div class="table-responsive">
@@ -55,17 +56,20 @@
                                         <td>{{ $item->email }}</td>
 
                                         <td class="text-center">
-                                            <a href="{{ route('warga.edit', $item->warga_id) }}"
-                                                class="btn btn-sm btn-warning">Edit</a>
+                                            <a href="{{ route('warga.edit', $item->warga_id) }}" class="btn btn-warning">
+                                                <i class="mdi mdi-pencil"></i> Edit
+                                            </a>
+
                                             <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
-                                                style="display:inline;">
-
-
+                                                style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Yakin hapus data ini?')">Hapus</button>
+                                                <button type="submit" class="btn btn-danger"
+                                                    onclick="return confirm('Yakin hapus data ini?')">
+                                                    <i class="mdi mdi-delete"></i> Hapus
+                                                </button>
                                             </form>
+
                                         </td>
                                     </tr>
                                 @empty

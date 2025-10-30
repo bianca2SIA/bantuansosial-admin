@@ -52,14 +52,7 @@
                                     <input type="text" name="email" class="form-control" placeholder="Masukkan email"
                                         value="{{ old('email') }}"required>
                                 </div>
-                                <div class="form-group">
-                                    <label>Role</label>
-                                    <select name="role" class="form-control" required>
-                                        <option value="">-- Pilih Jenis Role --</option>
-                                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                        <option value="guest" {{ old('role') == 'guest' ? 'selected' : '' }}>Guest</option>
-                                    </select>
-                                </div>
+
                                 <div class="form-group">
                                     <label>Password (kosongkan jika tidak ingin diubah)</label>
                                     <input type="text" name="password" class="form-control"
@@ -72,9 +65,17 @@
                                         placeholder="Ulangi password baru (opsional)">
                                 </div>
                                 <div class="mt-4 d-flex justify-content-end">
-                                    <a href="/program" class="btn btn-light me-2">Batal</a>
-                                    <button type="submit" class="btn btn-gradient-primary text-white">Simpan</button>
+                                    <!-- Tombol Batal -->
+                                    <a href="/warga" class="btn btn-light me-2">
+                                        <i class="mdi mdi-arrow-left"></i> Batal
+                                    </a>
+
+                                    <!-- Tombol Simpan -->
+                                    <button type="submit" class="btn btn-gradient-primary text-white">
+                                        <i class="mdi mdi-content-save"></i> Simpan
+                                    </button>
                                 </div>
+
                             </form>
                         </div>
                     </div>

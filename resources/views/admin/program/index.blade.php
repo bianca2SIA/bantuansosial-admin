@@ -50,14 +50,18 @@
                                         <td>{{ $item->deskripsi }}</td>
                                         <td>Rp{{ number_format($item->anggaran, 0, ',', '.') }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('program.edit', $item->program_id) }}"
-                                                class="btn btn-sm btn-warning">Edit</a>
-                                            <form action="{{ route('program.destroy', $item->program_id) }}" method="POST"
-                                                style="display:inline;">
+                                            <a href="{{ route('warga.edit', $item->program_id) }}" class="btn btn-warning">
+                                                <i class="mdi mdi-pencil"></i> Edit
+                                            </a>
+
+                                            <form action="{{ route('warga.destroy', $item->program_id) }}" method="POST"
+                                                style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Yakin hapus data ini?')">Hapus</button>
+                                                <button type="submit" class="btn btn-danger"
+                                                    onclick="return confirm('Yakin hapus data ini?')">
+                                                    <i class="mdi mdi-delete"></i> Hapus
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>

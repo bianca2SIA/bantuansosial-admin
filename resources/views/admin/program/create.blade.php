@@ -56,9 +56,17 @@
                                     <textarea name="deskripsi" class="form-control" rows="4" placeholder="Tuliskan deskripsi program" required>{{ old('deskripsi') }}</textarea>
                                 </div>
                                 <div class="mt-4 d-flex justify-content-end">
-                                    <a href="/program" class="btn btn-light me-2">Batal</a>
-                                    <button type="submit" class="btn btn-gradient-primary text-white">Simpan</button>
+                                    <!-- Tombol Batal -->
+                                    <a href="/warga" class="btn btn-light me-2">
+                                        <i class="mdi mdi-arrow-left"></i> Batal
+                                    </a>
+
+                                    <!-- Tombol Simpan -->
+                                    <button type="submit" class="btn btn-gradient-primary text-white">
+                                        <i class="mdi mdi-content-save"></i> Simpan
+                                    </button>
                                 </div>
+
                             </form>
                         </div>
                     </div>

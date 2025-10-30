@@ -34,7 +34,7 @@
                                 <tr>
                                     <th class="text-center fw-bold">Nama</th>
                                     <th class="text-center fw-bold">Email</th>
-                                    <th class="text-center fw-bold">Role</th>
+
                                     <th class="text-center fw-bold">Aksi</th>
                                 </tr>
                             </thead>
@@ -43,33 +43,21 @@
                                     <tr>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
-                                        <td class="text-center">
-                                            @php $role = strtolower($item->role ?? ''); @endphp
 
-                                            @if ($role == 'admin')
-                                                <label class="badge badge-gradient-success">ADMIN</label>
-                                            @elseif ($role == 'user')
-                                                <label class="badge badge-gradient-info">USER</label>
-                                            @elseif ($role == 'guest')
-                                                <label class="badge badge-gradient-warning">GUEST</label>
-                                            @else
-                                                <label class="badge badge-gradient-secondary">BELUM DISET</label>
-                                            @endif
-                                        </td>
 
 
                                         <td class="text-center">
-                                            <a href="{{ route('user.edit', $item->id) }}"
-                                                class="btn btn-sm btn-warning">Edit</a>
-                                            <form action="{{ route('user.destroy', $item->id) }}" method="POST"
-                                                style="display:inline;">
+                                           <a href="{{ route('warga.edit', $item->id) }}" class="btn btn-warning">
+    <i class="mdi mdi-pencil"></i> Edit
+</a>
 
-
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Yakin hapus data ini?')">Hapus</button>
-                                            </form>
+<form action="{{ route('warga.destroy', $item->id) }}" method="POST" style="display:inline-block;">
+    @csrf
+    @method('DELETE')
+    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin hapus data ini?')">
+        <i class="mdi mdi-delete"></i> Hapus
+    </button>
+</form>
                                         </td>
                                     </tr>
                                 @empty

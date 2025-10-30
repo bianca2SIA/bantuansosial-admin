@@ -62,14 +62,7 @@
                                         required>
                                 </div>
 
-                                <div class="form-group">
-                                    <label>Role</label>
-                                    <select name="role" class="form-control" required>
-                                        <option value="">-- Pilih Jenis Role --</option>
-                                        <option value="admin" {{ old('role') == 'admin' ? 'selected' : '' }}>Admin</option>
-                                        <option value="guest" {{ old('role') == 'guest' ? 'selected' : '' }}>Guest</option>
-                                    </select>
-                                </div>
+
 
                                 <div class="form-group">
                                     <label>Password (kosongkan jika tidak ingin diubah)</label>
