@@ -3,3 +3,5 @@
  <script src="{{ asset('assets-admin/js/misc.js') }}"></script>
  <script src="assets-admin/vendors/chart.js/chart.umd.js"></script>
  <script src="assets-admin/js/dashboard.js"></script>
+
+ 

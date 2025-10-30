@@ -17,22 +17,22 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-    /* Tambahan baru 👇 */
-    background: url('{{ asset('assets-admin/images/bansos.jpg') }}') no-repeat center center fixed;
-    background-size: cover;
+            /* Tambahan baru 👇 */
+            background: url('{{ asset('assets-admin/images/bansos.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
 
-    /* Lapisan transparan di atas gambar */
-    position: relative;
-    overflow: hidden;
-}
+            /* Lapisan transparan di atas gambar */
+            position: relative;
+            overflow: hidden;
+        }
 
         body::before {
             content: '';
@@ -76,14 +76,21 @@
             color: #7b2cbf;
             margin-bottom: 8px;
         }
+
         .app-description {
-    font-size: 11.5px;        /* 🔹 Mengecilkan teks */
-    color: #000000;           /* Tetap warna ungu */
-    margin-bottom: 18px;      /* Kurangi jarak bawah sedikit */
-    line-height: 1.3;         /* Jarak antar baris lebih rapat */
-    opacity: 0.9;             /* Sedikit lembut supaya tidak terlalu mencolok */
-    animation: fadeIn 1s ease;
-}
+            font-size: 11.5px;
+            /* 🔹 Mengecilkan teks */
+            color: #000000;
+            /* Tetap warna ungu */
+            margin-bottom: 18px;
+            /* Kurangi jarak bawah sedikit */
+            line-height: 1.3;
+            /* Jarak antar baris lebih rapat */
+            opacity: 0.9;
+            /* Sedikit lembut supaya tidak terlalu mencolok */
+            animation: fadeIn 1s ease;
+        }
+
         h2 {
             font-size: 18px;
             font-weight: 600;
@@ -182,16 +189,16 @@
         </div>
     @else
         {{-- 🪄 Form login --}}
-      <div class="card-container">
-    <img src="{{ asset('assets-admin/images/logo-bina-desa.png') }}"
-         alt="Logo Bina Desa"
-         class="login-logo">
+        <div class="card-container">
+            <img src="{{ asset('assets-admin/images/logo-bina-desa.png') }}" alt="Logo Bina Desa"
+                style="width: 130px; height: auto; margin-bottom: 10px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));">
 
-    <div class="app-title">BINA DESA</div>
-    <p class="app-description">
-        Sistem Manajemen Bantuan Sosial Digital<br>
-        untuk mendukung transparansi dan akurasi penyaluran bantuan di desa.
-    </p>
+
+            <div class="app-title">BINA DESA</div>
+            <p class="app-description">
+                Sistem Manajemen Bantuan Sosial Digital<br>
+                untuk mendukung transparansi dan akurasi penyaluran bantuan di desa.
+            </p>
 
 
 

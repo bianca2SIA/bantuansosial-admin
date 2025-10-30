@@ -49,7 +49,7 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="#"
+                <a class="nav-link count-indicator dropdown-toggle" id="messageDropdown" href="javascript:void(0)"
                     data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="mdi mdi-email-outline"></i>
                     <span class="count-symbol bg-warning"></span>
@@ -87,8 +87,8 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#"
-                    data-bs-toggle="dropdown">
+                <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="javascript:void(0)"
+                    data-bs-toggle="dropdown" aria-expanded="false">
                     <i class="mdi mdi-bell-outline"></i>
                     <span class="count-symbol bg-danger"></span>
                 </a>
@@ -103,8 +103,7 @@
                             </div>
                         </div>
                         <div class="preview-item-content">
-                            <p class="preview-subject font-weight-normal mb-1">Laporan penyaluran butuh konfirmasi
-                            </p>
+                            <p class="preview-subject font-weight-normal mb-1">Laporan penyaluran butuh konfirmasi</p>
                             <p class="text-gray mb-0">10 menit lalu</p>
                         </div>
                     </a>
@@ -125,11 +124,13 @@
                 </div>
             </li>
 
+
             <li class="nav-item d-none d-lg-block">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="javascript:void(0)" id="fullscreenToggle" title="Layar Penuh">
                     <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
                 </a>
             </li>
+
 
             <li class="nav-item d-none d-lg-block">
                 <a class="nav-link" href="https://wa.me/6281234567890?text=Halo%20Admin%20BINA%20DESA"
@@ -139,15 +140,14 @@
             </li>
 
             <li class="nav-item d-none d-lg-block">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="javascript:void(0)" title="Pengaturan Tampilan">
                     <i class="mdi mdi-format-line-spacing"></i>
                 </a>
             </li>
-        </ul>
 
-        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-            data-bs-toggle="offcanvas">
-            <span class="mdi mdi-menu"></span>
-        </button>
+            <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                data-bs-toggle="offcanvas">
+                <span class="mdi mdi-menu"></span>
+            </button>
     </div>
 </nav>

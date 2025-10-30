@@ -16,22 +16,22 @@
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
         body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-    /* Tambahan baru 👇 */
-    background: url('{{ asset('assets-admin/images/bansos.jpg') }}') no-repeat center center fixed;
-    background-size: cover;
+            /* Tambahan baru 👇 */
+            background: url('{{ asset('assets-admin/images/bansos.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
 
-    /* Lapisan transparan di atas gambar */
-    position: relative;
-    overflow: hidden;
-}
+            /* Lapisan transparan di atas gambar */
+            position: relative;
+            overflow: hidden;
+        }
 
         /* ✨ Efek blur lembut di background */
         body::before {
