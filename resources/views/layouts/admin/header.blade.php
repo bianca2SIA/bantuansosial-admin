@@ -43,8 +43,14 @@
                     <a class="dropdown-item" href="#"><i class="mdi mdi-account text-primary me-2"></i>
                         Profil Saya</a>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#"><i class="mdi mdi-logout text-primary me-2"></i>
-                        Keluar</a>
+                    <form action="{{ route('logout') }}" method="POST" id="logout-form">
+                        @csrf
+                        <a href="#" class="dropdown-item"
+                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="mdi mdi-logout text-primary me-2"></i> Keluar
+                        </a>
+                    </form>
+
                 </div>
             </li>
 
