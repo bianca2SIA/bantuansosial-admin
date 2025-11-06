@@ -1,12 +1,13 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WargaController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PendaftarController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -34,3 +35,5 @@ Route::post('/logout', function () {
     request()->session()->regenerateToken();
     return redirect()->route('auth'); // Arahkan ke halaman auth.blade.php
 })->name('logout');
+
+Route::resource('pendaftar', PendaftarController::class);
