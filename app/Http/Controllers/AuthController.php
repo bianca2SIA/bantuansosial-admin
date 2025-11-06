@@ -23,9 +23,8 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            return view('admin.login', [
-                'email' => $request->email,
-            ]);
+            $request->session()->regenerate();     // penting untuk keamanan sesi
+            return redirect()->route('dashboard'); // langsung ke halaman dashboard
         }
 
         return back()->withErrors(['login' => 'Email atau Password salah.']);
@@ -46,7 +45,7 @@ class AuthController extends Controller
     {
         $data['nama'] = $request->nama;
 
-        return view('admin.login', $data);
+        return view('admin.dashboard', $data);
     }
 
     /**
