@@ -47,17 +47,20 @@
 
 
                                         <td class="text-center">
-                                           <a href="{{ route('warga.edit', $item->id) }}" class="btn btn-warning">
-    <i class="mdi mdi-pencil"></i> Edit
-</a>
+                                            <a href="{{ route('warga.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                                <i class="mdi mdi-pencil"></i> Edit
+                                            </a>
 
-<form action="{{ route('warga.destroy', $item->id) }}" method="POST" style="display:inline-block;">
-    @csrf
-    @method('DELETE')
-    <button type="submit" class="btn btn-danger" onclick="return confirm('Yakin hapus data ini?')">
-        <i class="mdi mdi-delete"></i> Hapus
-    </button>
-</form>
+                                            <form action="{{ route('warga.destroy', $item->id) }}" method="POST"
+                                                style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Yakin hapus data ini?')">
+                                                    <i class="mdi mdi-delete"></i> Hapus
+                                                </button>
+                                            </form>
+
                                         </td>
                                     </tr>
                                 @empty
