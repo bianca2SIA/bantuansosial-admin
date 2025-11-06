@@ -46,7 +46,7 @@
         .card-container {
             position: relative;
             z-index: 2;
-            background: rgba(255, 255, 255, 0.45);
+            background: rgba(255, 255, 255, 0.25);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.3);
@@ -191,7 +191,7 @@
         {{-- 🪄 Form login --}}
         <div class="card-container">
             <img src="{{ asset('assets-admin/images/logo-bina-desa.png') }}" alt="Logo Bina Desa"
-                style="width: 130px; height: auto; margin-bottom: 10px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));">
+                style="width: 100px; height: auto; margin-bottom: 10px; filter: drop-shadow(0 2px 3px rgba(0,0,0,0.1));">
 
 
             <div class="app-title">BINA DESA</div>

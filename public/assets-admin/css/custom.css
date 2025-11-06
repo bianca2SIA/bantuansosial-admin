@@ -60,3 +60,23 @@
 .sidebar .nav .nav-item.active > .nav-link i {
     color: var(--bina-ungu) !important;
 }
+
+}
+
+/* Efek hover lembut */
+.sidebar .nav .nav-item:hover > .nav-link {
+    background-color: rgba(156, 39, 176, 0.04);
+    color: var(--bina-ungu) !important;
+    transition: 0.3s;
+}
+
+/* Ikon menu aktif juga jadi ungu */
+.sidebar .nav .nav-item.active > .nav-link i {
+    color: var(--bina-ungu) !important;
+}
+
+.btn-sm {
+    padding: 4px 10px;
+    font-size: 13px;
+}
+

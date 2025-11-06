@@ -61,6 +61,16 @@
                                                 </button>
                                             </form>
 
+
+                                            <form action="{{ route('warga.destroy', $item->id) }}" method="POST"
+                                                style="display:inline-block;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-danger btn-sm"
+                                                    onclick="return confirm('Yakin hapus data ini?')">
+                                                    <i class="mdi mdi-delete"></i> Hapus
+                                                </button>
+                                            </form>
                                         </td>
                                     </tr>
                                 @empty

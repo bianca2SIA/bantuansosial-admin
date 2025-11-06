@@ -141,6 +141,12 @@
             </li>
 
 
+            <li class="nav-item d-none d-lg-block">
+                <a class="nav-link" href="https://wa.me/6282385830033?text=Halo%20Admin%20BINA%20DESA"
+                    target="_blank" title="Chat via WhatsApp">
+                    <i class="mdi mdi-whatsapp" style="color:inherit; font-size:22px;"></i>
+                </a>
+            </li>
 
             <li class="nav-item d-none d-lg-block">
                 <a class="nav-link" href="javascript:void(0)" title="Pengaturan Tampilan">
