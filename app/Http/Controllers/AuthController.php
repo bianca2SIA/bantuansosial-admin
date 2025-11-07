@@ -45,7 +45,7 @@ class AuthController extends Controller
     {
         $data['nama'] = $request->nama;
 
-        return view('admin.dashboard', $data);
+        return view('pages.admin.dashboard', $data);
     }
 
     /**

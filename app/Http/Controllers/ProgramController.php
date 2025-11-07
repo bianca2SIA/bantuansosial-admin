@@ -12,7 +12,7 @@ class ProgramController extends Controller
     public function index()
     {
         $data['dataProgram'] = Program::all();
-        return view('admin.program.index', $data);
+        return view('pages.admin.program.index', $data);
     }
 
     /**
@@ -20,7 +20,7 @@ class ProgramController extends Controller
      */
     public function create()
     {
-        return view('admin.program.create');
+        return view('pages.admin.program.create');
     }
 
     /**
@@ -65,7 +65,7 @@ class ProgramController extends Controller
     public function edit(string $id)
     {
         $data['dataProgram'] = Program::findOrFail($id);
-        return view('admin.program.edit', $data);
+        return view('pages.admin.program.edit', $data);
     }
 
     /**

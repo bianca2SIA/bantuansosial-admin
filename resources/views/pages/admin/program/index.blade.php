@@ -50,12 +50,12 @@
                                         <td>{{ $item->deskripsi }}</td>
                                         <td>Rp{{ number_format($item->anggaran, 0, ',', '.') }}</td>
                                         <td class="text-center">
-                                            <a href="{{ route('warga.edit', $item->program_id) }}"
+                                            <a href="{{ route('program.edit', $item->program_id) }}"
                                                 class="btn btn-warning btn-sm">
                                                 <i class="mdi mdi-pencil"></i> Edit
                                             </a>
 
-                                            <form action="{{ route('warga.destroy', $item->program_id) }}" method="POST"
+                                            <form action="{{ route('program.destroy', $item->program_id) }}" method="POST"
                                                 style="display:inline-block; margin-left: 4px;">
                                                 @csrf
                                                 @method('DELETE')
@@ -64,21 +64,6 @@
                                                     <i class="mdi mdi-delete"></i> Hapus
                                                 </button>
                                             </form>
-
-                                        </td>
-    <a href="{{ route('warga.edit', $item->program_id) }}" class="btn btn-warning btn-sm">
-        <i class="mdi mdi-pencil"></i> Edit
-    </a>
-
-    <form action="{{ route('warga.destroy', $item->program_id) }}" method="POST" style="display:inline-block;">
-        @csrf
-        @method('DELETE')
-        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Yakin hapus data ini?')">
-            <i class="mdi mdi-delete"></i> Hapus
-        </button>
-    </form>
-</td>
-
                                     </tr>
                                 @empty
                                     <tr>
