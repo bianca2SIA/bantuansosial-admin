@@ -15,7 +15,7 @@ class PendaftarController extends Controller
     public function index()
     {
        $pendaftar = Pendaftar::with(['program', 'warga'])->get();
-    return view('admin.pendaftar.index', compact('pendaftar'));
+    return view('pages.admin.pendaftar.index', compact('pendaftar'));
 
     }
 
@@ -26,7 +26,7 @@ class PendaftarController extends Controller
     {
         $program = Program::all();
     $warga = Warga::all();
-    return view('admin.pendaftar.create', compact('program', 'warga'));
+    return view('pages.admin.pendaftar.create', compact('program', 'warga'));
 
     }
 
@@ -57,7 +57,7 @@ class PendaftarController extends Controller
     public function show($id)
     {
         $pendaftar = Pendaftar::with(['program', 'warga'])->findOrFail($id);
-        return view('admin.pendaftar.show', compact('pendaftar'));
+        return view('pages.admin.pendaftar.show', compact('pendaftar'));
     }
 
     /**
@@ -69,7 +69,7 @@ class PendaftarController extends Controller
     $program = Program::all();
     $warga = Warga::all();
 
-    return view('admin.pendaftar.edit', compact('pendaftar', 'program', 'warga'));
+    return view('pages.admin.pendaftar.edit', compact('pendaftar', 'program', 'warga'));
     }
 
     /**

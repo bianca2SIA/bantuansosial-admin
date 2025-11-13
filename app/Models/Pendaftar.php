@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PendaftarBantuan extends Model
+class Pendaftar extends Model
 {
     use HasFactory;
 
     // Nama tabel
-    protected $table = 'pendaftar_bantuan';
+    protected $table = 'pendaftar';
 
     // Primary key
     protected $primaryKey = 'pendaftar_id';

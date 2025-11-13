@@ -15,7 +15,6 @@ use App\Http\Controllers\PendaftarController;
 
 Route::get('/dashboard', [DashboardController::class, 'index']) ->name('dashboard');
 
-
 Route::resource('program', ProgramController::class);
 
 Route::resource('user', UserController::class);
