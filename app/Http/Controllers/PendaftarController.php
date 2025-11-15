@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Pendaftar;
@@ -14,8 +13,8 @@ class PendaftarController extends Controller
      */
     public function index()
     {
-       $pendaftar = Pendaftar::with(['program', 'warga'])->get();
-    return view('pages.admin.pendaftar.index', compact('pendaftar'));
+        $pendaftar = Pendaftar::with(['program', 'warga'])->get();
+        return view('pages.admin.pendaftar.index', compact('pendaftar'));
 
     }
 
@@ -25,8 +24,8 @@ class PendaftarController extends Controller
     public function create()
     {
         $program = Program::all();
-    $warga = Warga::all();
-    return view('pages.admin.pendaftar.create', compact('program', 'warga'));
+        $warga   = Warga::all();
+        return view('pages.admin.pendaftar.create', compact('program', 'warga'));
 
     }
 
@@ -36,14 +35,14 @@ class PendaftarController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'program_id' => 'required|exists:program,program_id',
-            'warga_id' => 'required|exists:warga,warga_id',
+            'program_id'     => 'required|exists:program,program_id',
+            'warga_id'       => 'required|exists:warga,warga_id',
             'status_seleksi' => 'required|in:Menunggu,Diterima,Ditolak',
         ]);
 
         Pendaftar::create([
-            'program_id' => $request->program_id,
-            'warga_id' => $request->warga_id,
+            'program_id'     => $request->program_id,
+            'warga_id'       => $request->warga_id,
             'status_seleksi' => $request->status_seleksi,
         ]);
 
@@ -66,10 +65,10 @@ class PendaftarController extends Controller
     public function edit($id)
     {
         $pendaftar = Pendaftar::findOrFail($id);
-    $program = Program::all();
-    $warga = Warga::all();
+        $program   = Program::all();
+        $warga     = Warga::all();
 
-    return view('pages.admin.pendaftar.edit', compact('pendaftar', 'program', 'warga'));
+        return view('pages.admin.pendaftar.edit', compact('pendaftar', 'program', 'warga'));
     }
 
     /**
@@ -80,14 +79,14 @@ class PendaftarController extends Controller
         $pendaftar = Pendaftar::findOrFail($id);
 
         $request->validate([
-            'program_id' => 'required|exists:program,program_id',
-            'warga_id' => 'required|exists:warga,warga_id',
+            'program_id'     => 'required|exists:program,program_id',
+            'warga_id'       => 'required|exists:warga,warga_id',
             'status_seleksi' => 'required|in:Menunggu,Diterima,Ditolak',
         ]);
 
         $pendaftar->update([
-            'program_id' => $request->program_id,
-            'warga_id' => $request->warga_id,
+            'program_id'     => $request->program_id,
+            'warga_id'       => $request->warga_id,
             'status_seleksi' => $request->status_seleksi,
         ]);
 

@@ -55,7 +55,7 @@
                                     <label>Program Bantuan</label>
                                     <select name="program_id" class="form-control" required>
                                         <option value="">-- Pilih Program --</option>
-                                        @foreach ($programs as $program)
+                                        @foreach ($program as $program)
                                             <option value="{{ $program->program_id }}"
                                                 {{ old('program_id', $pendaftar->program_id) == $program->program_id ? 'selected' : '' }}>
                                                 {{ $program->nama_program }}
@@ -69,7 +69,7 @@
                                     <label>Nama Warga</label>
                                     <select name="warga_id" class="form-control" required>
                                         <option value="">-- Pilih Warga --</option>
-                                        @foreach ($wargas as $warga)
+                                        @foreach ($warga as $warga)
                                             <option value="{{ $warga->warga_id }}"
                                                 {{ old('warga_id', $pendaftar->warga_id) == $warga->warga_id ? 'selected' : '' }}>
                                                 {{ $warga->nama }}
@@ -82,9 +82,15 @@
                                 <div class="form-group">
                                     <label>Status Seleksi</label>
                                     <select name="status_seleksi" class="form-control" required>
-                                        <option value="Menunggu" {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
-                                        <option value="Diterima" {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Diterima' ? 'selected' : '' }}>Diterima</option>
-                                        <option value="Ditolak" {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                        <option value="Menunggu"
+                                            {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Menunggu' ? 'selected' : '' }}>
+                                            Menunggu</option>
+                                        <option value="Diterima"
+                                            {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Diterima' ? 'selected' : '' }}>
+                                            Diterima</option>
+                                        <option value="Ditolak"
+                                            {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Ditolak' ? 'selected' : '' }}>
+                                            Ditolak</option>
                                     </select>
                                 </div>
 
@@ -100,10 +106,10 @@
 
                         </div>
                     </div>
-                </div>
-            </div>
 
+                </div>
+
+            </div>
         </div>
-    </div>
-    {{-- end main content --}}
-@endsection
+        {{-- end main content --}}
+    @endsection

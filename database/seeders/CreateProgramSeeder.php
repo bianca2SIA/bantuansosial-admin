@@ -1,10 +1,9 @@
 <?php
-
 namespace Database\Seeders;
 
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 
 class CreateProgramSeeder extends Seeder
 {
@@ -40,13 +39,13 @@ class CreateProgramSeeder extends Seeder
 
         for ($i = 1; $i <= 20; $i++) {
             DB::table('program')->insert([
-                'kode' => 'PRG' . str_pad($i, 3, '0', STR_PAD_LEFT),
+                'kode'         => 'PRG' . str_pad($i, 3, '0', STR_PAD_LEFT),
                 'nama_program' => $faker->randomElement($namaProgram),
-                'tahun' => $faker->year(),
-                'deskripsi' => $faker->randomElement($deskripsiIndo),
-                'anggaran' => $faker->numberBetween(50000000, 2000000000),
-                'created_at' => now(),
-                'updated_at' => now(),
+                'tahun'        => $faker->year(),
+                'deskripsi'    => $faker->randomElement($deskripsiIndo),
+                'anggaran'     => $faker->numberBetween(50000000, 2000000000),
+                'created_at'   => now(),
+                'updated_at'   => now(),
             ]);
         }
     }
