@@ -43,21 +43,32 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Tahun</label>
-                                    <input type="number" name="tahun" class="form-control" placeholder="Contoh: 2025"
-                                        value="{{ old('tahun') }}" required>
+                                    <select name="tahun" class="form-control" required>
+                                        <option value="">-- Pilih Tahun --</option>
+                                        @for ($tahun = 2000; $tahun <= date('Y'); $tahun++)
+                                            <option value="{{ $tahun }}"
+                                                {{ old('tahun') == $tahun ? 'selected' : '' }}>
+                                                {{ $tahun }}
+                                            </option>
+                                        @endfor
+                                    </select>
                                 </div>
+
+
                                 <div class="form-group">
                                     <label>Anggaran (Rp)</label>
-                                    <input type="number" name="anggaran" class="form-control"
-                                        placeholder="Masukkan anggaran" value="{{ old('anggaran') }}"required>
+                                    <input type="text" name="anggaran" id="anggaran" class="form-control"
+                                        placeholder="Masukkan anggaran" value="{{ old('anggaran') }}" required>
                                 </div>
+
+
                                 <div class="form-group">
                                     <label>Deskripsi</label>
                                     <textarea name="deskripsi" class="form-control" rows="4" placeholder="Tuliskan deskripsi program" required>{{ old('deskripsi') }}</textarea>
                                 </div>
                                 <div class="mt-4 d-flex justify-content-end">
                                     <!-- Tombol Batal -->
-                                    <a href="/warga" class="btn btn-light me-2">
+                                    <a href="/program" class="btn btn-light me-2">
                                         <i class="mdi mdi-arrow-left"></i> Batal
                                     </a>
 

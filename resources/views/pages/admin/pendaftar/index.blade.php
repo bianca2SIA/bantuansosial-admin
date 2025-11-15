@@ -47,7 +47,7 @@
                                         <td class="text-center">{{ $item->pendaftar_id }}</td>
                                         <td>{{ $item->program->nama_program ?? '-' }}</td>
                                         <td>{{ $item->warga->nama ?? '-' }}</td>
-                                        <td>
+                                        <td class="text-center">
                                             @if ($item->status_seleksi == 'Diterima')
                                                 <span class="badge bg-success text-white">Diterima</span>
                                             @elseif ($item->status_seleksi == 'Ditolak')
