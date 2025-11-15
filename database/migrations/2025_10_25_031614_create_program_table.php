@@ -15,7 +15,7 @@ return new class extends Migration
             $table->increments('program_id');               // Primary Key (auto increment)
             $table->string('kode')->unique();               // Kode unik
             $table->string('nama_program', 150);            // Nama program
-            $table->date('tahun');                          // Tahun (misalnya 2025)
+            $table->year('tahun');                          // Tahun (misalnya 2025)
             $table->text('deskripsi')->nullable();          // Deskripsi program (boleh kosong)
             $table->decimal('anggaran', 15, 2)->default(0); // Anggaran dengan format desimal
             $table->timestamps();                           // created_at & updated_at
