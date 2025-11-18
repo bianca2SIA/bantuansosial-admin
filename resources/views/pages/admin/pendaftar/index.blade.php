@@ -7,12 +7,11 @@
             <div class="page-header">
                 <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white me-2">
-                        <i class="mdi mdi-account-multiple"></i>
+                        <i class="mdi mdi-account-edit"></i>
                     </span> Data Pendaftar Bantuan
                 </h3>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
                     style="background-color: #d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
@@ -23,10 +22,11 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="card-title mb-0">List Data Pendaftar Bantuan</h4>
+                        <h4 class="card-title mb-0">List Data Seluruh Pendaftar</h4>
                         <a href="{{ route('pendaftar.create') }}" class="btn btn-primary">
                             <i class="mdi mdi-plus"></i> Tambah Pendaftar
                         </a>
+
                     </div>
 
                     <div class="table-responsive">
@@ -38,15 +38,16 @@
                                     <th class="text-center fw-bold">Nama Warga</th>
                                     <th class="text-center fw-bold">Status Seleksi</th>
                                     <th class="text-center fw-bold">Aksi</th>
+
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($pendaftars as $item)
+                                @forelse ($pendaftar as $item)
                                     <tr>
                                         <td class="text-center">{{ $item->pendaftar_id }}</td>
                                         <td>{{ $item->program->nama_program ?? '-' }}</td>
                                         <td>{{ $item->warga->nama ?? '-' }}</td>
-                                        <td>
+                                        <td class="text-center">
                                             @if ($item->status_seleksi == 'Diterima')
                                                 <span class="badge bg-success text-white">Diterima</span>
                                             @elseif ($item->status_seleksi == 'Ditolak')
@@ -57,25 +58,28 @@
                                         </td>
 
                                         <td class="text-center">
-                                            <a href="{{ route('pendaftar.edit', $item->pendaftar_id) }}"
+                                            <a href="{{ route('pendaftar.edit', $item->warga_id) }}"
                                                 class="btn btn-warning btn-sm">
                                                 <i class="mdi mdi-pencil"></i> Edit
                                             </a>
 
-                                            <form action="{{ route('pendaftar.destroy', $item->pendaftar_id) }}"
-                                                method="POST" style="display:inline-block; margin-left: 4px;">
+                                            <form action="{{ route('pendaftar.destroy', $item->warga_id) }}" method="POST"
+                                                style="display:inline-block; margin-left: 4px;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin ingin menghapus data ini?')">
+                                                    onclick="return confirm('Yakin hapus data ini?')">
                                                     <i class="mdi mdi-delete"></i> Hapus
                                                 </button>
                                             </form>
+
+
                                         </td>
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="5" class="text-center text-muted">Belum ada data pendaftar.</td>
+                                        <td colspan="7" class="text-center text-muted">Belum ada data pendaftar
+                                        </td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -84,6 +88,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    {{-- end main content --}}
-@endsection
+        {{-- end main content --}}
+    @endsection
