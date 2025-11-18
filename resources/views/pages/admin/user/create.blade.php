@@ -12,7 +12,7 @@
                 </h3>
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/program">Data User</a></li>
+                        <li class="breadcrumb-item"><a href="/user">Data User</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Tambah User</li>
                     </ul>
                 </nav>
@@ -54,15 +54,15 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label>Password (kosongkan jika tidak ingin diubah)</label>
+                                    <label>Password </label>
                                     <input type="text" name="password" class="form-control"
-                                        placeholder="Masukkan password baru (opsional)">
+                                        placeholder="Masukkan password baru">
                                 </div>
 
                                 <div class="form-group">
                                     <label>Konfirmasi Password</label>
                                     <input type="text" name="password_confirmation" class="form-control"
-                                        placeholder="Ulangi password baru (opsional)">
+                                        placeholder="Ulangi password baru">
                                 </div>
                                 <div class="mt-4 d-flex justify-content-end">
                                     <!-- Tombol Batal -->

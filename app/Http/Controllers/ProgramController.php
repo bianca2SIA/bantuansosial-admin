@@ -79,7 +79,7 @@ class ProgramController extends Controller
         $request->validate([
             'nama_program' => 'required|string|max:255',
             'kode'         => 'required|string|max:50|unique:program,kode,' . $id . ',program_id',
-            'tahun'        => 'required|integer|min:2000|max:2100',
+            'tahun'        => 'required|integer|min:2010|max:2030',
             'anggaran'     => 'required|numeric|min:1',
             'deskripsi'    => 'required|string|max:1000',
         ], [

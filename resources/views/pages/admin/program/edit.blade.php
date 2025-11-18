@@ -45,9 +45,18 @@
 
                                 <div class="form-group">
                                     <label>Tahun</label>
-                                    <input type="number" name="tahun" class="form-control"
-                                        value="{{ old('tahun', $dataProgram->tahun) }}" placeholder="Contoh: 2025" required>
+                                    <select name="tahun" class="form-control" required>
+                                        <option value="">-- Pilih Tahun --</option>
+
+                                        @for ($tahun = 2000; $tahun <= date('Y'); $tahun++)
+                                            <option value="{{ $tahun }}"
+                                                {{ old('tahun', $dataProgram->tahun) == $tahun ? 'selected' : '' }}>
+                                                {{ $tahun }}
+                                            </option>
+                                        @endfor
+                                    </select>
                                 </div>
+
 
                                 <div class="form-group">
                                     <label>Anggaran (Rp)</label>
@@ -65,7 +74,7 @@
 
                                 <div class="mt-4 d-flex justify-content-end">
                                     <!-- Tombol Batal -->
-                                    <a href="/warga" class="btn btn-light me-2">
+                                    <a href="/program" class="btn btn-light me-2">
                                         <i class="mdi mdi-arrow-left"></i> Batal
                                     </a>
 

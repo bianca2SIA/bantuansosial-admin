@@ -23,7 +23,7 @@
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="card-title mb-0">List Data Program Bantuan</h4>
                         <a href="{{ route('program.create') }}" class="btn btn-gradient-primary text-white">
-                            + Tambah Program Bantuan
+                            + Tambah Program
                         </a>
                     </div>
 

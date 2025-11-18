@@ -96,17 +96,17 @@
                                     <label>Email</label>
                                     <input type="email" name="email" class="form-control"
                                         value="{{ old('email', $warga->email) }}" placeholder="Masukkan email">
-                                                                <div class="mt-4 d-flex justify-content-end">
-                                    <!-- Tombol Batal -->
-                                    <a href="/warga" class="btn btn-light me-2">
-                                        <i class="mdi mdi-arrow-left"></i> Batal
-                                    </a>
+                                    <div class="mt-4 d-flex justify-content-end">
+                                        <!-- Tombol Batal -->
+                                        <a href="/warga" class="btn btn-light me-2">
+                                            <i class="mdi mdi-arrow-left"></i> Batal
+                                        </a>
 
-                                    <!-- Tombol Simpan -->
-                                    <button type="submit" class="btn btn-gradient-primary text-white">
-                                        <i class="mdi mdi-content-save"></i> Simpan
-                                    </button>
-                                </div>
+                                        <!-- Tombol Simpan -->
+                                        <button type="submit" class="btn btn-gradient-primary text-white">
+                                            <i class="mdi mdi-content-save"></i> Simpan
+                                        </button>
+                                    </div>
                             </form>
                         </div>
                     </div>

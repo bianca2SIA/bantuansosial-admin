@@ -13,7 +13,7 @@
 
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/program">Data Warga</a></li>
+                        <li class="breadcrumb-item"><a href="/warga">Data Warga</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Tambah Warga</li>
                     </ul>
                 </nav>

@@ -14,7 +14,10 @@ class Warga extends Model
     // Primary key
     protected $primaryKey = 'warga_id';
 
-    // Kolom yang boleh diisi (fillable)
+    // Nonaktifkan timestamps (karena tabel 'warga' tidak punya created_at dan updated_at)
+    public $timestamps = false;
+
+    // Kolom yang boleh diisi
     protected $fillable = [
         'no_ktp',
         'nama',

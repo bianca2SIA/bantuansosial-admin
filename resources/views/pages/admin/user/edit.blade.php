@@ -78,7 +78,7 @@
 
 
                                 <div class="mt-4 d-flex justify-content-end">
-                                     <!-- Tombol Batal -->
+                                    <!-- Tombol Batal -->
                                     <a href="/warga" class="btn btn-light me-2">
                                         <i class="mdi mdi-arrow-left"></i> Batal
                                     </a>
