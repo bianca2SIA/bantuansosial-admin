@@ -58,13 +58,13 @@
                                         </td>
 
                                         <td class="text-center">
-                                            <a href="{{ route('pendaftar.edit', $item->warga_id) }}"
+                                            <a href="{{ route('pendaftar.edit', $item->pendaftar_id) }}"
                                                 class="btn btn-warning btn-sm">
                                                 <i class="mdi mdi-pencil"></i> Edit
                                             </a>
 
-                                            <form action="{{ route('pendaftar.destroy', $item->warga_id) }}" method="POST"
-                                                style="display:inline-block; margin-left: 4px;">
+                                            <form action="{{ route('pendaftar.destroy', $item->pendaftar_id) }}"
+                                                method="POST" style="display:inline-block; margin-left: 4px;">
                                                 @csrf
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"

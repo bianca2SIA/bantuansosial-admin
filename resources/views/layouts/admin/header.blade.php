@@ -1,14 +1,14 @@
 <nav class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-    <div class="navbar-brand-wrapper d-flex align-items-center" style="padding-right:200px; justify-content:flex-start;">
-        <a class="navbar-brand brand-logo d-flex align-items-center" href="/dashboard" style="text-decoration:none;">
-            <img src="{{ asset('assets-admin/images/logo-bina-desa.png') }}" alt="Logo Bina Desa"
-                style="width:80px; height:80px; margin-left:-20px; margin-right: -10px; object-fit:contain; display:block; max-width:none !important; max-height:none !important;">
+    <div class="navbar-brand-wrapper d-flex align-items-center justify-content-start">
 
-            <h3 style="color:#8a3ab9; font-weight:700; margin:0; line-height:1;">BINA DESA</h3>
-        </a>
-        <a class="navbar-brand brand-logo-mini" href="/dashboard">
-            <h3 style="color:#8a3ab9; font-weight:700;">BD</h3>
-        </a>
+        <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+          <a class="navbar-brand brand-logo" href="/">
+        <img src="{{ asset('assets-admin/images/BINA DESA.png') }}" alt="logo" style="height:170px; width: auto;">
+    </a>
+          <a class="navbar-brand brand-logo-mini" href="/">
+        <img src="{{ asset('assets-admin/images/logo-mini.svg') }}" alt="logo" style="height:30px;">
+    </a>  </div>
+
     </div>
 
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -147,8 +147,9 @@
             </li>
 
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
-                data-bs-toggle="offcanvas">
+                data-toggle="offcanvas">
                 <span class="mdi mdi-menu"></span>
             </button>
+
     </div>
 </nav>
