@@ -15,7 +15,9 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-// Tambahkan ini untuk men-seed semua tabel lainnya
+        // Tambahkan ini untuk men-seed semua tabel lainnya
+        // User::factory(10)->create();
+
         $this->call([
             CreateWargaSeeder::class,
             CreateFirstUser::class,
