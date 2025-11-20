@@ -6,9 +6,7 @@ use Illuminate\Http\Request;
 
 class WargaController extends Controller
 {
-    /**
-     * Tampilkan semua data warga.
-     */
+
     public function index(Request $request)
     {
         $filterableColumns = ['jenis_kelamin'];
@@ -24,17 +22,11 @@ class WargaController extends Controller
 
     }
 
-    /**
-     * Tampilkan form tambah warga baru.
-     */
     public function create()
     {
         return view('pages.admin.warga.create');
     }
 
-    /**
-     * Simpan data warga baru ke database.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -53,27 +45,18 @@ class WargaController extends Controller
             ->with('success', 'Data warga berhasil ditambahkan!');
     }
 
-    /**
-     * Tampilkan detail data warga berdasarkan ID.
-     */
     public function show($id)
     {
         $warga = Warga::findOrFail($id);
         return view('pages.admin.warga.show', compact('warga'));
     }
 
-    /**
-     * Tampilkan form edit data warga.
-     */
     public function edit($id)
     {
         $warga = Warga::findOrFail($id);
         return view('pages.admin.warga.edit', compact('warga'));
     }
 
-    /**
-     * Update data warga yang sudah ada.
-     */
     public function update(Request $request, $id)
     {
         $warga = Warga::findOrFail($id);
@@ -94,9 +77,6 @@ class WargaController extends Controller
             ->with('success', 'Data warga berhasil diperbarui!');
     }
 
-    /**
-     * Hapus data warga.
-     */
     public function destroy($id)
     {
         $warga = Warga::findOrFail($id);

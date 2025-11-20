@@ -35,12 +35,16 @@
 
                                 <!-- Filter Gender -->
                                 <div class="col-md-2">
-                                    <select name="gender" class="form-select" onchange="this.form.submit()">
-                                        <option value="">Semua</option>
+                                    <select name="jenis_kelamin" class="form-select filter-control"
+                                        onchange="this.form.submit()">
+
+                                        <option value="">Jenis Kelamin</option>
                                         <option value="Laki-Laki"
-                                            {{ request('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki</option>
+                                            {{ request('jenis_kelamin') == 'Laki-Laki' ? 'selected' : '' }}>Laki-Laki
+                                        </option>
                                         <option value="Perempuan"
-                                            {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                                            {{ request('jenis_kelamin') == 'Perempuan' ? 'selected' : '' }}>Perempuan
+                                        </option>
                                     </select>
                                 </div>
 
@@ -61,7 +65,7 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                             </button>
-                                            </span>
+
 
                                         </div>
 

@@ -173,6 +173,46 @@
         .card-container:hover {
             box-shadow: 0 10px 45px rgba(123, 44, 191, 0.25);
         }
+        /* 📱 Mobile Responsive Fix */
+@media (max-width: 480px) {
+
+    body {
+        padding: 0 15px;
+        background-size: cover;
+    }
+
+    .card-container {
+        width: 90%;
+        padding: 25px 20px;
+        border-radius: 16px;
+        box-shadow: 0 4px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .app-title {
+        font-size: 22px;
+        margin-bottom: 5px;
+    }
+
+    .app-description {
+        font-size: 10.5px;
+        line-height: 1.25;
+    }
+
+    input {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    button {
+        padding: 12px;
+        font-size: 15px;
+    }
+
+    img {
+        width: 80px !important;
+    }
+}
+
     </style>
 </head>
 

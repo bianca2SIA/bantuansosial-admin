@@ -41,7 +41,8 @@ class CreateProgramSeeder extends Seeder
             DB::table('program')->insert([
                 'kode'         => 'PRG' . str_pad($i, 3, '0', STR_PAD_LEFT),
                 'nama_program' => $faker->randomElement($namaProgram),
-                'tahun'        => $faker->year(),
+                'tahun'        => $faker->numberBetween(2020, 2026),
+
                 'deskripsi'    => $faker->randomElement($deskripsiIndo),
                 'anggaran'     => $faker->numberBetween(50000000, 2000000000),
                 'created_at'   => now(),
