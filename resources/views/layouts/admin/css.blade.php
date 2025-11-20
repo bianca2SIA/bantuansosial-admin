@@ -3,3 +3,5 @@
     <link rel="stylesheet" href="{{ asset('assets-admin/css/style.css') }}">
     <link rel="shortcut icon" href="{{ asset('assets-admin/images/favicon.png') }}" />
     <link rel="stylesheet" href="{{ asset('assets-admin/css/custom.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets-admin/vendors/css/pagination-custom.css') }}">
+

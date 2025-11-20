@@ -1,6 +1,7 @@
 <?php
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -20,6 +21,39 @@ class Pendaftar extends Model
         'warga_id',
         'status_seleksi',
     ];
+
+    public function scopeFilter(Builder $query, $request, array $filterableColumns): Builder
+    {
+        foreach ($filterableColumns as $column) {
+            if ($request->filled($column)) {
+                $query->where($column, $request->input($column));
+            }
+        }
+        return $query;
+    }
+
+    public function scopeSearch($query, $keyword)
+    {
+        if (! $keyword) {
+            return $query;
+        }
+
+        return $query->where(function ($q) use ($keyword) {
+
+            // Cari berdasarkan status seleksi
+            $q->where('status_seleksi', 'like', "%$keyword%")
+
+            // Cari berdasarkan nama program
+                ->orWhereHas('program', function ($p) use ($keyword) {
+                    $p->where('nama_program', 'like', "%$keyword%");
+                })
+
+            // Cari berdasarkan nama warga
+                ->orWhereHas('warga', function ($w) use ($keyword) {
+                    $w->where('nama', 'like', "%$keyword%");
+                });
+        });
+    }
 
     // Relasi ke tabel Program (Many to One)
     public function program()

@@ -3,80 +3,66 @@
     --bina-ungu: #9c27b0;
 }
 
-/* Menu aktif di sidebar */
+/* Menu aktif */
 .sidebar .nav .nav-item.active > .nav-link,
 .sidebar .nav .nav-item.active > .nav-link .menu-title,
 .sidebar .nav .nav-item.active > .nav-link .menu-icon {
     color: var(--bina-ungu) !important;
-    font-weight: 500; /* lebih halus daripada 600 */
-    letter-spacing: 0.2px; /* biar kelihatan rapi */
+    font-weight: 500;
+    letter-spacing: 0.2px;
 }
 
-/* Latar belakang lembut untuk menu aktif */
+/* Background menu aktif */
 .sidebar .nav .nav-item.active {
     background-color: rgba(156, 39, 176, 0.08);
     border-radius: 8px;
-
-    /* Warna utama ungu (Bina Desa) */
-    :root {
-        --bina-ungu: #9c27b0;
-    }
-
-    /* Menu aktif di sidebar */
-    .sidebar .nav .nav-item.active > .nav-link,
-    .sidebar .nav .nav-item.active > .nav-link .menu-title,
-    .sidebar .nav .nav-item.active > .nav-link .menu-icon {
-        color: var(--bina-ungu) !important;
-        font-weight: 500; /* lebih halus daripada 600 */
-        letter-spacing: 0.2px; /* biar kelihatan rapi */
-    }
-
-    /* Latar belakang lembut untuk menu aktif */
-    .sidebar .nav .nav-item.active {
-        background-color: rgba(156, 39, 176, 0.08);
-        border-radius: 8px;
-    }
-
-    /* Efek hover lembut */
-    .sidebar .nav .nav-item:hover > .nav-link {
-        background-color: rgba(156, 39, 176, 0.04);
-        color: var(--bina-ungu) !important;
-        transition: 0.3s;
-    }
-
-    /* Ikon menu aktif juga jadi ungu */
-    .sidebar .nav .nav-item.active > .nav-link i {
-        color: var(--bina-ungu) !important;
-    }
 }
-/* Efek hover lembut */
+
+/* Hover menu */
 .sidebar .nav .nav-item:hover > .nav-link {
     background-color: rgba(156, 39, 176, 0.04);
     color: var(--bina-ungu) !important;
     transition: 0.3s;
 }
 
-/* Ikon menu aktif juga jadi ungu */
+/* Icon menu aktif */
 .sidebar .nav .nav-item.active > .nav-link i {
     color: var(--bina-ungu) !important;
 }
 
-
-
-/* Efek hover lembut */
-.sidebar .nav .nav-item:hover > .nav-link {
-    background-color: rgba(156, 39, 176, 0.04);
-    color: var(--bina-ungu) !important;
-    transition: 0.3s;
-}
-
-/* Ikon menu aktif juga jadi ungu */
-.sidebar .nav .nav-item.active > .nav-link i {
-    color: var(--bina-ungu) !important;
-}
-
+/* Pagination kecil */
 .btn-sm {
     padding: 4px 10px;
     font-size: 13px;
 }
 
+/* Pagination normal */
+.page-item .page-link {
+    background-color: #f0e6ff !important;
+    color: #8b00ff !important;
+    border-color: #d4b3ff !important;
+}
+
+/* Pagination aktif */
+.page-item.active .page-link {
+    background-color: #b66dff !important;
+    color: #fff !important;
+    border-color: #b66dff !important;
+}
+
+/* Pagination hover */
+.page-item .page-link:hover {
+    background-color: #d5a0ff !important;
+    color: #fff !important;
+}
+
+/* FILTER CONTROL — INI SEKARANG AKAN TERBACA */
+.filter-control {
+    border: 1px solid #dee2e6 !important;
+    border-radius: 0.375rem !important;
+    background-color: #fff !important;
+    font-size: 0.9rem !important;
+    padding: 0.47rem 0.75rem !important;
+    height: 38px !important;
+    box-shadow: none !important;
+}

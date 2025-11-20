@@ -8,19 +8,22 @@ use Illuminate\Http\Request;
 
 class PendaftarController extends Controller
 {
-    /**
-     * Tampilkan semua data pendaftar bantuan.
-     */
-    public function index()
-    {
-        $pendaftar = Pendaftar::with(['program', 'warga'])->get();
-        return view('pages.admin.pendaftar.index', compact('pendaftar'));
 
+    public function index(Request $request)
+    {
+        $filterableColumns = ['status_seleksi'];
+
+        $keyword = $request->search;
+
+        $pendaftar = Pendaftar::with(['program', 'warga'])
+            ->filter($request, $filterableColumns)
+            ->search($keyword)
+            ->paginate(10)
+            ->withQueryString();
+
+        return view('pages.admin.pendaftar.index', compact('pendaftar'));
     }
 
-    /**
-     * Tampilkan form tambah pendaftar bantuan baru.
-     */
     public function create()
     {
         $program = Program::all();
@@ -29,9 +32,6 @@ class PendaftarController extends Controller
 
     }
 
-    /**
-     * Simpan data pendaftar bantuan baru ke database.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -50,18 +50,12 @@ class PendaftarController extends Controller
             ->with('success', 'Data pendaftar bantuan berhasil ditambahkan!');
     }
 
-    /**
-     * Tampilkan detail data pendaftar berdasarkan ID.
-     */
     public function show($id)
     {
         $pendaftar = Pendaftar::with(['program', 'warga'])->findOrFail($id);
         return view('pages.admin.pendaftar.show', compact('pendaftar'));
     }
 
-    /**
-     * Tampilkan form edit data pendaftar bantuan.
-     */
     public function edit($id)
     {
         $pendaftar = Pendaftar::findOrFail($id);
@@ -71,9 +65,6 @@ class PendaftarController extends Controller
         return view('pages.admin.pendaftar.edit', compact('pendaftar', 'program', 'warga'));
     }
 
-    /**
-     * Update data pendaftar bantuan yang sudah ada.
-     */
     public function update(Request $request, $id)
     {
         $pendaftar = Pendaftar::findOrFail($id);
@@ -94,9 +85,6 @@ class PendaftarController extends Controller
             ->with('success', 'Data pendaftar bantuan berhasil diperbarui!');
     }
 
-    /**
-     * Hapus data pendaftar bantuan.
-     */
     public function destroy($id)
     {
         $pendaftar = Pendaftar::findOrFail($id);

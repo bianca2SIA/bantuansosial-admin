@@ -1,0 +1,27 @@
+.pagination .page-link {
+    background: #fbf9ff !important;
+    border: 1px solid #ece6ff !important;
+    color: #6b00b3 !important;
+    margin: 0 3px !important;
+    padding: 8px 14px !important;
+    transition: .2s;
+}
+
+/* Hover */
+.pagination .page-link:hover {
+    background: #e6d4ff !important;
+    color: white !important;
+}
+
+/* Active button */
+.pagination .page-item.active .page-link {
+    background: #b66dff !important;
+    border-color: #b66dff !important;
+    color: white !important;
+}
+
+/* Disabled */
+.pagination .page-item.disabled .page-link {
+    background: #f4f1ff !important;
+    color: #c3bed9 !important;
+}

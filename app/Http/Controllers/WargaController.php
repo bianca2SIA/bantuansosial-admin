@@ -6,26 +6,27 @@ use Illuminate\Http\Request;
 
 class WargaController extends Controller
 {
-    /**
-     * Tampilkan semua data warga.
-     */
-    public function index()
+
+    public function index(Request $request)
     {
-        $dataWarga = Warga::all();
-        return view('pages.admin.warga.index', compact('dataWarga'));
+        $filterableColumns = ['jenis_kelamin'];
+        $searchableColumns = ['nama'];
+
+        $data['dataWarga'] = Warga::filter($request, $filterableColumns)
+            ->search($request, $searchableColumns)
+            ->paginate(10)
+            ->withQueryString();
+        return view('pages.admin.warga.index', [
+            'dataWarga' => $data['dataWarga'],
+        ]);
+
     }
 
-    /**
-     * Tampilkan form tambah warga baru.
-     */
     public function create()
     {
         return view('pages.admin.warga.create');
     }
 
-    /**
-     * Simpan data warga baru ke database.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -44,27 +45,18 @@ class WargaController extends Controller
             ->with('success', 'Data warga berhasil ditambahkan!');
     }
 
-    /**
-     * Tampilkan detail data warga berdasarkan ID.
-     */
     public function show($id)
     {
         $warga = Warga::findOrFail($id);
         return view('pages.admin.warga.show', compact('warga'));
     }
 
-    /**
-     * Tampilkan form edit data warga.
-     */
     public function edit($id)
     {
         $warga = Warga::findOrFail($id);
         return view('pages.admin.warga.edit', compact('warga'));
     }
 
-    /**
-     * Update data warga yang sudah ada.
-     */
     public function update(Request $request, $id)
     {
         $warga = Warga::findOrFail($id);
@@ -85,9 +77,6 @@ class WargaController extends Controller
             ->with('success', 'Data warga berhasil diperbarui!');
     }
 
-    /**
-     * Hapus data warga.
-     */
     public function destroy($id)
     {
         $warga = Warga::findOrFail($id);
