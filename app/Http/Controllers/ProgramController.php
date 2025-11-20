@@ -9,9 +9,16 @@ class ProgramController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+
+        public function index(Request $request)
     {
-        $data['dataProgram'] = Program::all();
+        $filterableColumns = ['tahun'];
+        $searchableColumns = ['nama_program'];
+
+        $data['dataProgram'] = Program::filter($request, $filterableColumns)
+            ->search($request, $searchableColumns)
+            ->paginate(10)
+            ->withQueryString();
         return view('pages.admin.program.index', $data);
     }
 

@@ -11,12 +11,18 @@ class PendaftarController extends Controller
     /**
      * Tampilkan semua data pendaftar bantuan.
      */
-    public function index()
-    {
-        $pendaftar = Pendaftar::with(['program', 'warga'])->get();
-        return view('pages.admin.pendaftar.index', compact('pendaftar'));
+    public function index(Request $request)
+{
+    $keyword = $request->search;
 
-    }
+    $pendaftar = Pendaftar::with(['program', 'warga'])
+        ->search($keyword)
+        ->paginate(10)
+        ->withQueryString();
+
+    return view('pages.admin.pendaftar.index', compact('pendaftar'));
+}
+
 
     /**
      * Tampilkan form tambah pendaftar bantuan baru.

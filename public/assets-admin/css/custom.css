@@ -80,3 +80,23 @@
     font-size: 13px;
 }
 
+/* Warna tombol normal */
+.page-item .page-link {
+    background-color: #f0e6ff !important;    /* ungu muda */
+    color: #8b00ff !important;               /* ungu gelap */
+    border-color: #d4b3ff !important;
+}
+
+/* Warna tombol aktif (misal nomor 1) */
+.page-item.active .page-link {
+    background-color: #b66dff !important;    /* ungu khas Purple Admin */
+    color: #fff !important;
+    border-color: #b66dff !important;
+}
+
+/* Saat dihover */
+.page-item .page-link:hover {
+    background-color: #d5a0ff !important;
+    color: #fff !important;
+}
+

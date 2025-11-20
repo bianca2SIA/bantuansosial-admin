@@ -11,7 +11,7 @@ class CreateWargaSeeder extends Seeder
     {
         $faker = Faker::create('id_ID'); // locale Indonesia
 
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 100; $i++) {
 
             DB::table('warga')->insert([
                 'no_ktp'        => $faker->unique()->nik(), // Faker Indonesia punya fitur NIK
