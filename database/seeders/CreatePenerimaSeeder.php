@@ -1,0 +1,45 @@
+<?php
+
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
+
+class CreatePenerimaSeeder extends Seeder
+{
+    public function run(): void
+    {
+        $faker = Faker::create('id_ID');
+
+        // Ambil semua id program & warga
+        $programList = DB::table('program')->pluck('program_id')->toArray();
+        $wargaList   = DB::table('warga')->pluck('warga_id')->toArray();
+
+        // Kalau kosong hentikan
+        if (empty($programList) || empty($wargaList)) {
+            echo "Tabel program atau warga kosong. Seeder dihentikan.\n";
+            return;
+        }
+
+        // Buat 50 data contoh penerima
+        for ($i = 0; $i < 100; $i++) {
+            DB::table('penerima')->insert([
+                'program_id' => $faker->randomElement($programList),
+                'warga_id'   => $faker->randomElement($wargaList),
+                'keterangan' => $faker->boolean(70)
+                                    ? $faker->randomElement([
+                                        'Layak menerima bantuan',
+                                        'Butuh verifikasi tambahan',
+                                        'Data sesuai hasil survei',
+                                        'Terverifikasi oleh petugas',
+                                        'Dalam pemantauan lanjutan',
+                                        'Disalurkan bulan ini'
+                                      ])
+                                    : null,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+    }
+}

@@ -3,63 +3,90 @@
 namespace App\Http\Controllers;
 
 use App\Models\Penerima;
+use App\Models\Program;
+use App\Models\Warga;
 use Illuminate\Http\Request;
 
 class PenerimaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Tampilkan semua data penerima
      */
     public function index()
     {
-        //
+        $penerima = Penerima::with(['program', 'warga'])->paginate(10);
+
+        return view('pages.admin.penerima.index', compact('penerima'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Form tambah data
      */
     public function create()
     {
-        //
+        $program = Program::all();
+        $warga   = Warga::all();
+
+        return view('pages.admin.penerima.create', compact('program', 'warga'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Simpan data baru
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'program_id' => 'required|exists:program,program_id',
+            'warga_id'   => 'required|exists:warga,warga_id',
+            'keterangan' => 'nullable|string'
+        ]);
+
+        Penerima::create($request->all());
+
+        return redirect()->route('penerima.index')
+                         ->with('success', 'Data penerima berhasil ditambahkan.');
     }
 
     /**
-     * Display the specified resource.
+     * Form edit
      */
-    public function show(Penerima $penerima)
+    public function edit($id)
+{
+    $penerima = Penerima::findOrFail($id);
+    $program  = Program::all();
+    $warga    = Warga::all();
+
+    return view('pages.admin.penerima.edit', compact('penerima', 'program', 'warga'));
+}
+
+
+    /**
+     * Update data
+     */
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'program_id' => 'required|exists:program,program_id',
+            'warga_id'   => 'required|exists:warga,warga_id',
+            'keterangan' => 'nullable|string'
+        ]);
+
+        $penerima = Penerima::findOrFail($id);
+        $penerima->update($request->all());
+
+        return redirect()->route('penerima.index')
+                         ->with('success', 'Data penerima berhasil diperbarui.');
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Hapus data
      */
-    public function edit(Penerima $penerima)
+    public function destroy($id)
     {
-        //
-    }
+        $penerima = Penerima::findOrFail($id);
+        $penerima->delete();
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Penerima $penerima)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Penerima $penerima)
-    {
-        //
+        return redirect()->route('penerima.index')
+                         ->with('success', 'Data penerima berhasil dihapus.');
     }
 }

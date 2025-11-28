@@ -6,20 +6,29 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
     public function up(): void
     {
         Schema::create('penerima', function (Blueprint $table) {
-            $table->id();
+            $table->increments('penerima_id');  // PK
+
+            $table->unsignedInteger('program_id'); // FK ke program
+            $table->foreign('program_id')
+                  ->references('program_id')
+                  ->on('program')
+                  ->onDelete('cascade');
+
+            $table->unsignedInteger('warga_id'); // FK ke warga
+            $table->foreign('warga_id')
+                  ->references('warga_id')
+                  ->on('warga')
+                  ->onDelete('cascade');
+
+            $table->string('keterangan')->nullable(); // tambahan opsional
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
         Schema::dropIfExists('penerima');

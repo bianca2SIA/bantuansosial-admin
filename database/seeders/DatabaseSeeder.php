@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             CreateProgramSeeder::class,
             CreatePendaftarSeeder::class,
             CreateVerifikasiSeeder::class,
+            CreatePenerimaSeeder::class,
         ]);
     }
 }
