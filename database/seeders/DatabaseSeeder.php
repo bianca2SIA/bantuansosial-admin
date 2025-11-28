@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             CreateFirstUser::class,
             CreateProgramSeeder::class,
             CreatePendaftarSeeder::class,
+            CreateVerifikasiSeeder::class,
         ]);
     }
 }

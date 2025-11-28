@@ -6,6 +6,7 @@ use App\Http\Controllers\PendaftarController;
 use App\Http\Controllers\ProgramController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WargaController;
+use App\Http\Controllers\VerifikasiController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,3 +35,6 @@ Route::post('/logout', function () {
 })->name('logout');
 
 Route::resource('pendaftar', PendaftarController::class);
+
+Route::resource('verifikasi', VerifikasiController::class);
+
