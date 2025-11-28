@@ -66,7 +66,6 @@ class ProgramController extends Controller
     {
         $program = Program::findOrFail($id);
 
-        // ✅ Validasi input
         $request->validate([
             'nama_program' => 'required|string|max:255',
             'kode'         => 'required|string|max:50|unique:program,kode,' . $id . ',program_id',

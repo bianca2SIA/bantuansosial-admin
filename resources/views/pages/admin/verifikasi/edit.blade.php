@@ -20,14 +20,16 @@
 
             {{-- Alert sukses --}}
             @if (session('success'))
-                <div style="background-color: #d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
+                <div
+                    style="background-color: #d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
                     {{ session('success') }}
                 </div>
             @endif
 
             {{-- Alert error --}}
             @if ($errors->any())
-                <div style="background-color:#f8d7da; color:#842029; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
+                <div
+                    style="background-color:#f8d7da; color:#842029; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
                     <ul class="mb-0">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>
@@ -42,7 +44,8 @@
                         <div class="card-body">
                             <h4 class="card-title mb-4">Form Edit Verifikasi</h4>
 
-                            <form class="forms-sample" method="POST" action="{{ route('verifikasi.update', $verifikasi->verifikasi_id) }}">
+                            <form class="forms-sample" method="POST"
+                                action="{{ route('verifikasi.update', $verifikasi->verifikasi_id) }}">
                                 @csrf
                                 @method('PUT')
 
@@ -73,7 +76,6 @@
                                 <div class="form-group">
                                     <label>Tanggal Verifikasi</label>
                                     <input type="date" name="tanggal" class="form-control" style="cursor: pointer;"
-
                                         value="{{ old('tanggal', $verifikasi->tanggal) }}" required>
                                 </div>
 
@@ -107,6 +109,6 @@
                 </div>
 
 
+            </div>
         </div>
-    </div>
-@endsection
+    @endsection

@@ -3,11 +3,12 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PendaftarController;
-use App\Http\Controllers\ProgramController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\WargaController;
-use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\PenerimaController;
+use App\Http\Controllers\ProgramController;
+use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\VerifikasiController;
+use App\Http\Controllers\WargaController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -40,3 +41,5 @@ Route::resource('pendaftar', PendaftarController::class);
 Route::resource('verifikasi', VerifikasiController::class);
 
 Route::resource('penerima', PenerimaController::class);
+
+Route::resource('riwayat', RiwayatController::class);

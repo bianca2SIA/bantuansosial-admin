@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -9,12 +8,11 @@ class Verifikasi extends Model
 {
     use HasFactory;
 
-    protected $table = 'verifikasi';
+    protected $table      = 'verifikasi';
     protected $primaryKey = 'verifikasi_id';
 
-    // Jika PK bukan auto increment bigInt default
     public $incrementing = true;
-    protected $keyType = 'int';
+    protected $keyType   = 'int';
 
     protected $fillable = [
         'pendaftar_id',
@@ -24,12 +22,31 @@ class Verifikasi extends Model
         'skor',
     ];
 
-    /**
-     * Relasi ke pendaftar
-     * verifikasi.pendaftar_id → pendaftar.pendaftar_id
-     */
     public function pendaftar()
     {
         return $this->belongsTo(Pendaftar::class, 'pendaftar_id', 'pendaftar_id');
     }
+    public function warga()
+    {
+        return $this->belongsTo(Warga::class, 'warga_id', 'warga_id');
+    }
+
+    public function scopeSearch($query, $search)
+    {
+        if (! $search) {
+            return $query;
+        }
+
+        return $query->where(function ($q) use ($search) {
+
+            // Cari nama petugas
+            $q->where('petugas', 'like', "%{$search}%")
+
+            // Cari nama warga (relasi 2 tingkat)
+                ->orWhereHas('pendaftar.warga', function ($p) use ($search) {
+                    $p->where('nama', 'like', "%{$search}%");
+                });
+        });
+    }
+
 }

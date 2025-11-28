@@ -1,10 +1,9 @@
 <?php
-
 namespace Database\Seeders;
 
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 
 class CreateVerifikasiSeeder extends Seeder
 {
@@ -37,8 +36,8 @@ class CreateVerifikasiSeeder extends Seeder
                 'petugas'      => $faker->name(),
                 'tanggal'      => $faker->date(),
                 'catatan'      => $faker->boolean(60)
-                                    ? $faker->randomElement($catatanList)
-                                    : '-',
+                    ? $faker->randomElement($catatanList)
+                    : '-',
                 'skor'         => $faker->numberBetween(10, 100),
                 'created_at'   => now(),
                 'updated_at'   => now(),

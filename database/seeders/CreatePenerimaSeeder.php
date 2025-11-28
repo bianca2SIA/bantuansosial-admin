@@ -1,10 +1,9 @@
 <?php
-
 namespace Database\Seeders;
 
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Faker\Factory as Faker;
 
 class CreatePenerimaSeeder extends Seeder
 {
@@ -28,15 +27,15 @@ class CreatePenerimaSeeder extends Seeder
                 'program_id' => $faker->randomElement($programList),
                 'warga_id'   => $faker->randomElement($wargaList),
                 'keterangan' => $faker->boolean(70)
-                                    ? $faker->randomElement([
-                                        'Layak menerima bantuan',
-                                        'Butuh verifikasi tambahan',
-                                        'Data sesuai hasil survei',
-                                        'Terverifikasi oleh petugas',
-                                        'Dalam pemantauan lanjutan',
-                                        'Disalurkan bulan ini'
-                                      ])
-                                    : null,
+                    ? $faker->randomElement([
+                    'Layak menerima bantuan',
+                    'Butuh verifikasi tambahan',
+                    'Data sesuai hasil survei',
+                    'Terverifikasi oleh petugas',
+                    'Dalam pemantauan lanjutan',
+                    'Disalurkan bulan ini',
+                ])
+                    : null,
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

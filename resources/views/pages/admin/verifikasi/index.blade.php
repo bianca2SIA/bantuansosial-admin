@@ -40,7 +40,7 @@
                                 <form method="GET" action="{{ route('verifikasi.index') }}">
                                     <div class="input-group">
                                         <input type="text" name="search" class="form-control"
-                                            value="{{ request('search') }}" placeholder="Cari Petugas / Pendaftar">
+                                            value="{{ request('search') }}" placeholder="Nama Petugas">
 
                                         <button type="submit"
                                             class="btn btn-light border-0 d-flex align-items-center px-3">
@@ -77,7 +77,6 @@
 
                             <tbody>
                                 @forelse ($verifikasi as $item)
-
                                     <tr>
                                         <td class="text-center">{{ $item->pendaftar->pendaftar_id }}</td>
                                         <td>
@@ -86,23 +85,32 @@
 
                                         </td>
                                         <td>{{ $item->petugas }}</td>
-                                        <td class="text-center">{{ $item->tanggal }}</td>
                                         <td class="text-center">
-    @if ($item->skor >= 80)
-        <span class="badge bg-success text-white">{{ $item->skor }}</span>
-    @elseif ($item->skor >= 50)
-        <span class="badge bg-warning text-dark">{{ $item->skor }}</span>
-    @else
-        <span class="badge bg-danger text-white">{{ $item->skor }}</span>
-    @endif
-</td>
+                                            {{ \Carbon\Carbon::parse($item->tanggal)->locale('id')->translatedFormat('d F Y') }}
+                                        </td>
+
+                                        <td>
+                                            <div style="width:100px; background:#eee; border-radius:4px; overflow:hidden;">
+                                                <div
+                                                    style="
+            width: {{ $item->skor }}%;
+            height: 8px;
+            background:
+                @if ($item->skor >= 80) #4caf50
+                @elseif($item->skor >= 50) #ffc107
+                @else #f44336 @endif;
+        ">
+                                                </div>
+                                            </div>
+                                            <small>{{ $item->skor }}%</small>
+                                        </td>
 
                                         <td>{{ $item->catatan ?? '-' }}</td>
 
                                         <td class="text-center">
                                             <a href="{{ route('verifikasi.edit', $item->verifikasi_id) }}"
                                                 class="btn btn-warning btn-sm">
-                                                <i class="mdi mdi-pencil"></i> Edit
+                                                <i class="mdi mdi-pencil"></i>
                                             </a>
 
                                             <form action="{{ route('verifikasi.destroy', $item->verifikasi_id) }}"
@@ -112,7 +120,7 @@
 
                                                 <button type="submit" class="btn btn-danger btn-sm"
                                                     onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i> Hapus
+                                                    <i class="mdi mdi-delete"></i>
                                                 </button>
                                             </form>
                                         </td>

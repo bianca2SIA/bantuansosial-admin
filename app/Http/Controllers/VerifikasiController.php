@@ -1,35 +1,26 @@
 <?php
-
 namespace App\Http\Controllers;
 
-use App\Models\Verifikasi;
 use App\Models\Pendaftar;
+use App\Models\Verifikasi;
 use Illuminate\Http\Request;
 
 class VerifikasiController extends Controller
 {
-    /**
-     * Display all verifikasi.
-     */
+
     public function index(Request $request)
     {
-        $query = Verifikasi::with('pendaftar');
+        $search = $request->search;
 
-        if ($request->search) {
-            $query->where('petugas', 'LIKE', '%' . $request->search . '%')
-                  ->orWhereHas('pendaftar', function ($q) use ($request) {
-                      $q->where('pendaftar_id', 'LIKE', '%' . $request->search . '%');
-                  });
-        }
-
-        $verifikasi = $query->paginate(10);
+        $verifikasi = Verifikasi::with('pendaftar')
+            ->search($search)
+            ->orderBy('verifikasi_id', 'DESC')
+            ->paginate(10)
+            ->withQueryString();
 
         return view('pages.admin.verifikasi.index', compact('verifikasi'));
     }
 
-    /**
-     * Show form create verifikasi.
-     */
     public function create()
     {
         $pendaftar = Pendaftar::with('warga')->get();
@@ -37,9 +28,6 @@ class VerifikasiController extends Controller
         return view('pages.admin.verifikasi.create', compact('pendaftar'));
     }
 
-    /**
-     * Store a newly created resource.
-     */
     public function store(Request $request)
     {
         $request->validate([
@@ -61,20 +49,14 @@ class VerifikasiController extends Controller
         return redirect()->route('verifikasi.index')->with('success', 'Data verifikasi berhasil ditambahkan');
     }
 
-    /**
-     * Show form edit verifikasi.
-     */
     public function edit($id)
     {
         $verifikasi = Verifikasi::findOrFail($id);
-        $pendaftar = Pendaftar::with('warga')->get();
+        $pendaftar  = Pendaftar::with('warga')->get();
 
         return view('pages.admin.verifikasi.edit', compact('verifikasi', 'pendaftar'));
     }
 
-    /**
-     * Update an existing record.
-     */
     public function update(Request $request, $id)
     {
         $verifikasi = Verifikasi::findOrFail($id);
@@ -98,9 +80,6 @@ class VerifikasiController extends Controller
         return redirect()->route('verifikasi.index')->with('success', 'Data verifikasi berhasil diperbarui');
     }
 
-    /**
-     * Delete a resource.
-     */
     public function destroy($id)
     {
         $verifikasi = Verifikasi::findOrFail($id);

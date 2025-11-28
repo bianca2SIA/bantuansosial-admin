@@ -5,7 +5,7 @@
     <div class="main-panel">
         <div class="content-wrapper">
             <div class="page-header">
-                 <h3 class="page-title">
+                <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white me-2">
                         <i class="mdi mdi-file-check menu-icon"></i>
                     </span> Tambah Data Verifikasi Lapangan
@@ -67,8 +67,8 @@
                                 {{-- Tanggal --}}
                                 <div class="form-group">
                                     <label>Tanggal Verifikasi</label>
-                                    <input type="date" name="tanggal" class="form-control"
-                                        value="{{ old('tanggal') }}" required>
+                                    <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}"
+                                        required>
                                 </div>
 
                                 {{-- Catatan --}}
@@ -80,8 +80,8 @@
                                 {{-- Skor --}}
                                 <div class="form-group">
                                     <label>Skor</label>
-                                    <input type="number" name="skor" class="form-control"
-                                        placeholder="Masukkan skor" value="{{ old('skor') }}" required min="0">
+                                    <input type="number" name="skor" class="form-control" placeholder="Masukkan skor"
+                                        value="{{ old('skor') }}" required min="0">
                                 </div>
 
                                 <div class="mt-4 d-flex justify-content-end">
@@ -99,8 +99,8 @@
                         </div>
                     </div>
 
-            </div>
+                </div>
 
+            </div>
         </div>
-    </div>
-@endsection
+    @endsection
