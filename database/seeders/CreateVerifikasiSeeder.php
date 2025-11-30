@@ -11,7 +11,6 @@ class CreateVerifikasiSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        // Catatan Bahasa Indonesia
         $catatanList = [
             "Dokumen lengkap dan valid.",
             "Perlu pengecekan ulang kondisi rumah.",

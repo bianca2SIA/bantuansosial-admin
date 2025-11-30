@@ -39,10 +39,8 @@ class Verifikasi extends Model
 
         return $query->where(function ($q) use ($search) {
 
-            // Cari nama petugas
             $q->where('petugas', 'like', "%{$search}%")
 
-            // Cari nama warga (relasi 2 tingkat)
                 ->orWhereHas('pendaftar.warga', function ($p) use ($search) {
                     $p->where('nama', 'like', "%{$search}%");
                 });

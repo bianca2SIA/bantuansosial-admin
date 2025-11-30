@@ -11,7 +11,6 @@ return new class extends Migration
         Schema::create('verifikasi', function (Blueprint $table) {
             $table->id('verifikasi_id');
 
-            // FIX: samakan tipe dengan PK di tabel pendaftar (increments → unsignedInteger)
             $table->unsignedInteger('pendaftar_id');
             $table->foreign('pendaftar_id')
                 ->references('pendaftar_id')

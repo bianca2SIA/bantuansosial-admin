@@ -11,7 +11,6 @@ class CreateRiwayatSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        // Ambil semua program dan penerima
         $programList  = DB::table('program')->pluck('program_id');
         $penerimaList = DB::table('penerima')->pluck('penerima_id');
 
@@ -27,8 +26,8 @@ class CreateRiwayatSeeder extends Seeder
                 'penerima_id'      => $penerima_id,
                 'tahap_ke'         => $faker->numberBetween(1, 3),
                 'tanggal'          => $faker->date(),
-                'nilai'            => $faker->numberBetween(100000, 2000000), // Rp 100rb - 2jt
-                'bukti_penyaluran' => null,                                   // atau 'dummy.jpg'
+                'nilai'            => $faker->numberBetween(100000, 2000000),
+                'bukti_penyaluran' => null,
                 'created_at'       => now(),
                 'updated_at'       => now(),
             ]);

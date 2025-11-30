@@ -11,17 +11,14 @@ class CreatePenerimaSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        // Ambil semua id program & warga
         $programList = DB::table('program')->pluck('program_id')->toArray();
         $wargaList   = DB::table('warga')->pluck('warga_id')->toArray();
 
-        // Kalau kosong hentikan
         if (empty($programList) || empty($wargaList)) {
             echo "Tabel program atau warga kosong. Seeder dihentikan.\n";
             return;
         }
 
-        // Buat 50 data contoh penerima
         for ($i = 0; $i < 100; $i++) {
             DB::table('penerima')->insert([
                 'program_id' => $faker->randomElement($programList),

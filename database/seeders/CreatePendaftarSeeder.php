@@ -11,7 +11,6 @@ class CreatePendaftarSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        // Ambil ID yang benar-benar ada di tabel program dan warga
         $programIds = DB::table('program')->pluck('program_id')->toArray();
         $wargaIds   = DB::table('warga')->pluck('warga_id')->toArray();
 

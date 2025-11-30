@@ -13,7 +13,6 @@ class CreateFirstUser extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        // User Admin Pertama
         User::updateOrCreate(
             ['email' => 'bianca24si@mahasiswa.pcr.ac.id'],
             [
@@ -24,7 +23,6 @@ class CreateFirstUser extends Seeder
             ]
         );
 
-        // 100 User Dummy
         for ($i = 0; $i < 100; $i++) {
             User::create([
                 'name'              => $faker->name(),
