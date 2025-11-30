@@ -32,9 +32,8 @@
                             <div class="row align-items-center">
 
                                 <!-- Filter Gender -->
-
                                 <div class="col-md-2">
-                                    <select name="tahun" class="form-select" onchange="this.form.submit()">
+                                    <select name="tahun" class="form-select filter-control" onchange="this.form.submit()">
                                         <option value="">Tahun</option>
 
                                         @for ($year = 2020; $year <= 2026; $year++)
@@ -44,8 +43,8 @@
                                             </option>
                                         @endfor
                                     </select>
-
                                 </div>
+
 
                                 <!-- Search + Clear -->
                                 <div class="col-md-4">
@@ -97,28 +96,42 @@
                                     <tr>
                                         <td>{{ $item->program_id }}</td>
                                         <td>
-                                            <span
-                                                style="background:#A06EFF;color:#fff;padding:4px 12px;border-radius:8px;font-size:13px;">
+                                            <span class="badge badge-gradient-warning">
                                                 {{ $item->kode }}
                                             </span>
+
                                         </td>
                                         <td>{{ $item->nama_program }}</td>
                                         <td>{{ $item->tahun }}</td>
                                         <td>{{ $item->deskripsi }}</td>
                                         <td>Rp{{ number_format($item->anggaran, 0, ',', '.') }}</td>
                                         <td class="text-center">
+                                            @if ($item->bukti_penyaluran)
+                                                <a href="{{ asset('storage/' . $item->bukti_penyaluran) }}" target="_blank"
+                                                    class="badge badge-gradient-info" title="Lihat Bukti">
+                                                    <i class="mdi mdi-file-document"></i>
+                                                </a>
+                                            @else
+                                                <span class="badge badge-gradient-secondary" title="Tidak ada bukti">
+                                                    <i class="mdi mdi-file-remove"></i>
+                                                </span>
+                                            @endif
                                             <a href="{{ route('program.edit', $item->program_id) }}"
-                                                class="btn btn-warning btn-sm">
+                                                class="badge badge-gradient-warning">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
-                                            <form action="{{ route('program.destroy', $item->program_id) }}" method="POST"
-                                                style="display:inline-block; margin-left: 4px;">
+
+                                            <a href="#" class="badge badge-gradient-danger"
+                                                onclick="event.preventDefault();
+                                            if(confirm('Yakin hapus data ini?')) {
+                                            document.getElementById('delete-{{ $item->program_id }}').submit();}">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+                                            <form id="delete-{{ $item->program_id }}"
+                                                action="{{ route('program.destroy', $item->program_id) }}" method="POST"
+                                                style="display:none;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin hapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
                                             </form>
                                     </tr>
                                 @empty

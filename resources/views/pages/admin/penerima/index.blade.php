@@ -90,20 +90,23 @@
 
                                         <td class="text-center">
                                             <a href="{{ route('penerima.edit', $item->penerima_id) }}"
-                                                class="btn btn-warning btn-sm">
+                                                class="badge badge-gradient-warning">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
 
-                                            <form action="{{ route('penerima.destroy', $item->penerima_id) }}"
-                                                method="POST" style="display:inline-block;">
+                                            <a href="#" class="badge badge-gradient-danger"
+                                                onclick="event.preventDefault(); if(confirm('Yakin ingin menghapus data ini?')) {
+                                            document.getElementById('delete-penerima-{{ $item->penerima_id }}').submit();}">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+
+                                            <form id="delete-penerima-{{ $item->penerima_id }}"
+                                                action="{{ route('penerima.destroy', $item->penerima_id) }}" method="POST"
+                                                style="display:none;">
                                                 @csrf
                                                 @method('DELETE')
-
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
                                             </form>
+
                                         </td>
                                     </tr>
 

@@ -74,19 +74,24 @@
                                         <td>{{ $item->email }}</td>
 
                                         <td class="text-center">
-                                            <a href="{{ route('user.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                            <a href="{{ route('user.edit', $item->id) }}"
+                                                class="badge badge-gradient-warning">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
 
-                                            <form action="{{ route('user.destroy', $item->id) }}" method="POST"
-                                                style="display:inline-block;">
+                                            <a href="#" class="badge badge-gradient-danger"
+                                                onclick="event.preventDefault(); if(confirm('Yakin hapus data ini?')) {
+                                            document.getElementById('delete-user-{{ $item->id }}').submit();}">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+
+                                            <form id="delete-user-{{ $item->id }}"
+                                                action="{{ route('user.destroy', $item->id) }}" method="POST"
+                                                style="display:none;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin hapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
                                             </form>
+
                                         </td>
                                     </tr>
                                 @empty

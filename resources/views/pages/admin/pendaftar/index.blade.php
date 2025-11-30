@@ -104,29 +104,45 @@
                                         <td>{{ $item->warga->nama ?? '-' }}</td>
                                         <td class="text-center">
                                             @if ($item->status_seleksi == 'Diterima')
-                                                <span class="badge bg-success text-white">Diterima</span>
+                                                <span class="badge badge-gradient-success">Diterima</span>
                                             @elseif ($item->status_seleksi == 'Ditolak')
-                                                <span class="badge bg-danger text-white">Ditolak</span>
+                                                <span class="badge badge-gradient-danger">Ditolak</span>
                                             @else
-                                                <span class="badge bg-warning text-dark">Menunggu</span>
+                                                <span class="badge badge-gradient-warning">Menunggu</span>
                                             @endif
                                         </td>
 
                                         <td class="text-center">
+                                            @if ($item->bukti_penyaluran)
+                                                <a href="{{ asset('storage/' . $item->bukti_penyaluran) }}" target="_blank"
+                                                    class="badge badge-gradient-info" title="Lihat Bukti">
+                                                    <i class="mdi mdi-file-document"></i>
+                                                </a>
+                                            @else
+                                                <span class="badge badge-gradient-secondary" title="Tidak ada bukti">
+                                                    <i class="mdi mdi-file-remove"></i>
+                                                </span>
+                                            @endif
                                             <a href="{{ route('pendaftar.edit', $item->pendaftar_id) }}"
-                                                class="btn btn-warning btn-sm">
+                                                class="badge badge-gradient-warning">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
 
-                                            <form action="{{ route('pendaftar.destroy', $item->pendaftar_id) }}"
-                                                method="POST" style="display:inline-block; margin-left: 4px;">
+
+                                            <a href="#" class="badge badge-gradient-danger"
+                                                onclick="event.preventDefault();
+                                            if(confirm('Yakin hapus data ini?')) {
+                                            document.getElementById('delete-pendaftar-{{ $item->pendaftar_id }}').submit();}">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+
+                                            <form id="delete-pendaftar-{{ $item->pendaftar_id }}"
+                                                action="{{ route('pendaftar.destroy', $item->pendaftar_id) }}"
+                                                method="POST" style="display:none;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin hapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
                                             </form>
+
 
 
                                         </td>

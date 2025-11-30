@@ -109,18 +109,21 @@
 
                                         <td class="text-center">
                                             <a href="{{ route('warga.edit', $item->warga_id) }}"
-                                                class="btn btn-warning btn-sm">
+                                                class="badge badge-gradient-warning">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
 
-                                            <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
-                                                style="display:inline-block; margin-left: 4px;">
+                                            <a href="#" class="badge badge-gradient-danger"
+                                                onclick="event.preventDefault(); if(confirm('Yakin hapus data ini?')) {
+                                                document.getElementById('delete-warga-{{ $item->warga_id }}').submit();}">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+
+                                            <form id="delete-warga-{{ $item->warga_id }}"
+                                                action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
+                                                style="display:none;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin hapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
                                             </form>
 
 

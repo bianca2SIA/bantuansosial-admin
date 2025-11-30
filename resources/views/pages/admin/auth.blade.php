@@ -28,7 +28,6 @@
             position: relative;
         }
 
-        /* Transparent overlay */
         .overlay {
             position: absolute;
             inset: 0;
@@ -37,7 +36,6 @@
             -webkit-backdrop-filter: blur(5px);
         }
 
-        /* MAIN CARD */
         .card {
             position: relative;
             z-index: 3;

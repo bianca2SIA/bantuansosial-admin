@@ -66,3 +66,14 @@
     height: 38px !important;
     box-shadow: none !important;
 }
+
+.btn-gradient-yellow {
+    background: linear-gradient(90deg, #FFD200, #FFB800) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 6px 10px !important;
+    border-radius: 5px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}

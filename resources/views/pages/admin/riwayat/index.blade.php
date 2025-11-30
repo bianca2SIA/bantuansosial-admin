@@ -92,7 +92,6 @@
                                     <th class="text-center"><strong>Tahap</strong></th>
                                     <th class="text-center"><strong>Tanggal</strong></th>
                                     <th class="text-center"><strong>Nilai (Rp)</strong></th>
-                                    <th class="text-center"><strong>Bukti</strong></th>
                                     <th class="text-center"><strong>Aksi</strong></th>
                                 </tr>
                             </thead>
@@ -112,15 +111,16 @@
 
                                         <td class="text-center">
                                             @if ($item->tahap_ke == 1)
-                                                <span class="badge bg-danger text-white">1</span>
+                                                <span class="badge badge-gradient-danger">1</span>
                                             @elseif ($item->tahap_ke == 2)
-                                                <span class="badge bg-warning text-dark">2</span>
+                                                <span class="badge badge-gradient-warning">2</span>
                                             @elseif ($item->tahap_ke == 3)
-                                                <span class="badge bg-success text-white">3</span>
+                                                <span class="badge badge-gradient-success">3</span>
                                             @else
-                                                <span class="badge bg-secondary text-white">-</span>
+                                                <span class="badge badge-gradient-secondary">-</span>
                                             @endif
                                         </td>
+
 
 
 
@@ -134,34 +134,41 @@
                                         </td>
 
                                         <td class="text-center">
+
+                                            {{-- Detail Bukti --}}
                                             @if ($item->bukti_penyaluran)
                                                 <a href="{{ asset('storage/' . $item->bukti_penyaluran) }}" target="_blank"
-                                                    class="btn btn-info btn-sm">
-                                                    Lihat
+                                                    class="badge badge-gradient-info" title="Lihat Bukti">
+                                                    <i class="mdi mdi-file-document"></i>
                                                 </a>
                                             @else
-                                                <span class="text-muted">-</span>
+                                                <span class="badge badge-gradient-secondary" title="Tidak ada bukti">
+                                                    <i class="mdi mdi-file-remove"></i>
+                                                </span>
                                             @endif
-                                        </td>
 
-                                        {{-- Aksi --}}
-                                        <td class="text-center">
+                                            {{-- Edit --}}
                                             <a href="{{ route('riwayat.edit', $item->riwayat_id) }}"
-                                                class="btn btn-warning btn-sm">
+                                                class="badge badge-gradient-warning" title="Edit">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
 
-                                            <form action="{{ route('riwayat.destroy', $item->riwayat_id) }}" method="POST"
-                                                style="display:inline-block; margin-left: 4px;">
+                                            {{-- Delete --}}
+                                            <a href="#" class="badge badge-gradient-danger" title="Hapus"
+                                                onclick="event.preventDefault(); if (confirm('Yakin hapus data ini?')) {
+                                            document.getElementById('delete-riwayat-{{ $item->riwayat_id }}').submit();}">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+
+                                            <form id="delete-riwayat-{{ $item->riwayat_id }}"
+                                                action="{{ route('riwayat.destroy', $item->riwayat_id) }}" method="POST"
+                                                style="display:none;">
                                                 @csrf
                                                 @method('DELETE')
-
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin hapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
                                             </form>
+
                                         </td>
+
                                     </tr>
 
                                 @empty
