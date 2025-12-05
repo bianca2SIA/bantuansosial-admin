@@ -2,7 +2,7 @@
 
 @section('content')
     {{-- start main content --}}
-    <div class="main-panel">
+    <div gitclass="main-panel">
         <div class="content-wrapper">
             <div class="page-header">
                 <h3 class="page-title">
@@ -64,6 +64,7 @@
                                 <tr>
                                     <th class="text-center fw-bold">Nama</th>
                                     <th class="text-center fw-bold">Email</th>
+                                    <th class="text-center fw-bold">Role</th>
                                     <th class="text-center fw-bold">Aksi</th>
                                 </tr>
                             </thead>
@@ -72,6 +73,20 @@
                                     <tr>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
+                                        <td class="text-center">
+                                            @if ($item->role == 'Super Admin')
+                                                <span class="badge badge-gradient-info">Super Admin</span>
+                                            @elseif ($item->role == 'Admin Bansos')
+                                                <span class="badge badge-gradient-warning">Admin Bansos</span>
+                                            @elseif ($item->role == 'Verifikator')
+                                                <span class="badge badge-gradient-primary">Verifikator</span>
+                                            @elseif ($item->role == 'Operator Penyaluran')
+                                                <span class="badge badge-gradient-danger">Operator Penyaluran</span>
+                                            @elseif ($item->role == 'Warga')
+                                                <span class="badge badge-gradient-success">Warga</span>
+                                            @endif
+                                        </td>
+
 
                                         <td class="text-center">
                                             <a href="{{ route('user.edit', $item->id) }}"

@@ -52,6 +52,22 @@
                                     <input type="text" name="email" class="form-control" placeholder="Masukkan email"
                                         value="{{ old('email') }}"required>
                                 </div>
+                                {{-- Role User --}}
+                               <div class="form-group">
+                                    <label>Role</label>
+                                    <select name="role" id="role"
+                                        class="form-control @error('role') is-invalid @enderror" required>
+                                        <option value="">-- Pilih Role --</option>
+                                        <option value="Super Admin">Super Admin</option>
+                                        <option value="Admin Bansos">Admin Bansos</option>
+                                        <option value="Verifikator">Verifikator</option>
+                                        <option value="Operator Penyaluran">Operator Penyaluran</option>
+                                        <option value="Warga">Warga</option>
+                                    </select>
+                                    @error('role')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
                                 <div class="form-group">
                                     <label>Password </label>

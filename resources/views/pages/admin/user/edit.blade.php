@@ -62,6 +62,31 @@
                                         required>
                                 </div>
 
+                                <div class="form-group">
+                                    <label>Role</label>
+                                    <select name="role" class="form-control @error('role') is-invalid @enderror"
+                                        required>
+                                        <option value="">-- Pilih Role --</option>
+                                        <option value="Super Admin"
+                                            {{ $dataUser->role == 'Super Admin' ? 'selected' : '' }}>Super Admin</option>
+                                        <option value="Admin Bansos"
+                                            {{ $dataUser->role == 'Admin Bansos' ? 'selected' : '' }}>Admin Bansos
+                                        </option>
+                                        <option value="Verifikator"
+                                            {{ $dataUser->role == 'Verifikator' ? 'selected' : '' }}>
+                                            Verifikator</option>
+                                        <option value="Operator Penyaluran"
+                                            {{ $dataUser->role == 'Operator Penyaluran' ? 'selected' : '' }}>Operator
+                                            Penyaluran
+                                        </option>
+                                        <option value="Warga" {{ $dataUser->role == 'Warga' ? 'selected' : '' }}>Warga
+                                        </option>
+                                    </select>
+
+                                    @error('role')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
 
 
                                 <div class="form-group">
