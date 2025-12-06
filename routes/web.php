@@ -16,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('program', ProgramController::class);
+Route::get('/program/{id}/dokumen', [ProgramController::class, 'mediaList'])
+    ->name('program.media.list');
+Route::delete('/media/{id}', [MediaController::class, 'destroy'])->name('media.destroy');
 
 Route::resource('user', UserController::class);
 

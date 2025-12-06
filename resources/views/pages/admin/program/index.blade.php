@@ -45,15 +45,12 @@
                                     </select>
                                 </div>
 
-
-                                <!-- Search + Clear -->
                                 <div class="col-md-4">
                                     <div class="d-flex align-items-center gap-2">
 
                                         <div class="input-group">
                                             <input type="text" name="search" class="form-control"
                                                 value="{{ request('search') }}" placeholder="Nama Program">
-
 
                                             <button type="submit"
                                                 class="btn btn-light border-0 d-flex align-items-center px-3">
@@ -63,8 +60,6 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                             </button>
-
-
                                         </div>
 
                                         @if (request('search'))
@@ -73,7 +68,6 @@
                                                 Clear
                                             </a>
                                         @endif
-
                                     </div>
                                 </div>
 
@@ -106,16 +100,20 @@
                                         <td>{{ $item->deskripsi }}</td>
                                         <td>Rp{{ number_format($item->anggaran, 0, ',', '.') }}</td>
                                         <td class="text-center">
-                                            @if ($item->bukti_penyaluran)
-                                                <a href="{{ asset('storage/' . $item->bukti_penyaluran) }}" target="_blank"
-                                                    class="badge badge-gradient-info" title="Lihat Bukti">
+                                            {{-- ICON FILE --}}
+                                            @if ($item->media()->count() > 0)
+                                                <a href="javascript:void(0)"
+                                                    class="badge badge-gradient-info open-media-modal"
+                                                    data-id="{{ $item->program_id }}" title="Lihat Dokumen"
+                                                    style="border:none !important; outline:none !important; box-shadow:none !important;">
                                                     <i class="mdi mdi-file-document"></i>
                                                 </a>
                                             @else
-                                                <span class="badge badge-gradient-secondary" title="Tidak ada bukti">
+                                                <span class="badge badge-gradient-secondary" title="Tidak ada dokumen">
                                                     <i class="mdi mdi-file-remove"></i>
                                                 </span>
                                             @endif
+
                                             <a href="{{ route('program.edit', $item->program_id) }}"
                                                 class="badge badge-gradient-warning">
                                                 <i class="mdi mdi-pencil"></i>
@@ -149,5 +147,43 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal fade" id="mediaModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 550px;">
+                <div class="modal-content" style="border-radius: 12px; overflow: hidden;">
+
+                    <div class="modal-header bg-gradient-primary text-white">
+                        <h5 class="modal-title">Dokumen Program</h5>
+                        <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body" id="mediaModalBody">
+                        <p class="text-muted">Memuat dokumen...</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.querySelectorAll('.open-media-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+
+                    let programId = this.getAttribute('data-id');
+                    let modalBody = document.getElementById('mediaModalBody');
+
+                    modalBody.innerHTML = "<p class='text-muted'>Memuat dokumen...</p>";
+
+                    fetch(`/program/${programId}/dokumen`)
+                        .then(res => res.json())
+                        .then(data => {
+                            modalBody.innerHTML = data.html;
+                        });
+
+                    let modal = new bootstrap.Modal(document.getElementById('mediaModal'));
+                    modal.show();
+                });
+            });
+        </script>
         {{-- end main content --}}
     @endsection

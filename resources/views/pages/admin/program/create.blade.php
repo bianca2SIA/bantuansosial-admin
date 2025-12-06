@@ -54,30 +54,36 @@
                                     </select>
                                 </div>
 
-
                                 <div class="form-group">
                                     <label>Anggaran (Rp)</label>
                                     <input type="text" name="anggaran" id="anggaran" class="form-control"
                                         placeholder="Masukkan anggaran" value="{{ old('anggaran') }}" required>
                                 </div>
 
-
                                 <div class="form-group">
                                     <label>Deskripsi</label>
                                     <textarea name="deskripsi" class="form-control" rows="4" placeholder="Tuliskan deskripsi program" required>{{ old('deskripsi') }}</textarea>
                                 </div>
+                                <div class="form-group mt-4">
+                                    <label>Dokumen Program (Boleh lebih dari 1)</label>
+                                    <input type="file" name="media[]" multiple class="form-control">
+
+                                    <small class="text-muted">
+                                        *Anda dapat mengupload lebih dari satu file sekaligus.
+                                        Caption bisa diedit nanti pada halaman Edit Program.
+                                    </small>
+                                </div>
+
                                 <div class="mt-4 d-flex justify-content-end">
-                                    <!-- Tombol Batal -->
+
                                     <a href="/program" class="btn btn-light me-2">
                                         <i class="mdi mdi-arrow-left"></i> Batal
                                     </a>
 
-                                    <!-- Tombol Simpan -->
                                     <button type="submit" class="btn btn-gradient-primary text-white">
                                         <i class="mdi mdi-content-save"></i> Simpan
                                     </button>
                                 </div>
-
                             </form>
                         </div>
                     </div>

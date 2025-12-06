@@ -3,42 +3,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MediaController extends Controller
 {
 
-    public static function saveFiles($files, $refTable, $refId)
+    public function destroy($id)
     {
-        if (! $files) {
-            return;
-        }
+        $media = Media::findOrFail($id);
 
-        foreach ($files as $file) {
+        $path = 'uploads/program_bantuan/' . $media->file_name;
 
-            $fileName = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+        Storage::disk('public')->delete($path);
+        $media->delete();
 
-            $path = "media/$refTable/$refId";
-
-            $file->storeAs($path, $fileName, 'public');
-
-            Media::create([
-                'ref_table'  => $refTable,
-                'ref_id'     => $refId,
-                'file_name'  => $fileName,
-                'mime_type'  => $file->getClientMimeType(),
-                'caption'    => null,
-                'sort_order' => 0,
-            ]);
-        }
+        return response()->json(['success' => true]);
     }
-
     public function view($id)
     {
         $media = Media::findOrFail($id);
 
-        $filePath = storage_path(
-            'app/public/media/' . $media->ref_table . '/' . $media->ref_id . '/' . $media->file_name
-        );
+        $filePath = storage_path('app/public/uploads/program_bantuan/' . $media->file_name);
 
         if (! file_exists($filePath)) {
             abort(404, 'File tidak ditemukan.');
@@ -46,35 +31,13 @@ class MediaController extends Controller
 
         return response()->file($filePath);
     }
-
-    public function delete($id)
-    {
-        $media = Media::findOrFail($id);
-
-        $filePath = storage_path(
-            'app/public/media/' . $media->ref_table . '/' . $media->ref_id . '/' . $media->file_name
-        );
-
-        if (file_exists($filePath)) {
-            unlink($filePath);
-        }
-
-        $media->delete();
-
-        return back()->with('success', 'File berhasil dihapus.');
-    }
-
     public function updateCaption(Request $request, $id)
     {
         $media = Media::findOrFail($id);
 
-        $request->validate([
-            'caption' => 'nullable|string|max:255',
-        ]);
-
         $media->caption = $request->caption;
         $media->save();
 
-        return back()->with('success', 'Caption berhasil diperbarui.');
+        return response()->json(['success' => true]);
     }
 }
