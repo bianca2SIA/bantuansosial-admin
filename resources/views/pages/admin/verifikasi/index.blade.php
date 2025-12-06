@@ -13,7 +13,6 @@
                 </h3>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
                     style="background-color: #d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
@@ -32,8 +31,6 @@
                     </div>
 
                     <div class="table-responsive">
-
-                        {{-- Search --}}
                         <div class="col-md-4 mb-3">
                             <div class="d-flex align-items-center gap-2">
 
@@ -109,16 +106,19 @@
                                         <td>{{ $item->catatan ?? '-' }}</td>
 
                                         <td class="text-center">
-                                            @if ($item->bukti_penyaluran)
-                                                <a href="{{ asset('storage/' . $item->bukti_penyaluran) }}" target="_blank"
-                                                    class="badge badge-gradient-info" title="Lihat Bukti">
+                                            @if ($item->media()->count() > 0)
+                                                <a href="javascript:void(0)"
+                                                    class="badge badge-gradient-info open-media-modal"
+                                                    data-id="{{ $item->verifikasi_id }}" title="Lihat Dokumen"
+                                                    style="border:none !important; outline:none !important; box-shadow:none !important;">
                                                     <i class="mdi mdi-file-document"></i>
                                                 </a>
                                             @else
-                                                <span class="badge badge-gradient-secondary" title="Tidak ada bukti">
+                                                <span class="badge badge-gradient-secondary" title="Tidak ada dokumen">
                                                     <i class="mdi mdi-file-remove"></i>
                                                 </span>
                                             @endif
+
                                             <a href="{{ route('verifikasi.edit', $item->verifikasi_id) }}"
                                                 class="badge badge-gradient-warning">
                                                 <i class="mdi mdi-pencil"></i>
@@ -151,11 +151,46 @@
                         <div class="mt-3">
                             {{ $verifikasi->links('pagination::bootstrap-5') }}
                         </div>
-
-
                     </div>
                 </div>
-
             </div>
         </div>
+
+        <div class="modal fade" id="mediaModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 550px;">
+                <div class="modal-content" style="border-radius: 12px; overflow: hidden;">
+
+                    <div class="modal-header bg-gradient-primary text-white">
+                        <h5 class="modal-title">Foto Verifikasi</h5>
+                        <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body" id="mediaModalBody">
+                        <p class="text-muted">Memuat foto...</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.querySelectorAll('.open-media-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+
+                    let id = this.getAttribute('data-id');
+                    let modalBody = document.getElementById('mediaModalBody');
+
+                    modalBody.innerHTML = "<p class='text-muted'>Memuat foto...</p>";
+
+                    fetch(`/verifikasi/${id}/dokumen`)
+                        .then(res => res.json())
+                        .then(data => {
+                            modalBody.innerHTML = data.html;
+                        });
+
+                    let modal = new bootstrap.Modal(document.getElementById('mediaModal'));
+                    modal.show();
+                });
+            });
+        </script>
     @endsection

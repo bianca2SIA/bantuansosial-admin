@@ -40,8 +40,9 @@ Route::resource('pendaftar', PendaftarController::class);
 Route::get('/pendaftar/{id}/dokumen', [PendaftarController::class, 'mediaList'])
      ->name('pendaftar.media.list');
 
-
 Route::resource('verifikasi', VerifikasiController::class);
+Route::get('/verifikasi/{id}/dokumen', [VerifikasiController::class, 'mediaList'])
+    ->name('verifikasi.media.list');
 
 Route::resource('penerima', PenerimaController::class);
 

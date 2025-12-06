@@ -44,7 +44,6 @@
                             <form class="forms-sample" method="POST" action="{{ route('verifikasi.store') }}">
                                 @csrf
 
-                                {{-- Pendaftar --}}
                                 <div class="form-group">
                                     <label>Pendaftar</label>
                                     <select name="pendaftar_id" class="form-control" required>
@@ -57,33 +56,37 @@
                                     </select>
                                 </div>
 
-                                {{-- Petugas --}}
                                 <div class="form-group">
                                     <label>Nama Petugas</label>
                                     <input type="text" name="petugas" class="form-control"
                                         placeholder="Masukkan nama petugas" value="{{ old('petugas') }}" required>
                                 </div>
 
-                                {{-- Tanggal --}}
                                 <div class="form-group">
                                     <label>Tanggal Verifikasi</label>
                                     <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}"
                                         required>
                                 </div>
 
-                                {{-- Catatan --}}
                                 <div class="form-group">
                                     <label>Catatan (Opsional)</label>
                                     <textarea name="catatan" class="form-control" rows="3" placeholder="Masukkan catatan jika ada">{{ old('catatan') }}</textarea>
                                 </div>
 
-                                {{-- Skor --}}
                                 <div class="form-group">
                                     <label>Skor</label>
                                     <input type="number" name="skor" class="form-control" placeholder="Masukkan skor"
                                         value="{{ old('skor') }}" required min="0">
                                 </div>
+                                <div class="form-group mt-4">
+                                    <label>Foto Verifikasi</label>
+                                    <input type="file" name="media[]" multiple class="form-control">
 
+                                    <small class="text-muted">
+                                        *Anda dapat mengupload lebih dari satu file sekaligus.
+                                        Caption bisa diedit nanti pada halaman Edit Pendaftar.
+                                    </small>
+                                </div>
                                 <div class="mt-4 d-flex justify-content-end">
                                     <a href="/verifikasi" class="btn btn-light me-2">
                                         <i class="mdi mdi-arrow-left"></i> Batal
@@ -93,14 +96,10 @@
                                         <i class="mdi mdi-content-save"></i> Simpan
                                     </button>
                                 </div>
-
                             </form>
-
                         </div>
                     </div>
-
                 </div>
-
             </div>
         </div>
     @endsection
