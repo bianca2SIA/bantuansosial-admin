@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::resource('program', ProgramController::class);
-Route::get('/program/{id}/dokumen', [ProgramController::class, 'mediaList'])
-    ->name('program.media.list');
+Route::get('/program/{id}/dokumen', [ProgramController::class, 'mediaList']) ->name('program.media.list');
 Route::delete('/media/{id}', [MediaController::class, 'destroy'])->name('media.destroy');
 
 Route::resource('user', UserController::class);
@@ -37,16 +36,15 @@ Route::post('/logout', function () {
 })->name('logout');
 
 Route::resource('pendaftar', PendaftarController::class);
-Route::get('/pendaftar/{id}/dokumen', [PendaftarController::class, 'mediaList'])
-     ->name('pendaftar.media.list');
+Route::get('/pendaftar/{id}/dokumen', [PendaftarController::class, 'mediaList']) ->name('pendaftar.media.list');
 
 Route::resource('verifikasi', VerifikasiController::class);
-Route::get('/verifikasi/{id}/dokumen', [VerifikasiController::class, 'mediaList'])
-    ->name('verifikasi.media.list');
+Route::get('/verifikasi/{id}/dokumen', [VerifikasiController::class, 'mediaList']) ->name('verifikasi.media.list');
 
 Route::resource('penerima', PenerimaController::class);
 
 Route::resource('riwayat', RiwayatController::class);
+Route::get('/riwayat/{id}/dokumen', [RiwayatController::class, 'mediaList']) ->name('riwayat.media.list');
 
 Route::get('/media/view/{id}', [MediaController::class, 'view'])->name('media.view');
 Route::delete('/media/delete/{id}', [MediaController::class, 'delete'])->name('media.delete');

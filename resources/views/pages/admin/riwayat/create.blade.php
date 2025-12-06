@@ -20,7 +20,6 @@
                 </nav>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
                     style="background-color:#d1e7dd; color:#0f5132; border-radius:8px;
@@ -29,7 +28,6 @@
                 </div>
             @endif
 
-            {{-- Alert error --}}
             @if ($errors->any())
                 <div
                     style="background-color:#f8d7da; color:#842029; border-radius:8px;
@@ -55,7 +53,6 @@
                                 enctype="multipart/form-data">
                                 @csrf
 
-                                {{-- Program --}}
                                 <div class="form-group">
                                     <label>Program Bantuan</label>
                                     <select name="program_id" class="form-control" required>
@@ -69,7 +66,6 @@
                                     </select>
                                 </div>
 
-                                {{-- Penerima --}}
                                 <div class="form-group">
                                     <label>Penerima Bantuan</label>
                                     <select name="penerima_id" class="form-control" required>
@@ -83,55 +79,48 @@
                                     </select>
                                 </div>
 
-                                {{-- Tahap --}}
                                 <div class="form-group">
                                     <label>Tahap Ke</label>
                                     <input type="number" name="tahap_ke" class="form-control"
                                         value="{{ old('tahap_ke') }}" placeholder="Contoh: 1" required>
                                 </div>
 
-                                {{-- Tanggal --}}
                                 <div class="form-group">
                                     <label>Tanggal Penyaluran</label>
                                     <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}"
                                         required>
                                 </div>
 
-                                {{-- Nilai --}}
                                 <div class="form-group">
                                     <label>Nilai Bantuan (Rp)</label>
                                     <input type="number" name="nilai" class="form-control" value="{{ old('nilai') }}"
                                         placeholder="Contoh: 2500000" required>
                                 </div>
 
-                                {{-- Bukti --}}
-                                <div class="form-group">
-                                    <label>Upload Bukti Penyaluran (Foto/PDF)</label>
-                                    <input type="file" name="bukti_penyaluran" class="form-control"
-                                        accept=".jpg,.jpeg,.png,.pdf">
-                                </div>
+                                <div class="form-group mt-4">
+                                    <label>Bukti Penyaluran</label>
+                                    <input type="file" name="media[]" multiple class="form-control">
 
+                                    <small class="text-muted">
+                                        *Anda dapat mengupload lebih dari satu file sekaligus.
+                                        Caption bisa diedit nanti pada halaman Edit Pendaftar.
+                                    </small>
+                                </div>
                                 <div class="mt-4 d-flex justify-content-end">
 
-                                    {{-- Tombol Batal --}}
                                     <a href="{{ route('riwayat.index') }}" class="btn btn-light me-2">
                                         <i class="mdi mdi-arrow-left"></i> Batal
                                     </a>
 
-                                    {{-- Tombol Simpan --}}
                                     <button type="submit" class="btn btn-gradient-primary text-white">
                                         <i class="mdi mdi-content-save"></i> Simpan
                                     </button>
                                 </div>
-
                             </form>
-
                         </div>
                     </div>
-
                 </div>
-
             </div>
-            {{-- end main content --}}
         </div>
+        {{-- end main content --}}
     @endsection

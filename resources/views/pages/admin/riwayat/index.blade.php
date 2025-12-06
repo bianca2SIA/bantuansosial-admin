@@ -13,7 +13,6 @@
                 </h3>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
                     style="background-color: #d1e7dd; color:#0f5132; border-radius:8px;
@@ -25,7 +24,6 @@
             <div class="card">
                 <div class="card-body">
 
-                    {{-- Header + Button --}}
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="card-title mb-0">List Riwayat Penyaluran Bantuan</h4>
 
@@ -36,26 +34,21 @@
 
                     <div class="table-responsive">
 
-                        {{-- SEARCH --}}
                         <form method="GET" action="{{ route('riwayat.index') }}" class="mb-3">
                             <div class="row align-items-center">
                                 <div class="col-md-2">
                                     <select name="tahap_ke" class="form-select filter-control"
                                         onchange="this.form.submit()">
                                         <option value="">Tahap</option>
-
                                         <option value="1" {{ request('tahap_ke') == '1' ? 'selected' : '' }}>Tahap 1
                                         </option>
                                         <option value="2" {{ request('tahap_ke') == '2' ? 'selected' : '' }}>Tahap 2
                                         </option>
                                         <option value="3" {{ request('tahap_ke') == '3' ? 'selected' : '' }}>Tahap 3
                                         </option>
-
                                     </select>
                                 </div>
 
-
-                                {{-- Search --}}
                                 <div class="col-md-4">
                                     <div class="d-flex align-items-center gap-2">
 
@@ -69,7 +62,6 @@
                                             </button>
                                         </div>
 
-                                        {{-- Clear --}}
                                         @if (request('search'))
                                             <a href="{{ route('riwayat.index') }}" class="btn btn-outline-secondary">
                                                 Clear
@@ -82,7 +74,6 @@
                             </div>
                         </form>
 
-                        {{-- TABLE --}}
                         <table class="table table-bordered table-striped">
                             <thead class="bg-gradient-primary text-white">
                                 <tr>
@@ -121,13 +112,9 @@
                                             @endif
                                         </td>
 
-
-
-
                                         <td class="text-center">
                                             {{ \Carbon\Carbon::parse($item->tanggal)->locale('id')->translatedFormat('d F Y') }}
                                         </td>
-
 
                                         <td class="text-center">
                                             Rp{{ number_format($item->nilai, 0, ',', '.') }}
@@ -135,10 +122,11 @@
 
                                         <td class="text-center">
 
-                                            {{-- Detail Bukti --}}
-                                            @if ($item->bukti_penyaluran)
-                                                <a href="{{ asset('storage/' . $item->bukti_penyaluran) }}" target="_blank"
-                                                    class="badge badge-gradient-info" title="Lihat Bukti">
+                                            @if ($item->media()->count() > 0)
+                                                <a href="javascript:void(0)"
+                                                    class="badge badge-gradient-info open-media-modal"
+                                                    data-id="{{ $item->riwayat_id }}" title="Lihat Bukti"
+                                                    style="border:none; outline:none; box-shadow:none;">
                                                     <i class="mdi mdi-file-document"></i>
                                                 </a>
                                             @else
@@ -147,13 +135,11 @@
                                                 </span>
                                             @endif
 
-                                            {{-- Edit --}}
                                             <a href="{{ route('riwayat.edit', $item->riwayat_id) }}"
                                                 class="badge badge-gradient-warning" title="Edit">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
 
-                                            {{-- Delete --}}
                                             <a href="#" class="badge badge-gradient-danger" title="Hapus"
                                                 onclick="event.preventDefault(); if (confirm('Yakin hapus data ini?')) {
                                             document.getElementById('delete-riwayat-{{ $item->riwayat_id }}').submit();}">
@@ -166,11 +152,8 @@
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
-
                                         </td>
-
                                     </tr>
-
                                 @empty
                                     <tr>
                                         <td colspan="8" class="text-center text-muted">Belum ada data riwayat</td>
@@ -179,16 +162,50 @@
                             </tbody>
                         </table>
 
-                        {{-- Pagination --}}
                         <div class="mt-3">
                             {{ $riwayat->links('pagination::bootstrap-5') }}
                         </div>
-
                     </div>
                 </div>
-
-
             </div>
-            {{-- end main content --}}
         </div>
+
+        <div class="modal fade" id="mediaModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 550px;">
+                <div class="modal-content" style="border-radius: 12px; overflow: hidden;">
+
+                    <div class="modal-header bg-gradient-primary text-white">
+                        <h5 class="modal-title">Bukti Penyaluran</h5>
+                        <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body" id="mediaModalBody">
+                        <p class="text-muted">Memuat bukti...</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.querySelectorAll('.open-media-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+
+                    let id = this.getAttribute('data-id');
+                    let modalBody = document.getElementById('mediaModalBody');
+
+                    modalBody.innerHTML = "<p class='text-muted'>Memuat dokumen...</p>";
+
+                    fetch(`/riwayat/${id}/dokumen`)
+                        .then(res => res.json())
+                        .then(data => {
+                            modalBody.innerHTML = data.html;
+                        });
+
+                    let modal = new bootstrap.Modal(document.getElementById('mediaModal'));
+                    modal.show();
+                });
+            });
+        </script>
+        {{-- end main content --}}
     @endsection

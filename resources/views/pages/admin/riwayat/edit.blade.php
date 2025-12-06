@@ -20,7 +20,6 @@
                 </nav>
             </div>
 
-            {{-- ALERT SUCCESS --}}
             @if (session('success'))
                 <div
                     style="background-color:#d1e7dd; color:#0f5132; border-radius:8px;
@@ -29,7 +28,6 @@
                 </div>
             @endif
 
-            {{-- ALERT ERROR --}}
             @if ($errors->any())
                 <div
                     style="background-color:#f8d7da; color:#842029; border-radius:8px;
@@ -55,7 +53,6 @@
                                 @csrf
                                 @method('PUT')
 
-                                {{-- PROGRAM --}}
                                 <div class="form-group">
                                     <label>Program Bantuan</label>
                                     <select name="program_id" class="form-control" required>
@@ -70,7 +67,6 @@
                                     </select>
                                 </div>
 
-                                {{-- PENERIMA --}}
                                 <div class="form-group">
                                     <label>Penerima Bantuan</label>
                                     <select name="penerima_id" class="form-control" required>
@@ -85,41 +81,57 @@
                                     </select>
                                 </div>
 
-                                {{-- TAHAP --}}
                                 <div class="form-group">
                                     <label>Tahap Ke</label>
                                     <input type="number" name="tahap_ke" class="form-control"
                                         value="{{ old('tahap_ke', $riwayat->tahap_ke) }}" placeholder="Contoh: 1" required>
                                 </div>
 
-                                {{-- TANGGAL --}}
                                 <div class="form-group">
                                     <label>Tanggal Penyaluran</label>
                                     <input type="date" name="tanggal" class="form-control"
                                         value="{{ old('tanggal', $riwayat->tanggal) }}" required>
                                 </div>
 
-                                {{-- NILAI --}}
                                 <div class="form-group">
                                     <label>Nilai Bantuan (Rp)</label>
                                     <input type="number" name="nilai" class="form-control"
                                         value="{{ old('nilai', $riwayat->nilai) }}" placeholder="Contoh: 2500000" required>
                                 </div>
 
-                                {{-- BUKTI --}}
-                                <div class="form-group">
-                                    <label>Bukti Penyaluran (Foto/PDF - opsional)</label>
-                                    <input type="file" name="bukti_penyaluran" class="form-control"
-                                        accept=".jpg,.jpeg,.png,.pdf">
+                                <hr class="my-4">
+                                <h4 class="card-title mb-3">Bukti Penyaluran</h4>
 
-                                    @if ($riwayat->bukti_penyaluran)
-                                        <small class="text-muted">
-                                            File saat ini:
-                                            <a href="{{ asset('storage/' . $riwayat->bukti_penyaluran) }}" target="_blank">
-                                                Lihat Bukti
-                                            </a>
-                                        </small>
-                                    @endif
+                                @foreach ($riwayat->media as $file)
+                                    <div class="d-flex align-items-center mb-2">
+
+                                        <a href="{{ asset('storage/uploads/penyaluran_bantuan/' . $file->file_name) }}"
+                                            target="_blank" class="d-flex align-items-center"
+                                            style="font-size:13px; text-decoration:underline; color:#0d6efd;">
+                                            <i class="mdi mdi-file-outline me-1" style="font-size:17px;"></i>
+                                            <span>{{ $file->file_name }}</span>
+                                        </a>
+
+                                        <input type="text" name="captions_existing[{{ $file->media_id }}]"
+                                            class="form-control ms-3" style="max-width:220px; height:30px; font-size:13px;"
+                                            placeholder="Caption" value="{{ $file->caption }}">
+
+                                        <button type="button" class="btn btn-link text-danger ms-2 p-0 delete-media"
+                                            data-id="{{ $file->media_id }}" style="font-size:18px;">
+                                            <i class="mdi mdi-close-circle-outline"></i>
+                                        </button>
+
+                                    </div>
+                                @endforeach
+
+                                @if ($riwayat->media->count() == 0)
+                                    <p class="text-muted" style="font-size: 13px;">Belum ada bukti penyaluran.</p>
+                                @endif
+
+                                <div class="form-group mt-4">
+                                    <label style="font-size: 14px; font-weight: 600;">Tambah Bukti Penyaluran Baru</label>
+                                    <input type="file" name="media[]" multiple class="form-control"
+                                        style="height: 45px;">
                                 </div>
 
                                 <div class="mt-4 d-flex justify-content-end">
@@ -131,15 +143,11 @@
                                         <i class="mdi mdi-content-save"></i> Simpan
                                     </button>
                                 </div>
-
                             </form>
-
                         </div>
                     </div>
                 </div>
-
-
             </div>
-            {{-- end main content --}}
         </div>
+        {{-- end main content --}}
     @endsection
