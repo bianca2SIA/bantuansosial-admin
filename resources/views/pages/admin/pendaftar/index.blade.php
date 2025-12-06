@@ -33,7 +33,6 @@
                         <form method="GET" action="{{ route('pendaftar.index') }}" class="mb-3">
                             <div class="row align-items-center">
 
-                                <!-- Filter Gender -->
                                 <div class="col-md-2">
                                     <select name="status" class="form-select filter-control" onchange="this.form.submit()">
                                         <option value="">Status</option>
@@ -49,15 +48,12 @@
                                     </select>
                                 </div>
 
-
-                                <!-- Search + Clear -->
                                 <div class="col-md-4">
                                     <div class="d-flex align-items-center gap-2">
 
                                         <div class="input-group">
                                             <input type="text" name="search" class="form-control"
                                                 value="{{ request('search') }}" placeholder="Nama Warga">
-
 
                                             <button type="submit"
                                                 class="btn btn-light border-0 d-flex align-items-center px-3">
@@ -67,8 +63,6 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                             </button>
-
-
                                         </div>
 
                                         @if (request('search'))
@@ -77,13 +71,10 @@
                                                 Clear
                                             </a>
                                         @endif
-
                                     </div>
                                 </div>
-
                             </div>
                         </form>
-
 
                         <table class="table table-bordered table-striped">
                             <thead class="bg-gradient-primary text-white">
@@ -93,7 +84,6 @@
                                     <th class="text-center fw-bold">Nama Warga</th>
                                     <th class="text-center fw-bold">Status Seleksi</th>
                                     <th class="text-center fw-bold">Aksi</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -113,21 +103,23 @@
                                         </td>
 
                                         <td class="text-center">
-                                            @if ($item->bukti_penyaluran)
-                                                <a href="{{ asset('storage/' . $item->bukti_penyaluran) }}" target="_blank"
-                                                    class="badge badge-gradient-info" title="Lihat Bukti">
+                                            @if ($item->media()->count() > 0)
+                                                <a href="javascript:void(0)"
+                                                    class="badge badge-gradient-info open-media-modal"
+                                                    data-id="{{ $item->pendaftar_id }}" title="Lihat Berkas"
+                                                    style="border:none !important; outline:none !important; box-shadow:none !important;">
                                                     <i class="mdi mdi-file-document"></i>
                                                 </a>
                                             @else
-                                                <span class="badge badge-gradient-secondary" title="Tidak ada bukti">
+                                                <span class="badge badge-gradient-secondary" title="Tidak ada berkas">
                                                     <i class="mdi mdi-file-remove"></i>
                                                 </span>
                                             @endif
+
                                             <a href="{{ route('pendaftar.edit', $item->pendaftar_id) }}"
                                                 class="badge badge-gradient-warning">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
-
 
                                             <a href="#" class="badge badge-gradient-danger"
                                                 onclick="event.preventDefault();
@@ -142,8 +134,6 @@
                                                 @csrf
                                                 @method('DELETE')
                                             </form>
-
-
 
                                         </td>
                                     </tr>
@@ -162,5 +152,42 @@
                 </div>
             </div>
         </div>
+        <div class="modal fade" id="mediaModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered" style="max-width: 550px;">
+                <div class="modal-content" style="border-radius: 12px; overflow: hidden;">
+
+                    <div class="modal-header bg-gradient-primary text-white">
+                        <h5 class="modal-title">Berkas Pendaftaran</h5>
+                        <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
+                    </div>
+
+                    <div class="modal-body" id="mediaModalBody">
+                        <p class="text-muted">Memuat berkas...</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <script>
+            document.querySelectorAll('.open-media-modal').forEach(btn => {
+                btn.addEventListener('click', function() {
+
+                    let id = this.getAttribute('data-id');
+                    let modalBody = document.getElementById('mediaModalBody');
+
+                    modalBody.innerHTML = "<p class='text-muted'>Memuat berkas...</p>";
+
+                    fetch(`/pendaftar/${id}/dokumen`)
+                        .then(res => res.json())
+                        .then(data => {
+                            modalBody.innerHTML = data.html;
+                        });
+
+                    let modal = new bootstrap.Modal(document.getElementById('mediaModal'));
+                    modal.show();
+                });
+            });
+        </script>
         {{-- end main content --}}
     @endsection

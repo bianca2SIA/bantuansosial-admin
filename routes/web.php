@@ -37,6 +37,9 @@ Route::post('/logout', function () {
 })->name('logout');
 
 Route::resource('pendaftar', PendaftarController::class);
+Route::get('/pendaftar/{id}/dokumen', [PendaftarController::class, 'mediaList'])
+     ->name('pendaftar.media.list');
+
 
 Route::resource('verifikasi', VerifikasiController::class);
 

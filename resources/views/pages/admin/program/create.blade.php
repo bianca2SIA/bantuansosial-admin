@@ -65,7 +65,7 @@
                                     <textarea name="deskripsi" class="form-control" rows="4" placeholder="Tuliskan deskripsi program" required>{{ old('deskripsi') }}</textarea>
                                 </div>
                                 <div class="form-group mt-4">
-                                    <label>Dokumen Program (Boleh lebih dari 1)</label>
+                                    <label>Dokumen Program</label>
                                     <input type="file" name="media[]" multiple class="form-control">
 
                                     <small class="text-muted">

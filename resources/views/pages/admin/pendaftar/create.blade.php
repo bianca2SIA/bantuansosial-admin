@@ -66,9 +66,16 @@
                                     </select>
                                 </div>
 
+                                <div class="form-group mt-4">
+                                    <label>Berkas Pendaftaran</label>
+                                    <input type="file" name="media[]" multiple class="form-control">
 
+                                    <small class="text-muted">
+                                        *Anda dapat mengupload lebih dari satu file sekaligus.
+                                        Caption bisa diedit nanti pada halaman Edit Pendaftar.
+                                    </small>
+                                </div>
 
-                                <!-- Tombol Batal -->
                                 <div class="mt-4 d-flex justify-content-end gap-2">
 
                                     <a href="/pendaftar" class="btn btn-light">
@@ -78,10 +85,7 @@
                                     <button type="submit" class="btn btn-gradient-primary text-white">
                                         <i class="mdi mdi-content-save"></i> Simpan
                                     </button>
-
                                 </div>
-
-
                             </form>
                         </div>
                     </div>
