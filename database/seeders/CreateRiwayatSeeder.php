@@ -32,7 +32,5 @@ class CreateRiwayatSeeder extends Seeder
                 'updated_at'       => now(),
             ]);
         }
-
-        echo "Seeder Riwayat selesai.\n";
     }
 }

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
             CreatePendaftarSeeder::class,
             CreateVerifikasiSeeder::class,
             CreatePenerimaSeeder::class,
+            CreateRiwayatSeeder::class,
         ]);
     }
 }

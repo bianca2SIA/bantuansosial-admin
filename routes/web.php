@@ -11,7 +11,7 @@ use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\WargaController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('auth', [AuthController::class, 'index'])->name('auth');
+Route::get('/', [AuthController::class, 'index'])->name('auth');
 Route::post('auth/login', [AuthController::class, 'login'])->name('auth.login');
 Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
@@ -20,7 +20,7 @@ Route::middleware(['checkislogin'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::middleware('checkrole:Super Admin')->group(function () {
-        Route::resource('user', UserController::class);
+
         Route::resource('program', ProgramController::class);
 
         Route::post('program/{id}/media', [ProgramController::class, 'uploadMedia'])->name('program.media.upload');
@@ -54,3 +54,4 @@ Route::middleware(['checkislogin'])->group(function () {
 
     Route::get('/profil', function () {return view('pages.admin.profil');})->name('profil.index')->middleware('auth');
 });
+    Route::resource('user', UserController::class);

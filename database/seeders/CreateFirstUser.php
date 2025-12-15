@@ -18,6 +18,7 @@ class CreateFirstUser extends Seeder
             [
                 'name'              => 'Admin',
                 'password'          => Hash::make('bianca'),
+                'role'              => 'Admin',
                 'email_verified_at' => now(),
                 'remember_token'    => Str::random(10),
             ]
@@ -27,6 +28,7 @@ class CreateFirstUser extends Seeder
             User::create([
                 'name'              => $faker->name(),
                 'email'             => $faker->unique()->safeEmail(),
+                'role'              => 'User',
                 'email_verified_at' => now(),
                 'password'          => Hash::make('password123'),
                 'remember_token'    => Str::random(10),
