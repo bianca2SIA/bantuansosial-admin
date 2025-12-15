@@ -110,7 +110,7 @@
                                         <td class="text-center">
                                             <a href="{{ route('warga.edit', $item->warga_id) }}"
                                                 class="btn btn-warning btn-sm">
-                                                <i class="mdi mdi-pencil"></i> Edit
+                                                <i class="mdi mdi-pencil"></i>
                                             </a>
 
                                             <form action="{{ route('warga.destroy', $item->warga_id) }}" method="POST"
@@ -119,7 +119,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"
                                                     onclick="return confirm('Yakin hapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i> Hapus
+                                                    <i class="mdi mdi-delete"></i>
                                                 </button>
                                             </form>
 

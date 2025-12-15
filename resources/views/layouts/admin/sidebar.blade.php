@@ -74,12 +74,13 @@
 
 
         {{-- Riwayat Penyaluran Bantuan --}}
-        <li class="nav-item">
-            <a class="nav-link {{ request()->is('riwayat*') ? 'active' : '' }}" href="/penerima">
+        <li class="nav-item {{ request()->is('riwayat*') ? 'active' : '' }}">
+            <a class="nav-link" href="/riwayat">
                 <span class="menu-title">Riwayat Penyaluran Bantuan</span>
                 <i class="mdi mdi-table-large menu-icon"></i>
             </a>
         </li>
+
 
     </ul>
 </nav>

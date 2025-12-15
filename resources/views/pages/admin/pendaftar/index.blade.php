@@ -35,18 +35,20 @@
 
                                 <!-- Filter Gender -->
                                 <div class="col-md-2">
-                                    <select name="status_seleksi" class="form-select" onchange="this.form.submit()">
+                                    <select name="status" class="form-select filter-control" onchange="this.form.submit()">
                                         <option value="">Status</option>
-                                        <option value="Menunggu"
-                                            {{ request('status_seleksi') == 'Menunggu' ? 'selected' : '' }}>Menunggu
+                                        <option value="Menunggu" {{ request('status') == 'Menunggu' ? 'selected' : '' }}>
+                                            Menunggu
                                         </option>
-                                        <option value="Diterima"
-                                            {{ request('status_seleksi') == 'Diterima' ? 'selected' : '' }}>Diterima
+                                        <option value="Diterima" {{ request('status') == 'Diterima' ? 'selected' : '' }}>
+                                            Diterima
                                         </option>
-                                        <option value="Ditolak"
-                                            {{ request('status_seleksi') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                                        <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>
+                                            Ditolak
+                                        </option>
                                     </select>
                                 </div>
+
 
                                 <!-- Search + Clear -->
                                 <div class="col-md-4">
@@ -113,7 +115,7 @@
                                         <td class="text-center">
                                             <a href="{{ route('pendaftar.edit', $item->pendaftar_id) }}"
                                                 class="btn btn-warning btn-sm">
-                                                <i class="mdi mdi-pencil"></i> Edit
+                                                <i class="mdi mdi-pencil"></i>
                                             </a>
 
                                             <form action="{{ route('pendaftar.destroy', $item->pendaftar_id) }}"
@@ -122,7 +124,7 @@
                                                 @method('DELETE')
                                                 <button type="submit" class="btn btn-danger btn-sm"
                                                     onclick="return confirm('Yakin hapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i> Hapus
+                                                    <i class="mdi mdi-delete"></i>
                                                 </button>
                                             </form>
 

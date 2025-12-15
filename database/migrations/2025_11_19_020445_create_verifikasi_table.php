@@ -6,21 +6,27 @@ use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
-    /**
-     * Run the migrations.
-     */
-    public function up(): void
+    public function up()
     {
         Schema::create('verifikasi', function (Blueprint $table) {
-            $table->id();
+            $table->id('verifikasi_id');
+
+            $table->unsignedInteger('pendaftar_id');
+            $table->foreign('pendaftar_id')
+                ->references('pendaftar_id')
+                ->on('pendaftar')
+                ->cascadeOnDelete();
+
+            $table->string('petugas');
+            $table->date('tanggal');
+            $table->text('catatan')->nullable();
+            $table->integer('skor');
+
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('verifikasi');
     }

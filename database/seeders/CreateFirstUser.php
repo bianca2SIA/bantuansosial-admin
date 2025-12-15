@@ -1,12 +1,11 @@
 <?php
-
 namespace Database\Seeders;
 
+use App\Models\User;
+use Faker\Factory as Faker;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-use App\Models\User;
-use Faker\Factory as Faker;
 
 class CreateFirstUser extends Seeder
 {
@@ -14,7 +13,6 @@ class CreateFirstUser extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        // User Admin Pertama
         User::updateOrCreate(
             ['email' => 'bianca24si@mahasiswa.pcr.ac.id'],
             [
@@ -25,7 +23,6 @@ class CreateFirstUser extends Seeder
             ]
         );
 
-        // 100 User Dummy
         for ($i = 0; $i < 100; $i++) {
             User::create([
                 'name'              => $faker->name(),

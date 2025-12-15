@@ -1,43 +1,46 @@
 @extends('layouts.admin.app')
 
 @section('content')
-    {{-- start main content --}}
     <div class="main-panel">
         <div class="content-wrapper">
+
             <div class="page-header">
                 <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white me-2">
-                        <i class="mdi mdi-account-edit"></i>
-                    </span> Data User
+                        <i class="mdi mdi-account-check"></i>
+                    </span> Data Penerima Bantuan
                 </h3>
             </div>
 
+            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
-                    style="background-color: #d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
+                    style="background-color:#d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
                     {{ session('success') }}
                 </div>
             @endif
 
+
             <div class="card">
                 <div class="card-body">
+
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="card-title mb-0">List Data Seluruh User</h4>
-                        <a href="{{ route('user.create') }}" class="btn btn-gradient-primary text-white">
-                            + Tambah User
+                        <h4 class="card-title mb-0">List Data Penerima</h4>
+                        <a href="{{ route('penerima.create') }}" class="btn btn-gradient-primary text-white">
+                            + Tambah Penerima
                         </a>
                     </div>
 
                     <div class="table-responsive">
-                        <!-- Search + Clear -->
+
+                        {{-- Search Bar --}}
                         <div class="col-md-4 mb-3">
                             <div class="d-flex align-items-center gap-2">
-                                <form method="GET" action="{{ route('user.index') }}">
+
+                                <form method="GET" action="{{ route('penerima.index') }}">
                                     <div class="input-group">
-
                                         <input type="text" name="search" class="form-control"
-                                            value="{{ request('search') }}" placeholder="Nama User">
-
+                                            value="{{ request('search') }}" placeholder="Nama Warga ">
 
                                         <button type="submit"
                                             class="btn btn-light border-0 d-flex align-items-center px-3">
@@ -51,58 +54,77 @@
                                 </form>
 
                                 @if (request('search'))
-                                    <a href="{{ request()->fullUrlWithQuery(['search' => null]) }}"
-                                        class="btn btn-outline-secondary">
+                                    <a href="{{ route('penerima.index') }}" class="btn btn-outline-secondary">
                                         Clear
                                     </a>
                                 @endif
+
                             </div>
                         </div>
 
                         <table class="table table-bordered table-striped">
                             <thead class="bg-gradient-primary text-white">
                                 <tr>
-                                    <th class="text-center fw-bold">Nama</th>
-                                    <th class="text-center fw-bold">Email</th>
+                                    <th class="text-center fw-bold">ID</th>
+                                    <th class="text-center fw-bold">Warga</th>
+                                    <th class="text-center fw-bold">Program</th>
+                                    <th class="text-center fw-bold">Keterangan</th>
                                     <th class="text-center fw-bold">Aksi</th>
                                 </tr>
                             </thead>
+
                             <tbody>
-                                @forelse ($dataUser as $item)
+                                @forelse ($penerima as $item)
                                     <tr>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->email }}</td>
+                                        <td class="text-center">{{ $item->warga->warga_id }}</td>
+
+                                        <td>
+                                            {{ $item->warga->nama ?? '-' }}
+                                        </td>
+
+                                        <td>
+                                            {{ $item->program->nama_program ?? '-' }}
+                                        </td>
+
+                                        <td>{{ $item->keterangan ?? '-' }}</td>
 
                                         <td class="text-center">
-                                            <a href="{{ route('user.edit', $item->id) }}" class="btn btn-warning btn-sm">
+                                            <a href="{{ route('penerima.edit', $item->penerima_id) }}"
+                                                class="btn btn-warning btn-sm">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
 
-                                            <form action="{{ route('user.destroy', $item->id) }}" method="POST"
-                                                style="display:inline-block;">
+                                            <form action="{{ route('penerima.destroy', $item->penerima_id) }}"
+                                                method="POST" style="display:inline-block;">
                                                 @csrf
                                                 @method('DELETE')
+
                                                 <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin hapus data ini?')">
+                                                    onclick="return confirm('Yakin ingin menghapus data ini?')">
                                                     <i class="mdi mdi-delete"></i>
                                                 </button>
                                             </form>
                                         </td>
                                     </tr>
+
                                 @empty
                                     <tr>
-                                        <td colspan="7" class="text-center text-muted">Belum ada data user
+                                        <td colspan="5" class="text-center text-muted">
+                                            Belum ada data penerima
                                         </td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
+
                         <div class="mt-3">
-                            {{ $dataUser->links('pagination::bootstrap-5') }}
+                            {{ $penerima->links('pagination::bootstrap-5') }}
                         </div>
+
+
                     </div>
                 </div>
+
             </div>
         </div>
-        {{-- end main content --}}
     @endsection

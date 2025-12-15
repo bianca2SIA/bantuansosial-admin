@@ -9,16 +9,10 @@ class Warga extends Model
 {
     use HasFactory;
 
-    // Nama tabel
-    protected $table = 'warga';
-
-    // Primary key
+    protected $table      = 'warga';
     protected $primaryKey = 'warga_id';
+    public $timestamps    = false;
 
-    // Nonaktifkan timestamps (karena tabel 'warga' tidak punya created_at dan updated_at)
-    public $timestamps = false;
-
-    // Kolom yang boleh diisi
     protected $fillable = [
         'no_ktp',
         'nama',

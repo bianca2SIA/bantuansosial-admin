@@ -2,12 +2,14 @@
     <div class="navbar-brand-wrapper d-flex align-items-center justify-content-start">
 
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-          <a class="navbar-brand brand-logo" href="/">
-        <img src="{{ asset('assets-admin/images/BINA DESA.png') }}" alt="logo" style="height:170px; width: auto;">
-    </a>
-          <a class="navbar-brand brand-logo-mini" href="/">
-        <img src="{{ asset('assets-admin/images/logo-mini.svg') }}" alt="logo" style="height:30px;">
-    </a>  </div>
+            <a class="navbar-brand brand-logo" href="/">
+                <img src="{{ asset('assets-admin/images/BINA DESA.png') }}" alt="logo"
+                    style="height:170px; width: auto;">
+            </a>
+            <a class="navbar-brand brand-logo-mini" href="/">
+                <img src="{{ asset('assets-admin/images/logo-mini.svg') }}" alt="logo" style="height:30px;">
+            </a>
+        </div>
 
     </div>
 
