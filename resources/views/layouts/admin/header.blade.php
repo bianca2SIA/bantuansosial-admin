@@ -3,11 +3,12 @@
 
         <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
             <a class="navbar-brand brand-logo" href="/">
-                <img src="{{ asset('assets-admin/images/BINA DESA.png') }}" alt="logo"
+                <img src="{{ asset('assets-admin/images/BANSOS2.png') }}" alt="logo"
                     style="height:170px; width: auto;">
             </a>
             <a class="navbar-brand brand-logo-mini" href="/">
-                <img src="{{ asset('assets-admin/images/logo-mini.svg') }}" alt="logo" style="height:30px;">
+                <img src="{{ asset('assets-admin/images/favicon1.png') }}" alt="logo"
+                    style="height:30px; width:auto;">
             </a>
         </div>
 
@@ -15,7 +16,7 @@
 
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
         <!-- Tombol Sidebar -->
-        <button class="navbar-toggler align-self-center" type="button" data-bs-toggle="minimize">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
         </button>
         <div class="search-field d-none d-md-block">
@@ -32,31 +33,43 @@
         <ul class="navbar-nav navbar-nav-right">
 
             <li class="nav-item nav-profile dropdown">
-                <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
-                    id="profileDropdown">
+                @if (Auth::check())
+                    <a class="nav-link dropdown-toggle" href="javascript:void(0)" data-bs-toggle="dropdown"
+                        id="profileDropdown">
 
-                    <div class="nav-profile-img">
-                        <img src="{{ asset('assets-admin/images/faces/face6.jpg') }}" alt="image">
-                        <span class="availability-status online"></span>
-                    </div>
-                    <div class="nav-profile-text d-flex align-items-center">
-                        <p class="mb-1 text-black me-1">Bianca Bahi</p>
-                        <i class="mdi mdi-chevron-down text-primary"></i>
-                    </div>
-                </a>
-                <div class="dropdown-menu dropdown-menu-end navbar-dropdown" aria-labelledby="profileDropdown">
-                    <a class="dropdown-item" href="#"><i class="mdi mdi-account text-primary me-2"></i>
-                        Profil Saya</a>
-                    <div class="dropdown-divider"></div>
-                    <form action="{{ route('logout') }}" method="POST" id="logout-form">
-                        @csrf
-                        <a href="#" class="dropdown-item"
-                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                            <i class="mdi mdi-logout text-primary me-2"></i> Keluar
+                        <div class="nav-profile-img">
+                            <img src="{{ asset('assets-admin/images/faces/face6.jpg') }}" alt="image">
+                            <span class="availability-status online"></span>
+                        </div>
+                        <div class="nav-profile-text d-flex align-items-center">
+                            <p class="mb-1 text-black me-1">{{ Auth::user()->name }}</p>
+                            <i class="mdi mdi-chevron-down text-primary"></i>
+                        </div>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end navbar-dropdown" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" href="{{ route('profil.index') }}">
+                            <i class="mdi mdi-account text-primary me-2"></i>
+                            Profil Saya
                         </a>
-                    </form>
 
-                </div>
+                        <div class="dropdown-divider"></div>
+                        {{-- LAST LOGIN --}}
+                        <a class="dropdown-item d-flex align-items-center">
+                            <i class="mdi mdi-clock-outline text-primary me-2"></i>
+                            {{ session('last_login') }}
+                        </a>
+
+                        <div class="dropdown-divider"></div>
+
+                        <form action="{{ route('auth.logout') }}" method="POST" id="logout-form">
+                            @csrf
+                            <a href="#" class="dropdown-item"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                <i class="mdi mdi-logout text-primary me-2"></i> Keluar
+                            </a>
+                        </form>
+
+                    </div>
             </li>
 
             <li class="nav-item dropdown">
@@ -134,6 +147,9 @@
                     <p class="p-3 mb-0 text-center">Lihat semua notifikasi</p>
                 </div>
             </li>
+        @else
+            <a class= " btn btn-success" href="{{ route('auth') }}">Login</a>
+            @endif
 
 
             <li class="nav-item d-none d-lg-block">
@@ -142,11 +158,7 @@
                 </a>
             </li>
 
-            <li class="nav-item d-none d-lg-block">
-                <a class="nav-link" href="javascript:void(0)" title="Pengaturan Tampilan">
-                    <i class="mdi mdi-format-line-spacing"></i>
-                </a>
-            </li>
+
 
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                 data-toggle="offcanvas">

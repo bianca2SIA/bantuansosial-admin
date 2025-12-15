@@ -33,31 +33,27 @@
                         <form method="GET" action="{{ route('pendaftar.index') }}" class="mb-3">
                             <div class="row align-items-center">
 
-                                <!-- Filter Gender -->
                                 <div class="col-md-2">
-                                    <select name="status" class="form-select filter-control" onchange="this.form.submit()">
+                                    <select name="status_seleksi" class="form-select filter-control" onchange="this.form.submit()">
                                         <option value="">Status</option>
-                                        <option value="Menunggu" {{ request('status') == 'Menunggu' ? 'selected' : '' }}>
+                                        <option value="Menunggu" {{ request('status_seleksi') == 'Menunggu' ? 'selected' : '' }}>
                                             Menunggu
                                         </option>
-                                        <option value="Diterima" {{ request('status') == 'Diterima' ? 'selected' : '' }}>
+                                        <option value="Diterima" {{ request('status_seleksi') == 'Diterima' ? 'selected' : '' }}>
                                             Diterima
                                         </option>
-                                        <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>
+                                        <option value="Ditolak" {{ request('status_seleksi') == 'Ditolak' ? 'selected' : '' }}>
                                             Ditolak
                                         </option>
                                     </select>
                                 </div>
 
-
-                                <!-- Search + Clear -->
                                 <div class="col-md-4">
                                     <div class="d-flex align-items-center gap-2">
 
                                         <div class="input-group">
                                             <input type="text" name="search" class="form-control"
                                                 value="{{ request('search') }}" placeholder="Nama Warga">
-
 
                                             <button type="submit"
                                                 class="btn btn-light border-0 d-flex align-items-center px-3">
@@ -67,8 +63,6 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                             </button>
-
-
                                         </div>
 
                                         @if (request('search'))
@@ -77,13 +71,10 @@
                                                 Clear
                                             </a>
                                         @endif
-
                                     </div>
                                 </div>
-
                             </div>
                         </form>
-
 
                         <table class="table table-bordered table-striped">
                             <thead class="bg-gradient-primary text-white">
@@ -93,7 +84,6 @@
                                     <th class="text-center fw-bold">Nama Warga</th>
                                     <th class="text-center fw-bold">Status Seleksi</th>
                                     <th class="text-center fw-bold">Aksi</th>
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -104,30 +94,38 @@
                                         <td>{{ $item->warga->nama ?? '-' }}</td>
                                         <td class="text-center">
                                             @if ($item->status_seleksi == 'Diterima')
-                                                <span class="badge bg-success text-white">Diterima</span>
+                                                <span class="badge badge-gradient-success">Diterima</span>
                                             @elseif ($item->status_seleksi == 'Ditolak')
-                                                <span class="badge bg-danger text-white">Ditolak</span>
+                                                <span class="badge badge-gradient-danger">Ditolak</span>
                                             @else
-                                                <span class="badge bg-warning text-dark">Menunggu</span>
+                                                <span class="badge badge-gradient-warning">Menunggu</span>
                                             @endif
                                         </td>
 
                                         <td class="text-center">
+                                           <a href="{{ route('pendaftar.show', $item->pendaftar_id) }}"
+                                                class="badge badge-gradient-info" title="Lihat Detail Program">
+                                                <i class="mdi mdi-file-document"></i>
+                                            </a>
+
                                             <a href="{{ route('pendaftar.edit', $item->pendaftar_id) }}"
-                                                class="btn btn-warning btn-sm">
+                                                class="badge badge-gradient-warning">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
 
-                                            <form action="{{ route('pendaftar.destroy', $item->pendaftar_id) }}"
-                                                method="POST" style="display:inline-block; margin-left: 4px;">
+                                            <a href="#" class="badge badge-gradient-danger"
+                                                onclick="event.preventDefault();
+                                            if(confirm('Yakin hapus data ini?')) {
+                                            document.getElementById('delete-pendaftar-{{ $item->pendaftar_id }}').submit();}">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+
+                                            <form id="delete-pendaftar-{{ $item->pendaftar_id }}"
+                                                action="{{ route('pendaftar.destroy', $item->pendaftar_id) }}"
+                                                method="POST" style="display:none;">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin hapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
                                             </form>
-
 
                                         </td>
                                     </tr>
@@ -146,5 +144,6 @@
                 </div>
             </div>
         </div>
+
         {{-- end main content --}}
     @endsection

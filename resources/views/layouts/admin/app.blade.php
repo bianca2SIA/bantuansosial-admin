@@ -10,7 +10,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Data Program Bantuan | BINA DESA</title>
+    <title>SiBansos | BantuanSosial </title>
+
 
     {{-- start css --}}
     @include('layouts.admin.css')
@@ -70,8 +71,8 @@
             {{-- start footer --}}
             @include('layouts.admin.footer')
             {{-- end footer --}}
+
         </div>
-    </div>
     </div>
     {{-- start js --}}
     @include('layouts.admin.js')

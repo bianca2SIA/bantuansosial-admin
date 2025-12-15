@@ -20,7 +20,6 @@
                 </nav>
             </div>
 
-            {{-- ALERT SUCCESS --}}
             @if (session('success'))
                 <div
                     style="background-color:#d1e7dd; color:#0f5132; border-radius:8px;
@@ -29,7 +28,6 @@
                 </div>
             @endif
 
-            {{-- ALERT ERROR --}}
             @if ($errors->any())
                 <div
                     style="background-color:#f8d7da; color:#842029; border-radius:8px;
@@ -47,7 +45,6 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title mb-4">Form Edit Riwayat Penyaluran</h4>
 
                             <form class="forms-sample" method="POST"
                                 action="{{ route('riwayat.update', $riwayat->riwayat_id) }}" enctype="multipart/form-data">
@@ -55,81 +52,97 @@
                                 @csrf
                                 @method('PUT')
 
-                                {{-- PROGRAM --}}
-                                <div class="form-group">
-                                    <label>Program Bantuan</label>
-                                    <select name="program_id" class="form-control" required>
-                                        <option value="">-- Pilih Program --</option>
+                                <div class="row">
 
-                                        @foreach ($program as $p)
-                                            <option value="{{ $p->program_id }}"
-                                                {{ old('program_id', $riwayat->program_id) == $p->program_id ? 'selected' : '' }}>
-                                                {{ $p->nama_program }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                    {{-- ======================== KIRI ======================== --}}
+                                    <div class="col-md-6">
 
-                                {{-- PENERIMA --}}
-                                <div class="form-group">
-                                    <label>Penerima Bantuan</label>
-                                    <select name="penerima_id" class="form-control" required>
-                                        <option value="">-- Pilih Penerima --</option>
 
-                                        @foreach ($penerima as $pn)
-                                            <option value="{{ $pn->penerima_id }}"
-                                                {{ old('penerima_id', $riwayat->penerima_id) == $pn->penerima_id ? 'selected' : '' }}>
-                                                {{ $pn->warga->nama }} (ID: {{ $pn->penerima_id }})
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                        <div class="form-group">
+                                            <label>Program Bantuan</label>
+                                            <select name="program_id" class="form-control" required>
+                                                <option value="">-- Pilih Program --</option>
+                                                @foreach ($program as $p)
+                                                    <option value="{{ $p->program_id }}"
+                                                        {{ old('program_id', $riwayat->program_id) == $p->program_id ? 'selected' : '' }}>
+                                                        {{ $p->nama_program }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-                                {{-- TAHAP --}}
-                                <div class="form-group">
-                                    <label>Tahap Ke</label>
-                                    <input type="number" name="tahap_ke" class="form-control"
-                                        value="{{ old('tahap_ke', $riwayat->tahap_ke) }}" placeholder="Contoh: 1" required>
-                                </div>
+                                        <div class="form-group">
+                                            <label>Penerima Bantuan</label>
+                                            <select name="penerima_id" class="form-control" required>
+                                                <option value="">-- Pilih Penerima --</option>
+                                                @foreach ($penerima as $pn)
+                                                    <option value="{{ $pn->penerima_id }}"
+                                                        {{ old('penerima_id', $riwayat->penerima_id) == $pn->penerima_id ? 'selected' : '' }}>
+                                                        {{ $pn->warga->nama }} (ID: {{ $pn->penerima_id }})
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-                                {{-- TANGGAL --}}
-                                <div class="form-group">
-                                    <label>Tanggal Penyaluran</label>
-                                    <input type="date" name="tanggal" class="form-control"
-                                        value="{{ old('tanggal', $riwayat->tanggal) }}" required>
-                                </div>
+                                        <div class="form-group">
+                                            <label>Tahap Ke</label>
+                                            <input type="number" name="tahap_ke" class="form-control"
+                                                value="{{ old('tahap_ke', $riwayat->tahap_ke) }}" required>
+                                        </div>
 
-                                {{-- NILAI --}}
-                                <div class="form-group">
-                                    <label>Nilai Bantuan (Rp)</label>
-                                    <input type="number" name="nilai" class="form-control"
-                                        value="{{ old('nilai', $riwayat->nilai) }}" placeholder="Contoh: 2500000" required>
-                                </div>
+                                        <div class="form-group">
+                                            <label>Tanggal Penyaluran</label>
+                                            <input type="date" name="tanggal" class="form-control"
+                                                value="{{ old('tanggal', $riwayat->tanggal) }}" required>
+                                        </div>
 
-                                {{-- BUKTI --}}
-                                <div class="form-group">
-                                    <label>Bukti Penyaluran (Foto/PDF - opsional)</label>
-                                    <input type="file" name="bukti_penyaluran" class="form-control"
-                                        accept=".jpg,.jpeg,.png,.pdf">
 
-                                    @if ($riwayat->bukti_penyaluran)
-                                        <small class="text-muted">
-                                            File saat ini:
-                                            <a href="{{ asset('storage/' . $riwayat->bukti_penyaluran) }}" target="_blank">
-                                                Lihat Bukti
+                                    </div>
+
+                                    {{-- ======================== KANAN ======================== --}}
+                                    <div class="col-md-6 d-flex flex-column">
+
+
+                                        <div class="form-group">
+                                            <label>Nilai Bantuan (Rp)</label>
+                                            <input type="number" name="nilai" class="form-control"
+                                                value="{{ old('nilai', $riwayat->nilai) }}" required>
+                                        </div>
+
+
+
+                                        {{-- FILE LAMA --}}
+                                        <div class="alert alert-purple small d-flex align-items-center mb-3">
+                                            <i class="mdi mdi-information-outline me-2"></i>
+                                            <span>
+                                                Ingin melihat atau menghapus file sebelumnya?
+                                                <a href="{{ route('riwayat.show', $riwayat->riwayat_id) }}"
+                                                    class="alert-link">
+                                                    Klik ke halaman Detail
+                                                </a>
+                                            </span>
+                                        </div>
+
+                                        {{-- TAMBAH FILE BARU --}}
+                                        <div class="form-group mt-3">
+                                            <label>Upload Bukti Penyaluran</label>
+                                            <input type="file" name="media[]" multiple class="form-control"
+                                                style="height:45px;">
+                                            <small class="text-muted">*Anda dapat upload lebih dari satu file.</small>
+                                        </div>
+
+                                        {{-- BUTTON --}}
+                                        <div class="mt-auto d-flex justify-content-end">
+                                            <a href="{{ route('riwayat.index') }}" class="btn btn-light me-2">
+                                                <i class="mdi mdi-arrow-left"></i> Batal
                                             </a>
-                                        </small>
-                                    @endif
-                                </div>
 
-                                <div class="mt-4 d-flex justify-content-end">
-                                    <a href="{{ route('riwayat.index') }}" class="btn btn-light me-2">
-                                        <i class="mdi mdi-arrow-left"></i> Batal
-                                    </a>
+                                            <button type="submit" class="btn btn-gradient-primary text-white">
+                                                <i class="mdi mdi-content-save"></i> Simpan Perubahan
+                                            </button>
+                                        </div>
 
-                                    <button type="submit" class="btn btn-gradient-primary text-white">
-                                        <i class="mdi mdi-content-save"></i> Simpan
-                                    </button>
+                                    </div>
                                 </div>
 
                             </form>
@@ -138,8 +151,7 @@
                     </div>
                 </div>
 
-
             </div>
-            {{-- end main content --}}
         </div>
+        {{-- end main content --}}
     @endsection

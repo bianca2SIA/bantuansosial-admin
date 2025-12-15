@@ -13,7 +13,6 @@
                 </h3>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
                     style="background-color: #d1e7dd; color:#0f5132; border-radius:8px;
@@ -25,9 +24,8 @@
             <div class="card">
                 <div class="card-body">
 
-                    {{-- Header + Button --}}
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="card-title mb-0">List Riwayat Penyaluran Bantuan</h4>
+                        <h4 class="card-title mb-0">List Data Riwayat Penyaluran Bantuan</h4>
 
                         <a href="{{ route('riwayat.create') }}" class="btn btn-gradient-primary text-white">
                             + Tambah Riwayat
@@ -36,26 +34,21 @@
 
                     <div class="table-responsive">
 
-                        {{-- SEARCH --}}
                         <form method="GET" action="{{ route('riwayat.index') }}" class="mb-3">
                             <div class="row align-items-center">
                                 <div class="col-md-2">
                                     <select name="tahap_ke" class="form-select filter-control"
                                         onchange="this.form.submit()">
                                         <option value="">Tahap</option>
-
                                         <option value="1" {{ request('tahap_ke') == '1' ? 'selected' : '' }}>Tahap 1
                                         </option>
                                         <option value="2" {{ request('tahap_ke') == '2' ? 'selected' : '' }}>Tahap 2
                                         </option>
                                         <option value="3" {{ request('tahap_ke') == '3' ? 'selected' : '' }}>Tahap 3
                                         </option>
-
                                     </select>
                                 </div>
 
-
-                                {{-- Search --}}
                                 <div class="col-md-4">
                                     <div class="d-flex align-items-center gap-2">
 
@@ -69,7 +62,6 @@
                                             </button>
                                         </div>
 
-                                        {{-- Clear --}}
                                         @if (request('search'))
                                             <a href="{{ route('riwayat.index') }}" class="btn btn-outline-secondary">
                                                 Clear
@@ -82,7 +74,6 @@
                             </div>
                         </form>
 
-                        {{-- TABLE --}}
                         <table class="table table-bordered table-striped">
                             <thead class="bg-gradient-primary text-white">
                                 <tr>
@@ -92,7 +83,6 @@
                                     <th class="text-center"><strong>Tahap</strong></th>
                                     <th class="text-center"><strong>Tanggal</strong></th>
                                     <th class="text-center"><strong>Nilai (Rp)</strong></th>
-                                    <th class="text-center"><strong>Bukti</strong></th>
                                     <th class="text-center"><strong>Aksi</strong></th>
                                 </tr>
                             </thead>
@@ -112,76 +102,65 @@
 
                                         <td class="text-center">
                                             @if ($item->tahap_ke == 1)
-                                                <span class="badge bg-danger text-white">1</span>
+                                                <span class="badge badge-gradient-danger">1</span>
                                             @elseif ($item->tahap_ke == 2)
-                                                <span class="badge bg-warning text-dark">2</span>
+                                                <span class="badge badge-gradient-warning">2</span>
                                             @elseif ($item->tahap_ke == 3)
-                                                <span class="badge bg-success text-white">3</span>
+                                                <span class="badge badge-gradient-success">3</span>
                                             @else
-                                                <span class="badge bg-secondary text-white">-</span>
+                                                <span class="badge badge-gradient-secondary">-</span>
                                             @endif
                                         </td>
 
-
-
-                                        <td class="text-center">
-                                            {{ \Carbon\Carbon::parse($item->tanggal)->locale('id')->translatedFormat('d F Y') }}
+                                      <td class="text-center">
+                                            {{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}
                                         </td>
-
 
                                         <td class="text-center">
                                             Rp{{ number_format($item->nilai, 0, ',', '.') }}
                                         </td>
 
                                         <td class="text-center">
-                                            @if ($item->bukti_penyaluran)
-                                                <a href="{{ asset('storage/' . $item->bukti_penyaluran) }}" target="_blank"
-                                                    class="btn btn-info btn-sm">
-                                                    Lihat
-                                                </a>
-                                            @else
-                                                <span class="text-muted">-</span>
-                                            @endif
-                                        </td>
 
-                                        {{-- Aksi --}}
-                                        <td class="text-center">
+                                            <a href="{{ route('riwayat.show', $item->riwayat_id) }}"
+                                                class="badge badge-gradient-info" title="Lihat Detail Program">
+                                                <i class="mdi mdi-file-document"></i>
+                                            </a>
+
                                             <a href="{{ route('riwayat.edit', $item->riwayat_id) }}"
-                                                class="btn btn-warning btn-sm">
+                                                class="badge badge-gradient-warning" title="Edit">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
 
-                                            <form action="{{ route('riwayat.destroy', $item->riwayat_id) }}" method="POST"
-                                                style="display:inline-block; margin-left: 4px;">
+                                            <a href="#" class="badge badge-gradient-danger" title="Hapus"
+                                                onclick="event.preventDefault(); if (confirm('Yakin hapus data ini?')) {
+                                            document.getElementById('delete-riwayat-{{ $item->riwayat_id }}').submit();}">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+
+                                            <form id="delete-riwayat-{{ $item->riwayat_id }}"
+                                                action="{{ route('riwayat.destroy', $item->riwayat_id) }}" method="POST"
+                                                style="display:none;">
                                                 @csrf
                                                 @method('DELETE')
-
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin hapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
                                             </form>
                                         </td>
                                     </tr>
-
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="text-center text-muted">Belum ada data riwayat</td>
+                                        <td colspan="7" class="text-center text-muted">Belum ada data riwayat</td>
                                     </tr>
                                 @endforelse
                             </tbody>
                         </table>
 
-                        {{-- Pagination --}}
                         <div class="mt-3">
                             {{ $riwayat->links('pagination::bootstrap-5') }}
                         </div>
-
                     </div>
                 </div>
-
-
             </div>
-            {{-- end main content --}}
         </div>
+
+        {{-- end main content --}}
     @endsection

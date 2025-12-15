@@ -1,25 +1,24 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\Media;
 use App\Models\Penerima;
 use App\Models\Program;
 use App\Models\Riwayat;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class RiwayatController extends Controller
 {
-
     public function index(Request $request)
     {
-
         $filterableColumns = ['program_id', 'tahap_ke'];
+        $search            = $request->search;
 
-        $search = $request->input('search');
-
-        $riwayat = Riwayat::with(['program', 'penerima.warga'])
-            ->when($search, function ($query) use ($search) {
-                $query->whereHas('penerima.warga', function ($q) use ($search) {
-                    $q->where('nama', 'like', '%' . $search . '%');
+        $riwayat = Riwayat::with(['program', 'penerima.warga', 'media'])
+            ->when($search, function ($q) use ($search) {
+                $q->whereHas('penerima.warga', function ($w) use ($search) {
+                    $w->where('nama', 'like', "%$search%");
                 });
             })
             ->filter($request, $filterableColumns)
@@ -41,34 +40,52 @@ class RiwayatController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'program_id'       => 'required|exists:program,program_id',
-            'penerima_id'      => 'required|exists:penerima,penerima_id',
-            'tahap_ke'         => 'required|integer|min:1',
-            'tanggal'          => 'required|date',
-            'nilai'            => 'required|numeric|min:0',
-            'bukti_penyaluran' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'program_id'  => 'required',
+            'penerima_id' => 'required',
+            'tahap_ke'    => 'required|integer|min:1',
+            'tanggal'     => 'required|date',
+            'nilai'       => 'required|numeric|min:0',
+            'media.*'     => 'nullable|file|max:2048',
         ]);
 
-        $bukti = null;
-        if ($request->hasFile('bukti_penyaluran')) {
-            $bukti = $request->file('bukti_penyaluran')->store('bukti_penyaluran', 'public');
+        $riwayat = Riwayat::create($request->only(
+            'program_id',
+            'penerima_id',
+            'tahap_ke',
+            'tanggal',
+            'nilai'
+        ));
+
+        if ($request->hasFile('media')) {
+            foreach ($request->file('media') as $i => $file) {
+                $fileName = uniqid() . '-' . $file->getClientOriginalName();
+                $file->storeAs('uploads/riwayat_bantuan', $fileName, 'public');
+
+                Media::create([
+                    'ref_table'  => 'riwayat_bantuan',
+                    'ref_id'     => $riwayat->riwayat_id,
+                    'file_name'  => $fileName,
+                    'mime_type'  => $file->getClientMimeType(),
+                    'sort_order' => $i,
+                ]);
+            }
         }
 
-        Riwayat::create([
-            'program_id'       => $request->program_id,
-            'penerima_id'      => $request->penerima_id,
-            'tahap_ke'         => $request->tahap_ke,
-            'tanggal'          => $request->tanggal,
-            'nilai'            => $request->nilai,
-            'bukti_penyaluran' => $bukti,
-        ]);
+        return redirect()->route('riwayat.index')
+            ->with('success', 'Riwayat berhasil ditambahkan');
+    }
 
-        return redirect()->route('riwayat.index')->with('success', 'Data riwayat berhasil ditambahkan.');
+    public function show($id)
+    {
+        $riwayat = Riwayat::with(['program', 'penerima.warga', 'media'])
+            ->findOrFail($id);
+
+        return view('pages.admin.riwayat.show', compact('riwayat'));
     }
 
     public function edit($id)
     {
-        $riwayat  = Riwayat::findOrFail($id);
+        $riwayat  = Riwayat::with('media')->findOrFail($id);
         $program  = Program::all();
         $penerima = Penerima::with('warga')->get();
 
@@ -80,37 +97,101 @@ class RiwayatController extends Controller
         $riwayat = Riwayat::findOrFail($id);
 
         $request->validate([
-            'program_id'       => 'required|exists:program,program_id',
-            'penerima_id'      => 'required|exists:penerima,penerima_id',
-            'tahap_ke'         => 'required|integer|min:1',
-            'tanggal'          => 'required|date',
-            'nilai'            => 'required|numeric|min:0',
-            'bukti_penyaluran' => 'nullable|file|mimes:jpg,jpeg,png,pdf|max:2048',
+            'program_id'  => 'required',
+            'penerima_id' => 'required',
+            'tahap_ke'    => 'required|integer|min:1',
+            'tanggal'     => 'required|date',
+            'nilai'       => 'required|numeric|min:0',
+            'media.*'     => 'nullable|file|max:2048',
         ]);
 
-        $bukti = $riwayat->bukti_penyaluran;
+        $riwayat->update($request->only(
+            'program_id',
+            'penerima_id',
+            'tahap_ke',
+            'tanggal',
+            'nilai'
+        ));
 
-        if ($request->hasFile('bukti_penyaluran')) {
-            $bukti = $request->file('bukti_penyaluran')->store('bukti_penyaluran', 'public');
+        if ($request->hasFile('media')) {
+            foreach ($request->file('media') as $i => $file) {
+                $fileName = uniqid() . '-' . $file->getClientOriginalName();
+                $file->storeAs('uploads/riwayat_bantuan', $fileName, 'public');
+
+                Media::create([
+                    'ref_table'  => 'riwayat_bantuan',
+                    'ref_id'     => $id,
+                    'file_name'  => $fileName,
+                    'mime_type'  => $file->getClientMimeType(),
+                    'sort_order' => $i,
+                ]);
+            }
         }
 
-        $riwayat->update([
-            'program_id'       => $request->program_id,
-            'penerima_id'      => $request->penerima_id,
-            'tahap_ke'         => $request->tahap_ke,
-            'tanggal'          => $request->tanggal,
-            'nilai'            => $request->nilai,
-            'bukti_penyaluran' => $bukti,
-        ]);
-
-        return redirect()->route('riwayat.index')->with('success', 'Data riwayat berhasil diperbarui.');
+        return redirect()->route('riwayat.index')
+            ->with('success', 'Riwayat berhasil diperbarui');
     }
 
     public function destroy($id)
     {
-        $riwayat = Riwayat::findOrFail($id);
+        $riwayat = Riwayat::with('media')->findOrFail($id);
+
+        foreach ($riwayat->media as $file) {
+            Storage::disk('public')
+                ->delete('uploads/riwayat_bantuan/' . $file->file_name);
+            $file->delete();
+        }
+
         $riwayat->delete();
 
-        return redirect()->route('riwayat.index')->with('success', 'Data riwayat berhasil dihapus.');
+        return redirect()->route('riwayat.index')
+            ->with('success', 'Riwayat berhasil dihapus');
+    }
+
+    public function uploadMedia(Request $request, $riwayatId)
+    {
+        $request->validate([
+            'media.*' => 'required|file|max:2048',
+        ]);
+
+        foreach ($request->file('media') as $i => $file) {
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $file->storeAs('uploads/riwayat_bantuan', $fileName, 'public');
+
+            Media::create([
+                'ref_table'  => 'riwayat_bantuan',
+                'ref_id'     => $riwayatId,
+                'file_name'  => $fileName,
+                'mime_type'  => $file->getClientMimeType(),
+                'sort_order' => $i,
+            ]);
+        }
+
+        return back()->with('success', 'Dokumen berhasil diupload');
+    }
+
+    public function downloadFile($mediaId)
+    {
+        $media = Media::findOrFail($mediaId);
+
+        abort_if($media->ref_table !== 'riwayat_bantuan', 403);
+
+        return response()->download(
+            storage_path('app/public/uploads/riwayat_bantuan/' . $media->file_name)
+        );
+    }
+
+    public function deleteFile($mediaId)
+    {
+        $media = Media::findOrFail($mediaId);
+
+        abort_if($media->ref_table !== 'riwayat_bantuan', 403);
+
+        Storage::disk('public')
+            ->delete('uploads/riwayat_bantuan/' . $media->file_name);
+
+        $media->delete();
+
+        return back()->with('success', 'File berhasil dihapus');
     }
 }

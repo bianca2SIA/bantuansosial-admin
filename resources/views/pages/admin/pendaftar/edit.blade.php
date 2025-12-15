@@ -19,7 +19,6 @@
                 </nav>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
                     style="background-color: #d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
@@ -27,7 +26,6 @@
                 </div>
             @endif
 
-            {{-- Alert error validasi --}}
             @if ($errors->any())
                 <div
                     style="background-color:#f8d7da; color:#842029; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
@@ -43,73 +41,113 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Form Edit Pendaftar Bantuan</h4>
+
 
                             <form class="forms-sample" method="POST"
-                                action="{{ route('pendaftar.update', $pendaftar->pendaftar_id) }}">
+                                action="{{ route('pendaftar.update', $pendaftar->pendaftar_id) }}"
+                                enctype="multipart/form-data">
+
                                 @csrf
                                 @method('PUT')
 
-                                {{-- Pilih Program --}}
-                                <div class="form-group">
-                                    <label>Program Bantuan</label>
-                                    <select name="program_id" class="form-control" required>
-                                        <option value="">-- Pilih Program --</option>
-                                        @foreach ($program as $program)
-                                            <option value="{{ $program->program_id }}"
-                                                {{ old('program_id', $pendaftar->program_id) == $program->program_id ? 'selected' : '' }}>
-                                                {{ $program->nama_program }}
-                                            </option>
-                                        @endforeach
-                                    </select>
+                                <div class="row">
+                                    {{-- KIRI --}}
+                                    <div class="col-md-6">
+
+
+                                        <div class="form-group">
+                                            <label>Program Bantuan</label>
+                                            <select name="program_id" class="form-control" required>
+                                                <option value="">-- Pilih Program --</option>
+                                                @foreach ($program as $item)
+                                                    <option value="{{ $item->program_id }}"
+                                                        {{ old('program_id', $pendaftar->program_id) == $item->program_id ? 'selected' : '' }}>
+                                                        {{ $item->nama_program }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Nama Warga</label>
+                                            <select name="warga_id" class="form-control" required>
+                                                <option value="">-- Pilih Warga --</option>
+                                                @foreach ($warga as $w)
+                                                    <option value="{{ $w->warga_id }}"
+                                                        {{ old('warga_id', $pendaftar->warga_id) == $w->warga_id ? 'selected' : '' }}>
+                                                        {{ $w->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>Status Seleksi</label>
+                                            <select name="status_seleksi" class="form-control" required>
+                                                <option value="Menunggu"
+                                                    {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Menunggu' ? 'selected' : '' }}>
+                                                    Menunggu
+                                                </option>
+                                                <option value="Diterima"
+                                                    {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Diterima' ? 'selected' : '' }}>
+                                                    Diterima
+                                                </option>
+                                                <option value="Ditolak"
+                                                    {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Ditolak' ? 'selected' : '' }}>
+                                                    Ditolak
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {{-- KANAN --}}
+                                    <div class="col-md-6 d-flex flex-column">
+
+
+                                        {{-- DOKUMEN LAMA --}}
+                                       <div class="alert alert-purple small d-flex align-items-center mb-3 mt-3">
+                                            <i class="mdi mdi-information-outline me-2"></i>
+                                            <span>
+                                                Ingin melihat atau menghapus file sebelumnya?
+                                                <a href="{{ route('pendaftar.show', $pendaftar->pendaftar_id) }}"
+                                                    class="alert-link">
+                                                    Klik ke halaman Detail
+                                                </a>
+                                            </span>
+                                        </div>
+
+                                        {{-- TAMBAH BERKAS BARU --}}
+                                        <div class="form-group mt-4">
+                                            <label>Upload Berkas Pendaftaran</label>
+                                            <input type="file" name="media[]" multiple class="form-control"
+                                                style="height: 45px;">
+
+                                            <small class="text-muted">
+                                              *File yang diupload di sini akan ditambahkan ke daftar file yang sudah ada
+                                            </small>
+                                        </div>
+
+                                        {{-- TOMBOL --}}
+                                        <div class="mt-auto d-flex justify-content-end">
+                                            <a href="{{ route('pendaftar.index') }}" class="btn btn-light me-2">
+                                                <i class="mdi mdi-arrow-left"></i> Batal
+                                            </a>
+
+                                            <button type="submit" class="btn btn-gradient-primary text-white">
+                                                <i class="mdi mdi-content-save"></i> Simpan Perubahan
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                {{-- Pilih Warga --}}
-                                <div class="form-group">
-                                    <label>Nama Warga</label>
-                                    <select name="warga_id" class="form-control" required>
-                                        <option value="">-- Pilih Warga --</option>
-                                        @foreach ($warga as $warga)
-                                            <option value="{{ $warga->warga_id }}"
-                                                {{ old('warga_id', $pendaftar->warga_id) == $warga->warga_id ? 'selected' : '' }}>
-                                                {{ $warga->nama }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
-                                {{-- Status Seleksi --}}
-                                <div class="form-group">
-                                    <label>Status Seleksi</label>
-                                    <select name="status_seleksi" class="form-control" required>
-                                        <option value="Menunggu"
-                                            {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Menunggu' ? 'selected' : '' }}>
-                                            Menunggu</option>
-                                        <option value="Diterima"
-                                            {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Diterima' ? 'selected' : '' }}>
-                                            Diterima</option>
-                                        <option value="Ditolak"
-                                            {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Ditolak' ? 'selected' : '' }}>
-                                            Ditolak</option>
-                                    </select>
-                                </div>
-
-                                <div class="mt-4 d-flex justify-content-end">
-                                    <a href="{{ route('pendaftar.index') }}" class="btn btn-light me-2">
-                                        <i class="mdi mdi-arrow-left"></i> Batal
-                                    </a>
-                                    <button type="submit" class="btn btn-gradient-primary text-white">
-                                        <i class="mdi mdi-content-save"></i> Simpan Perubahan
-                                    </button>
-                                </div>
                             </form>
 
                         </div>
                     </div>
-
                 </div>
 
             </div>
         </div>
         {{-- end main content --}}
+
     @endsection

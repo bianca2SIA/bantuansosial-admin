@@ -13,7 +13,6 @@
                 </h3>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
                     style="background-color: #d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
@@ -32,8 +31,6 @@
                     </div>
 
                     <div class="table-responsive">
-
-                        {{-- Search --}}
                         <div class="col-md-4 mb-3">
                             <div class="d-flex align-items-center gap-2">
 
@@ -78,7 +75,8 @@
                             <tbody>
                                 @forelse ($verifikasi as $item)
                                     <tr>
-                                        <td class="text-center">{{ $item->pendaftar->pendaftar_id }}</td>
+                                        <td class="text-center">{{ $item->verifikasi_id }}</td>
+
                                         <td>
 
                                             <span>{{ $item->pendaftar->warga->nama ?? '-' }}</span>
@@ -86,20 +84,22 @@
                                         </td>
                                         <td>{{ $item->petugas }}</td>
                                         <td class="text-center">
-                                            {{ \Carbon\Carbon::parse($item->tanggal)->locale('id')->translatedFormat('d F Y') }}
+                                            {{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}
                                         </td>
+
 
                                         <td>
                                             <div style="width:100px; background:#eee; border-radius:4px; overflow:hidden;">
                                                 <div
                                                     style="
-            width: {{ $item->skor }}%;
-            height: 8px;
-            background:
-                @if ($item->skor >= 80) #4caf50
-                @elseif($item->skor >= 50) #ffc107
-                @else #f44336 @endif;
-        ">
+                                                width: {{ $item->skor }}%;
+                                                height: 8px;
+                                                background:
+                                                @if ($item->skor >= 80) linear-gradient(90deg, #4caf50, #2e7d32)
+                                                @elseif($item->skor >= 50)
+                                                linear-gradient(90deg, #FFD200, #FFB800)
+                                                @else
+                                                linear-gradient(90deg, #ff9bb3, #ff4770) @endif;">
                                                 </div>
                                             </div>
                                             <small>{{ $item->skor }}%</small>
@@ -108,21 +108,29 @@
                                         <td>{{ $item->catatan ?? '-' }}</td>
 
                                         <td class="text-center">
+                                            <a href="{{ route('verifikasi.show', $item->verifikasi_id) }}"
+                                                class="badge badge-gradient-info" title="Lihat Detail Program">
+                                                <i class="mdi mdi-file-document"></i>
+                                            </a>
+
                                             <a href="{{ route('verifikasi.edit', $item->verifikasi_id) }}"
-                                                class="btn btn-warning btn-sm">
+                                                class="badge badge-gradient-warning">
                                                 <i class="mdi mdi-pencil"></i>
                                             </a>
 
-                                            <form action="{{ route('verifikasi.destroy', $item->verifikasi_id) }}"
-                                                method="POST" style="display:inline-block;">
+                                            <a href="#" class="badge badge-gradient-danger"
+                                                onclick="event.preventDefault(); if(confirm('Yakin ingin menghapus data ini?')) {
+                                            document.getElementById('delete-verifikasi-{{ $item->verifikasi_id }}').submit();}">
+                                                <i class="mdi mdi-delete"></i>
+                                            </a>
+
+                                            <form id="delete-verifikasi-{{ $item->verifikasi_id }}"
+                                                action="{{ route('verifikasi.destroy', $item->verifikasi_id) }}"
+                                                method="POST" style="display:none;">
                                                 @csrf
                                                 @method('DELETE')
-
-                                                <button type="submit" class="btn btn-danger btn-sm"
-                                                    onclick="return confirm('Yakin ingin menghapus data ini?')">
-                                                    <i class="mdi mdi-delete"></i>
-                                                </button>
                                             </form>
+
                                         </td>
                                     </tr>
 
@@ -137,11 +145,8 @@
                         <div class="mt-3">
                             {{ $verifikasi->links('pagination::bootstrap-5') }}
                         </div>
-
-
                     </div>
                 </div>
-
             </div>
         </div>
     @endsection

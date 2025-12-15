@@ -46,5 +46,11 @@ class Verifikasi extends Model
                 });
         });
     }
+    public function media()
+    {
+        return $this->hasMany(Media::class, 'ref_id')
+            ->where('ref_table', 'verifikasi_lapangan')
+            ->orderBy('sort_order');
+    }
 
 }

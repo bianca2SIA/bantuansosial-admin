@@ -1,0 +1,29 @@
+<svg viewBox="0 0 800 300"
+     xmlns="http://www.w3.org/2000/svg"
+     role="img"
+     aria-label="Tidak ada dokumen">
+
+    <!-- Background -->
+    <rect x="0" y="0" width="800" height="300" rx="16"
+          fill="#f3f4f6"/>
+
+    <!-- Icon container -->
+    <rect x="300" y="70" width="200" height="120" rx="12"
+          fill="#e5e7eb"/>
+
+    <!-- Sun -->
+    <circle cx="330" cy="100" r="10" fill="#d1d5db"/>
+
+    <!-- Mountains -->
+    <path d="M310 170 L350 120 L390 170 L430 140 L470 170 L470 190 L310 190 Z"
+          fill="#d1d5db"/>
+
+    <!-- Text -->
+    <text x="400" y="235"
+          text-anchor="middle"
+          font-size="16"
+          fill="#9ca3af"
+          font-family="Arial, sans-serif">
+        Oops, tidak ada file di sini!
+    </text>
+</svg>

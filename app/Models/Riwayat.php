@@ -29,6 +29,12 @@ class Riwayat extends Model
     {
         return $this->belongsTo(Penerima::class, 'penerima_id', 'penerima_id');
     }
+    public function media()
+    {
+        return $this->hasMany(Media::class, 'ref_id')
+            ->where('ref_table', 'riwayat_bantuan')
+            ->orderBy('sort_order');
+    }
 
     public function scopeFilter($query, $request, $columns)
     {

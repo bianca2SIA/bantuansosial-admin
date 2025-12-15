@@ -44,54 +44,70 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Form Edit Penerima</h4>
+
+
 
                             <form method="POST" action="{{ route('penerima.update', $penerima->penerima_id) }}">
                                 @csrf
                                 @method('PUT')
 
-                                {{-- Program --}}
-                                <div class="form-group">
-                                    <label>Program Bantuan</label>
-                                    <select name="program_id" class="form-control" required>
-                                        <option value="">-- Pilih Program --</option>
-                                        @foreach ($program as $item)
-                                            <option value="{{ $item->program_id }}"
-                                                {{ old('program_id', $penerima->program_id) == $item->program_id ? 'selected' : '' }}>
-                                                {{ $item->nama_program }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <div class="row">
 
-                                {{-- Warga --}}
-                                <div class="form-group">
-                                    <label>Nama Warga</label>
-                                    <select name="warga_id" class="form-control" required>
-                                        <option value="">-- Pilih Warga --</option>
-                                        @foreach ($warga as $item)
-                                            <option value="{{ $item->warga_id }}"
-                                                {{ old('warga_id', $penerima->warga_id) == $item->warga_id ? 'selected' : '' }}>
-                                                {{ $item->nama }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                    {{-- ================= BAGIAN KIRI ================= --}}
+                                    <div class="col-md-6">
 
-                                {{-- Keterangan --}}
-                                <div class="form-group">
-                                    <label>Keterangan</label>
-                                    <textarea name="keterangan" class="form-control" rows="3" placeholder="Isi keterangan">{{ old('keterangan', $penerima->keterangan) }}</textarea>
-                                </div>
 
-                                <div class="mt-4 d-flex justify-content-end">
-                                    <a href="{{ route('penerima.index') }}" class="btn btn-light me-2">
-                                        <i class="mdi mdi-arrow-left"></i> Batal
-                                    </a>
+                                        {{-- Program --}}
+                                        <div class="form-group">
+                                            <label>Program Bantuan</label>
+                                            <select name="program_id" class="form-control" required>
+                                                <option value="">-- Pilih Program --</option>
+                                                @foreach ($program as $item)
+                                                    <option value="{{ $item->program_id }}"
+                                                        {{ old('program_id', $penerima->program_id) == $item->program_id ? 'selected' : '' }}>
+                                                        {{ $item->nama_program }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-                                    <button type="submit" class="btn btn-gradient-primary text-white">
-                                        <i class="mdi mdi-content-save"></i> Simpan
-                                    </button>
+                                        {{-- Warga --}}
+                                        <div class="form-group">
+                                            <label>Nama Warga</label>
+                                            <select name="warga_id" class="form-control" required>
+                                                <option value="">-- Pilih Warga --</option>
+                                                @foreach ($warga as $item)
+                                                    <option value="{{ $item->warga_id }}"
+                                                        {{ old('warga_id', $penerima->warga_id) == $item->warga_id ? 'selected' : '' }}>
+                                                        {{ $item->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {{-- ================= BAGIAN KANAN ================= --}}
+                                    <div class="col-md-6 d-flex flex-column">
+                                  
+
+                                        {{-- Keterangan --}}
+                                        <div class="form-group">
+                                            <label>Keterangan</label>
+                                            <textarea name="keterangan" class="form-control" rows="5" placeholder="Isi keterangan">{{ old('keterangan', $penerima->keterangan) }}</textarea>
+                                        </div>
+
+                                        {{-- Tombol --}}
+                                        <div class="mt-auto d-flex justify-content-end">
+                                            <a href="{{ route('penerima.index') }}" class="btn btn-light me-2">
+                                                <i class="mdi mdi-arrow-left"></i> Batal
+                                            </a>
+
+                                            <button type="submit" class="btn btn-gradient-primary text-white">
+                                                <i class="mdi mdi-content-save"></i> Simpan
+                                            </button>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </form>

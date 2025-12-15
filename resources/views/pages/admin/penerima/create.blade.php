@@ -45,51 +45,66 @@
                     <div class="card">
                         <div class="card-body">
 
-                            <h4 class="card-title mb-4">Form Tambah Penerima</h4>
+
 
                             <form action="{{ route('penerima.store') }}" method="POST">
                                 @csrf
 
-                                {{-- Program --}}
-                                <div class="form-group">
-                                    <label>Program Bantuan</label>
-                                    <select name="program_id" class="form-control" required>
-                                        <option value="">-- Pilih Program --</option>
-                                        @foreach ($program as $item)
-                                            <option value="{{ $item->program_id }}">
-                                                {{ $item->nama_program }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <div class="row">
 
-                                {{-- Warga --}}
-                                <div class="form-group">
-                                    <label>Nama Warga</label>
-                                    <select name="warga_id" class="form-control" required>
-                                        <option value="">-- Pilih Warga --</option>
-                                        @foreach ($warga as $item)
-                                            <option value="{{ $item->warga_id }}">
-                                                {{ $item->nama }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                    {{-- ================= BAGIAN KIRI ================= --}}
+                                    <div class="col-md-6">
 
-                                {{-- Keterangan --}}
-                                <div class="form-group">
-                                    <label>Keterangan</label>
-                                    <textarea name="keterangan" class="form-control" rows="3" placeholder="Isi keterangan jika ada...">{{ old('keterangan') }}</textarea>
-                                </div>
 
-                                <div class="mt-4 d-flex justify-content-end">
-                                    <a href="{{ route('penerima.index') }}" class="btn btn-light me-2">
-                                        <i class="mdi mdi-arrow-left"></i> Batal
-                                    </a>
+                                        {{-- Program --}}
+                                        <div class="form-group">
+                                            <label>Program Bantuan</label>
+                                            <select name="program_id" class="form-control" required>
+                                                <option value="">-- Pilih Program --</option>
+                                                @foreach ($program as $item)
+                                                    <option value="{{ $item->program_id }}">
+                                                        {{ $item->nama_program }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-                                    <button type="submit" class="btn btn-gradient-primary text-white">
-                                        <i class="mdi mdi-content-save"></i> Simpan
-                                    </button>
+                                        {{-- Warga --}}
+                                        <div class="form-group">
+                                            <label>Nama Warga</label>
+                                            <select name="warga_id" class="form-control" required>
+                                                <option value="">-- Pilih Warga --</option>
+                                                @foreach ($warga as $item)
+                                                    <option value="{{ $item->warga_id }}">
+                                                        {{ $item->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    {{-- ================= BAGIAN KANAN ================= --}}
+                                    <div class="col-md-6 d-flex flex-column">
+                                    
+
+                                        {{-- Keterangan --}}
+                                        <div class="form-group">
+                                            <label>Keterangan</label>
+                                            <textarea name="keterangan" class="form-control" rows="5" placeholder="Isi keterangan jika ada...">{{ old('keterangan') }}</textarea>
+                                        </div>
+
+                                        {{-- Tombol --}}
+                                        <div class="mt-auto d-flex justify-content-end">
+                                            <a href="{{ route('penerima.index') }}" class="btn btn-light me-2">
+                                                <i class="mdi mdi-arrow-left"></i> Batal
+                                            </a>
+
+                                            <button type="submit" class="btn btn-gradient-primary text-white">
+                                                <i class="mdi mdi-content-save"></i> Simpan
+                                            </button>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                             </form>
@@ -97,6 +112,7 @@
                         </div>
                     </div>
                 </div>
+
 
             </div>
         </div>

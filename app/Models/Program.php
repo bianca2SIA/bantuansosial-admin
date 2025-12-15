@@ -40,4 +40,11 @@ class Program extends Model
             });
         }
     }
+    public function media()
+    {
+        return $this->hasMany(Media::class, 'ref_id')
+            ->where('ref_table', 'program')
+            ->orderBy('sort_order');
+    }
+
 }
