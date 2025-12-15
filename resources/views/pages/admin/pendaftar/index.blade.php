@@ -34,15 +34,15 @@
                             <div class="row align-items-center">
 
                                 <div class="col-md-2">
-                                    <select name="status" class="form-select filter-control" onchange="this.form.submit()">
+                                    <select name="status_seleksi" class="form-select filter-control" onchange="this.form.submit()">
                                         <option value="">Status</option>
-                                        <option value="Menunggu" {{ request('status') == 'Menunggu' ? 'selected' : '' }}>
+                                        <option value="Menunggu" {{ request('status_seleksi') == 'Menunggu' ? 'selected' : '' }}>
                                             Menunggu
                                         </option>
-                                        <option value="Diterima" {{ request('status') == 'Diterima' ? 'selected' : '' }}>
+                                        <option value="Diterima" {{ request('status_seleksi') == 'Diterima' ? 'selected' : '' }}>
                                             Diterima
                                         </option>
-                                        <option value="Ditolak" {{ request('status') == 'Ditolak' ? 'selected' : '' }}>
+                                        <option value="Ditolak" {{ request('status_seleksi') == 'Ditolak' ? 'selected' : '' }}>
                                             Ditolak
                                         </option>
                                     </select>
@@ -103,18 +103,10 @@
                                         </td>
 
                                         <td class="text-center">
-                                            @if ($item->media()->count() > 0)
-                                                <a href="javascript:void(0)"
-                                                    class="badge badge-gradient-info open-media-modal"
-                                                    data-id="{{ $item->pendaftar_id }}" title="Lihat Berkas"
-                                                    style="border:none !important; outline:none !important; box-shadow:none !important;">
-                                                    <i class="mdi mdi-file-document"></i>
-                                                </a>
-                                            @else
-                                                <span class="badge badge-gradient-secondary" title="Tidak ada berkas">
-                                                    <i class="mdi mdi-file-remove"></i>
-                                                </span>
-                                            @endif
+                                           <a href="{{ route('pendaftar.show', $item->pendaftar_id) }}"
+                                                class="badge badge-gradient-info" title="Lihat Detail Program">
+                                                <i class="mdi mdi-file-document"></i>
+                                            </a>
 
                                             <a href="{{ route('pendaftar.edit', $item->pendaftar_id) }}"
                                                 class="badge badge-gradient-warning">
@@ -152,42 +144,6 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="mediaModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered" style="max-width: 550px;">
-                <div class="modal-content" style="border-radius: 12px; overflow: hidden;">
 
-                    <div class="modal-header bg-gradient-primary text-white">
-                        <h5 class="modal-title">Berkas Pendaftaran</h5>
-                        <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <div class="modal-body" id="mediaModalBody">
-                        <p class="text-muted">Memuat berkas...</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <script>
-            document.querySelectorAll('.open-media-modal').forEach(btn => {
-                btn.addEventListener('click', function() {
-
-                    let id = this.getAttribute('data-id');
-                    let modalBody = document.getElementById('mediaModalBody');
-
-                    modalBody.innerHTML = "<p class='text-muted'>Memuat berkas...</p>";
-
-                    fetch(`/pendaftar/${id}/dokumen`)
-                        .then(res => res.json())
-                        .then(data => {
-                            modalBody.innerHTML = data.html;
-                        });
-
-                    let modal = new bootstrap.Modal(document.getElementById('mediaModal'));
-                    modal.show();
-                });
-            });
-        </script>
         {{-- end main content --}}
     @endsection

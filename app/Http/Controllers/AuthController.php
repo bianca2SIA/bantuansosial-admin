@@ -1,62 +1,45 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
-
     public function index()
     {
-        return view('pages.admin.auth');
-
+        if (Auth::check()) {
+            //Redirect ke halaman dashboard
+            return redirect()->route('dashboard');
+        }
+        return view('auth.login');
     }
-
     public function login(Request $request)
     {
         $request->validate([
             'email'    => 'required|email',
-            'password' => ['required', 'min:3'],
+            'password' => 'required',
         ]);
 
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-            $request->session()->regenerate();
-            return redirect()->route('dashboard');
+        $user = User::where('email', $request->email)->first();
+        if ($user && Hash::check($request->password, $user->password)) {
+
+            Auth::login($user);
+            session(['last_login' => now()]);
+
+            return redirect()->route('dashboard')->with('success', 'Login berhasil!');
+        } else {
+            return back()->withErrors(['email' => 'Email atau password salah'])->withInput();
         }
-
-        return back()->withErrors(['login' => 'Email atau Password salah.']);
     }
-
-    public function create()
+    public function logout(Request $request)
     {
-        //
-    }
+        Auth::logout();
+        $request->session()->invalidate();      // Hapus semua session
+        $request->session()->regenerateToken(); // Cegah CSRF
 
-    public function store(Request $request)
-    {
-        $data['nama'] = $request->nama;
-
-        return view('pages.admin.dashboard', $data);
-    }
-
-    public function show(string $id)
-    {
-        //
-    }
-
-    public function edit(string $id)
-    {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('auth')->with('success', 'Anda berhasil logout!');
     }
 }

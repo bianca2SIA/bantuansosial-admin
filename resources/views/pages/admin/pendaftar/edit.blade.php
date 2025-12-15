@@ -41,7 +41,8 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title mb-4">Form Edit Pendaftar Bantuan</h4>
+
+
                             <form class="forms-sample" method="POST"
                                 action="{{ route('pendaftar.update', $pendaftar->pendaftar_id) }}"
                                 enctype="multipart/form-data">
@@ -49,95 +50,104 @@
                                 @csrf
                                 @method('PUT')
 
-                                <div class="form-group">
-                                    <label>Program Bantuan</label>
-                                    <select name="program_id" class="form-control" required>
-                                        <option value="">-- Pilih Program --</option>
-                                        @foreach ($program as $program)
-                                            <option value="{{ $program->program_id }}"
-                                                {{ old('program_id', $pendaftar->program_id) == $program->program_id ? 'selected' : '' }}>
-                                                {{ $program->nama_program }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                                <div class="row">
+                                    {{-- KIRI --}}
+                                    <div class="col-md-6">
 
-                                <div class="form-group">
-                                    <label>Nama Warga</label>
-                                    <select name="warga_id" class="form-control" required>
-                                        <option value="">-- Pilih Warga --</option>
-                                        @foreach ($warga as $warga)
-                                            <option value="{{ $warga->warga_id }}"
-                                                {{ old('warga_id', $pendaftar->warga_id) == $warga->warga_id ? 'selected' : '' }}>
-                                                {{ $warga->nama }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Status Seleksi</label>
-                                    <select name="status_seleksi" class="form-control" required>
-                                        <option value="Menunggu"
-                                            {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Menunggu' ? 'selected' : '' }}>
-                                            Menunggu</option>
-                                        <option value="Diterima"
-                                            {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Diterima' ? 'selected' : '' }}>
-                                            Diterima</option>
-                                        <option value="Ditolak"
-                                            {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Ditolak' ? 'selected' : '' }}>
-                                            Ditolak</option>
-                                    </select>
-                                </div>
+                                        <div class="form-group">
+                                            <label>Program Bantuan</label>
+                                            <select name="program_id" class="form-control" required>
+                                                <option value="">-- Pilih Program --</option>
+                                                @foreach ($program as $item)
+                                                    <option value="{{ $item->program_id }}"
+                                                        {{ old('program_id', $pendaftar->program_id) == $item->program_id ? 'selected' : '' }}>
+                                                        {{ $item->nama_program }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-                                <hr class="my-4">
-                                <h4 class="card-title mb-3">Berkas Pendaftaran</h4>
+                                        <div class="form-group">
+                                            <label>Nama Warga</label>
+                                            <select name="warga_id" class="form-control" required>
+                                                <option value="">-- Pilih Warga --</option>
+                                                @foreach ($warga as $w)
+                                                    <option value="{{ $w->warga_id }}"
+                                                        {{ old('warga_id', $pendaftar->warga_id) == $w->warga_id ? 'selected' : '' }}>
+                                                        {{ $w->nama }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
 
-                                @foreach ($pendaftar->media as $file)
-                                    <div class="d-flex align-items-center mb-2">
-
-                                        <a href="{{ asset('storage/uploads/pendaftar_bantuan/' . $file->file_name) }}"
-                                            target="_blank" class="d-flex align-items-center"
-                                            style="font-size:13px; text-decoration:underline; color:#0d6efd;">
-                                            <i class="mdi mdi-file-outline me-1" style="font-size:17px;"></i>
-                                            <span>{{ $file->file_name }}</span>
-                                        </a>
-
-                                        <input type="text" name="captions_existing[{{ $file->media_id }}]"
-                                            class="form-control ms-3" style="max-width:220px; height:30px; font-size:13px;"
-                                            placeholder="Caption" value="{{ $file->caption }}">
-
-                                        <button type="button" class="btn btn-link text-danger ms-2 p-0 delete-media"
-                                            data-id="{{ $file->media_id }}" style="font-size:18px;">
-                                            <i class="mdi mdi-close-circle-outline"></i>
-                                        </button>
-
+                                        <div class="form-group">
+                                            <label>Status Seleksi</label>
+                                            <select name="status_seleksi" class="form-control" required>
+                                                <option value="Menunggu"
+                                                    {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Menunggu' ? 'selected' : '' }}>
+                                                    Menunggu
+                                                </option>
+                                                <option value="Diterima"
+                                                    {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Diterima' ? 'selected' : '' }}>
+                                                    Diterima
+                                                </option>
+                                                <option value="Ditolak"
+                                                    {{ old('status_seleksi', $pendaftar->status_seleksi) == 'Ditolak' ? 'selected' : '' }}>
+                                                    Ditolak
+                                                </option>
+                                            </select>
+                                        </div>
                                     </div>
-                                @endforeach
 
-                                @if ($pendaftar->media->count() == 0)
-                                    <p class="text-muted" style="font-size: 13px;">Belum ada berkas.</p>
-                                @endif
+                                    {{-- KANAN --}}
+                                    <div class="col-md-6 d-flex flex-column">
 
-                                <div class="form-group mt-4">
-                                    <label style="font-size: 14px; font-weight: 600;">Tambah Berkas Baru</label>
-                                    <input type="file" name="media[]" multiple class="form-control"
-                                        style="height: 45px;">
+
+                                        {{-- DOKUMEN LAMA --}}
+                                       <div class="alert alert-purple small d-flex align-items-center mb-3 mt-3">
+                                            <i class="mdi mdi-information-outline me-2"></i>
+                                            <span>
+                                                Ingin melihat atau menghapus file sebelumnya?
+                                                <a href="{{ route('pendaftar.show', $pendaftar->pendaftar_id) }}"
+                                                    class="alert-link">
+                                                    Klik ke halaman Detail
+                                                </a>
+                                            </span>
+                                        </div>
+
+                                        {{-- TAMBAH BERKAS BARU --}}
+                                        <div class="form-group mt-4">
+                                            <label>Upload Berkas Pendaftaran</label>
+                                            <input type="file" name="media[]" multiple class="form-control"
+                                                style="height: 45px;">
+
+                                            <small class="text-muted">
+                                              *File yang diupload di sini akan ditambahkan ke daftar file yang sudah ada
+                                            </small>
+                                        </div>
+
+                                        {{-- TOMBOL --}}
+                                        <div class="mt-auto d-flex justify-content-end">
+                                            <a href="{{ route('pendaftar.index') }}" class="btn btn-light me-2">
+                                                <i class="mdi mdi-arrow-left"></i> Batal
+                                            </a>
+
+                                            <button type="submit" class="btn btn-gradient-primary text-white">
+                                                <i class="mdi mdi-content-save"></i> Simpan Perubahan
+                                            </button>
+                                        </div>
+                                    </div>
                                 </div>
 
-                                <div class="mt-4 d-flex justify-content-end">
-                                    <a href="{{ route('pendaftar.index') }}" class="btn btn-light me-2">
-                                        <i class="mdi mdi-arrow-left"></i> Batal
-                                    </a>
-                                    <button type="submit" class="btn btn-gradient-primary text-white">
-                                        <i class="mdi mdi-content-save"></i> Simpan Perubahan
-                                    </button>
-                                </div>
                             </form>
+
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         {{-- end main content --}}
+
     @endsection

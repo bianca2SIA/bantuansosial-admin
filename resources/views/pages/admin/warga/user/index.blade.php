@@ -78,12 +78,8 @@
                                                 <span class="badge badge-gradient-info">Super Admin</span>
                                             @elseif ($item->role == 'Admin Bansos')
                                                 <span class="badge badge-gradient-warning">Admin Bansos</span>
-                                            @elseif ($item->role == 'Verifikator')
-                                                <span class="badge badge-gradient-primary">Verifikator</span>
-                                            @elseif ($item->role == 'Operator Penyaluran')
-                                                <span class="badge badge-gradient-danger">Operator Penyaluran</span>
-                                            @elseif ($item->role == 'Warga')
-                                                <span class="badge badge-gradient-success">Warga</span>
+                                            @elseif ($item->role == 'Petugas Lapangan')
+                                                <span class="badge badge-gradient-primary">Petugas Lapangan</span>
                                             @endif
                                         </td>
 

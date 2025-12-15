@@ -43,83 +43,99 @@
 
 
             <div class="row">
-                <div class="col-md-12 grid-margin stretch-card">
-                    <div class="card">
-                        <div class="card-body">
+               <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
 
-                            <h4 class="card-title mb-4">Form Tambah Riwayat Penyaluran</h4>
 
-                            <form class="forms-sample" method="POST" action="{{ route('riwayat.store') }}"
-                                enctype="multipart/form-data">
-                                @csrf
 
-                                <div class="form-group">
-                                    <label>Program Bantuan</label>
-                                    <select name="program_id" class="form-control" required>
-                                        <option value="">-- Pilih Program --</option>
-                                        @foreach ($program as $p)
-                                            <option value="{{ $p->program_id }}"
-                                                {{ old('program_id') == $p->program_id ? 'selected' : '' }}>
-                                                {{ $p->nama_program }}
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+            <form class="forms-sample" method="POST" action="{{ route('riwayat.store') }}" enctype="multipart/form-data">
+                @csrf
 
-                                <div class="form-group">
-                                    <label>Penerima Bantuan</label>
-                                    <select name="penerima_id" class="form-control" required>
-                                        <option value="">-- Pilih Penerima --</option>
-                                        @foreach ($penerima as $pn)
-                                            <option value="{{ $pn->penerima_id }}"
-                                                {{ old('penerima_id') == $pn->penerima_id ? 'selected' : '' }}>
-                                                {{ $pn->warga->nama }} (ID: {{ $pn->penerima_id }})
-                                            </option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                <div class="row">
 
-                                <div class="form-group">
-                                    <label>Tahap Ke</label>
-                                    <input type="number" name="tahap_ke" class="form-control"
-                                        value="{{ old('tahap_ke') }}" placeholder="Contoh: 1" required>
-                                </div>
+                    {{-- ===================== KIRI ===================== --}}
+                    <div class="col-md-6">
 
-                                <div class="form-group">
-                                    <label>Tanggal Penyaluran</label>
-                                    <input type="date" name="tanggal" class="form-control" value="{{ old('tanggal') }}"
-                                        required>
-                                </div>
 
-                                <div class="form-group">
-                                    <label>Nilai Bantuan (Rp)</label>
-                                    <input type="number" name="nilai" class="form-control" value="{{ old('nilai') }}"
-                                        placeholder="Contoh: 2500000" required>
-                                </div>
+                        <div class="form-group">
+                            <label>Program Bantuan</label>
+                            <select name="program_id" class="form-control" required>
+                                <option value="">-- Pilih Program --</option>
+                                @foreach ($program as $p)
+                                    <option value="{{ $p->program_id }}"
+                                        {{ old('program_id') == $p->program_id ? 'selected' : '' }}>
+                                        {{ $p->nama_program }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                                <div class="form-group mt-4">
-                                    <label>Bukti Penyaluran</label>
-                                    <input type="file" name="media[]" multiple class="form-control">
+                        <div class="form-group">
+                            <label>Penerima Bantuan</label>
+                            <select name="penerima_id" class="form-control" required>
+                                <option value="">-- Pilih Penerima --</option>
+                                @foreach ($penerima as $pn)
+                                    <option value="{{ $pn->penerima_id }}"
+                                        {{ old('penerima_id') == $pn->penerima_id ? 'selected' : '' }}>
+                                        {{ $pn->warga->nama }} (ID: {{ $pn->penerima_id }})
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
 
-                                    <small class="text-muted">
-                                        *Anda dapat mengupload lebih dari satu file sekaligus.
-                                        Caption bisa diedit nanti pada halaman Edit Pendaftar.
-                                    </small>
-                                </div>
-                                <div class="mt-4 d-flex justify-content-end">
-
-                                    <a href="{{ route('riwayat.index') }}" class="btn btn-light me-2">
-                                        <i class="mdi mdi-arrow-left"></i> Batal
-                                    </a>
-
-                                    <button type="submit" class="btn btn-gradient-primary text-white">
-                                        <i class="mdi mdi-content-save"></i> Simpan
-                                    </button>
-                                </div>
-                            </form>
+                        <div class="form-group">
+                            <label>Tahap Ke</label>
+                            <input type="number" name="tahap_ke" class="form-control"
+                                placeholder="Contoh: 1" value="{{ old('tahap_ke') }}" required>
                         </div>
                     </div>
+
+                    {{-- ===================== KANAN ===================== --}}
+                    <div class="col-md-6 d-flex flex-column">
+
+
+                        <div class="form-group">
+                            <label>Tanggal Penyaluran</label>
+                            <input type="date" name="tanggal" class="form-control"
+                                value="{{ old('tanggal') }}" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Nilai Bantuan (Rp)</label>
+                            <input type="number" name="nilai" class="form-control"
+                                placeholder="Contoh: 2500000" value="{{ old('nilai') }}" required>
+                        </div>
+
+                        <div class="form-group mt-1">
+                            <label>Upload Bukti Penyaluran</label>
+                            <input type="file" name="media[]" multiple class="form-control">
+
+                            <small class="text-muted">
+                               *Anda dapat mengupload lebih dari satu file sekaligus.
+
+                            </small>
+                        </div>
+
+                        <div class="mt-auto d-flex justify-content-end">
+                            <a href="{{ route('riwayat.index') }}" class="btn btn-light me-2">
+                                <i class="mdi mdi-arrow-left"></i> Batal
+                            </a>
+
+                            <button type="submit" class="btn btn-gradient-primary text-white">
+                                <i class="mdi mdi-content-save"></i> Simpan
+                            </button>
+                        </div>
+                    </div>
+
                 </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
             </div>
         </div>
         {{-- end main content --}}

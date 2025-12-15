@@ -75,7 +75,8 @@
                             <tbody>
                                 @forelse ($verifikasi as $item)
                                     <tr>
-                                        <td class="text-center">{{ $item->pendaftar->pendaftar_id }}</td>
+                                        <td class="text-center">{{ $item->verifikasi_id }}</td>
+
                                         <td>
 
                                             <span>{{ $item->pendaftar->warga->nama ?? '-' }}</span>
@@ -83,8 +84,9 @@
                                         </td>
                                         <td>{{ $item->petugas }}</td>
                                         <td class="text-center">
-                                            {{ \Carbon\Carbon::parse($item->tanggal)->locale('id')->translatedFormat('d F Y') }}
+                                            {{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}
                                         </td>
+
 
                                         <td>
                                             <div style="width:100px; background:#eee; border-radius:4px; overflow:hidden;">
@@ -106,18 +108,10 @@
                                         <td>{{ $item->catatan ?? '-' }}</td>
 
                                         <td class="text-center">
-                                            @if ($item->media()->count() > 0)
-                                                <a href="javascript:void(0)"
-                                                    class="badge badge-gradient-info open-media-modal"
-                                                    data-id="{{ $item->verifikasi_id }}" title="Lihat Dokumen"
-                                                    style="border:none !important; outline:none !important; box-shadow:none !important;">
-                                                    <i class="mdi mdi-file-document"></i>
-                                                </a>
-                                            @else
-                                                <span class="badge badge-gradient-secondary" title="Tidak ada dokumen">
-                                                    <i class="mdi mdi-file-remove"></i>
-                                                </span>
-                                            @endif
+                                            <a href="{{ route('verifikasi.show', $item->verifikasi_id) }}"
+                                                class="badge badge-gradient-info" title="Lihat Detail Program">
+                                                <i class="mdi mdi-file-document"></i>
+                                            </a>
 
                                             <a href="{{ route('verifikasi.edit', $item->verifikasi_id) }}"
                                                 class="badge badge-gradient-warning">
@@ -155,42 +149,4 @@
                 </div>
             </div>
         </div>
-
-        <div class="modal fade" id="mediaModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered" style="max-width: 550px;">
-                <div class="modal-content" style="border-radius: 12px; overflow: hidden;">
-
-                    <div class="modal-header bg-gradient-primary text-white">
-                        <h5 class="modal-title">Foto Verifikasi</h5>
-                        <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <div class="modal-body" id="mediaModalBody">
-                        <p class="text-muted">Memuat foto...</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <script>
-            document.querySelectorAll('.open-media-modal').forEach(btn => {
-                btn.addEventListener('click', function() {
-
-                    let id = this.getAttribute('data-id');
-                    let modalBody = document.getElementById('mediaModalBody');
-
-                    modalBody.innerHTML = "<p class='text-muted'>Memuat foto...</p>";
-
-                    fetch(`/verifikasi/${id}/dokumen`)
-                        .then(res => res.json())
-                        .then(data => {
-                            modalBody.innerHTML = data.html;
-                        });
-
-                    let modal = new bootstrap.Modal(document.getElementById('mediaModal'));
-                    modal.show();
-                });
-            });
-        </script>
     @endsection

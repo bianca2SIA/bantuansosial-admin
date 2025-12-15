@@ -8,13 +8,11 @@ use Illuminate\Support\Facades\Storage;
 
 class ProgramController extends Controller
 {
+
     public function index(Request $request)
     {
-        $filterableColumns = ['tahun'];
-        $searchableColumns = ['nama_program'];
-
-        $data['dataProgram'] = Program::filter($request, $filterableColumns)
-            ->search($request, $searchableColumns)
+        $data['dataProgram'] = Program::filter($request, ['tahun'])
+            ->search($request, ['nama_program'])
             ->paginate(10)
             ->withQueryString();
 
@@ -28,142 +26,146 @@ class ProgramController extends Controller
 
     public function store(Request $request)
     {
-        // VALIDASI LAMA TETAP
         $request->validate([
-            'nama_program' => 'required|string|max:255',
-            'kode'         => 'required|string|max:50|unique:program,kode',
-            'tahun'        => 'required|integer|min:2000|max:2100',
+            'kode'         => 'required|unique:program,kode',
+            'nama_program' => 'required',
+            'tahun'        => 'required|integer',
             'anggaran'     => 'required|numeric|min:1',
-            'deskripsi'    => 'required|string|max:1000',
+            'deskripsi'    => 'required',
+            'media.*'      => 'nullable|file|max:2048',
         ]);
 
-        // SIMPAN PROGRAM
         $program = Program::create($request->only(
-            'kode', 'nama_program', 'tahun', 'deskripsi', 'anggaran'
+            'kode', 'nama_program', 'tahun', 'anggaran', 'deskripsi'
         ));
 
         if ($request->hasFile('media')) {
-            foreach ($request->file('media') as $index => $file) {
-
-                $fileName = time() . '-' . $file->getClientOriginalName();
+            foreach ($request->file('media') as $i => $file) {
+                $fileName = uniqid() . '-' . $file->getClientOriginalName();
                 $file->storeAs('uploads/program_bantuan', $fileName, 'public');
 
                 Media::create([
                     'ref_table'  => 'program',
                     'ref_id'     => $program->program_id,
                     'file_name'  => $fileName,
-                    'caption'    => $request->caption[$index] ?? null,
                     'mime_type'  => $file->getClientMimeType(),
-                    'sort_order' => $index,
+                    'sort_order' => $i,
                 ]);
             }
         }
 
         return redirect()->route('program.index')
-            ->with('success', 'Data Program Bantuan berhasil ditambahkan!');
+            ->with('success', 'Program berhasil ditambahkan');
     }
 
-    public function edit(string $id)
+    public function show($id)
     {
-        $data['dataProgram'] = Program::findOrFail($id);
+        $program = Program::with('media')->findOrFail($id);
+        return view('pages.admin.program.show', compact('program'));
+    }
+
+    public function edit($id)
+    {
+        $data['dataProgram'] = Program::with('media')->findOrFail($id);
         return view('pages.admin.program.edit', $data);
     }
 
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         $program = Program::findOrFail($id);
 
         $request->validate([
-            'nama_program' => 'required|string|max:255',
-            'kode'         => 'required|string|max:50|unique:program,kode,' . $id . ',program_id',
-            'tahun'        => 'required|integer|min:2010|max:2030',
+            'kode'         => 'required|unique:program,kode,' . $id . ',program_id',
+            'nama_program' => 'required',
+            'tahun'        => 'required|integer',
             'anggaran'     => 'required|numeric|min:1',
-            'deskripsi'    => 'required|string|max:1000',
+            'deskripsi'    => 'required',
+            'media.*'      => 'nullable|file|max:2048',
         ]);
 
-        // UPDATE PROGRAM
         $program->update($request->only(
-            'nama_program', 'kode', 'tahun', 'anggaran', 'deskripsi'
+            'kode', 'nama_program', 'tahun', 'anggaran', 'deskripsi'
         ));
 
-        if ($request->captions_existing) {
-            foreach ($request->captions_existing as $mediaId => $caption) {
-                Media::where('media_id', $mediaId)->update([
-                    'caption' => $caption,
-                ]);
-            }
-        }
-
         if ($request->hasFile('media')) {
-            foreach ($request->file('media') as $index => $file) {
-
-                $fileName = time() . '-' . $file->getClientOriginalName();
+            foreach ($request->file('media') as $i => $file) {
+                $fileName = uniqid() . '-' . $file->getClientOriginalName();
                 $file->storeAs('uploads/program_bantuan', $fileName, 'public');
 
                 Media::create([
                     'ref_table'  => 'program',
                     'ref_id'     => $id,
                     'file_name'  => $fileName,
-                    'caption'    => $request->caption[$index] ?? null,
                     'mime_type'  => $file->getClientMimeType(),
-                    'sort_order' => $index,
+                    'sort_order' => $i,
                 ]);
             }
         }
 
         return redirect()->route('program.index')
-            ->with('success', 'Data Program Bantuan berhasil diperbarui!');
+            ->with('success', 'Program berhasil diperbarui');
     }
 
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        $program = Program::findOrFail($id);
+        $program = Program::with('media')->findOrFail($id);
 
-        $mediaFiles = Media::where('ref_table', 'program')
-            ->where('ref_id', $id)->get();
-
-        foreach ($mediaFiles as $m) {
-            Storage::disk('public')->delete('uploads/program_bantuan/' . $m->file_name);
-            $m->delete();
+        foreach ($program->media as $file) {
+            Storage::disk('public')
+                ->delete('uploads/program_bantuan/' . $file->file_name);
+            $file->delete();
         }
 
         $program->delete();
 
         return redirect()->route('program.index')
-            ->with('success', 'Data Program Bantuan berhasil dihapus!');
+            ->with('success', 'Program berhasil dihapus');
     }
 
-    public function mediaList($id)
+    public function uploadMedia(Request $request, $programId)
     {
-        $files = Media::where('ref_table', 'program')
-            ->where('ref_id', $id)
-            ->get();
+        $request->validate([
+            'media.*' => 'required|file|max:2048',
+        ]);
 
-        if ($files->count() == 0) {
-            return response()->json([
-                'html' => '<p class="text-muted">Tidak ada dokumen.</p>',
+        foreach ($request->file('media') as $i => $file) {
+            $fileName = uniqid() . '-' . $file->getClientOriginalName();
+            $file->storeAs('uploads/program_bantuan', $fileName, 'public');
+
+            Media::create([
+                'ref_table'  => 'program',
+                'ref_id'     => $programId,
+                'file_name'  => $fileName,
+                'mime_type'  => $file->getClientMimeType(),
+                'sort_order' => $i,
             ]);
         }
 
-        $html = '<ul class="list-group">';
-
-        foreach ($files as $file) {
-
-            $url = asset("storage/uploads/program_bantuan/" . $file->file_name);
-
-            $html .= '
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href="' . $url . '" target="_blank" class="text-primary text-decoration-underline">
-                    <i class="mdi mdi-file-outline"></i> ' . $file->file_name . '
-                </a>
-                <small class="text-muted">' . ($file->caption ?: "Tanpa caption") . '</small>
-            </li>
-        ';
-        }
-
-        $html .= '</ul>';
-
-        return response()->json(['html' => $html]);
+        return back()->with('success', 'Dokumen berhasil diupload');
     }
 
+    public function downloadFile($mediaId)
+    {
+        $media = Media::findOrFail($mediaId);
+
+        abort_if($media->ref_table !== 'program', 403);
+
+        return response()->download(
+            storage_path('app/public/uploads/program_bantuan/' . $media->file_name)
+        );
+    }
+
+    public function deleteFile($mediaId)
+    {
+        $media = Media::findOrFail($mediaId);
+
+        abort_if($media->ref_table !== 'program', 403);
+
+        Storage::disk('public')
+            ->delete('uploads/program_bantuan/' . $media->file_name);
+
+        $media->delete();
+
+        return back()->with('success', 'File berhasil dihapus');
+    }
 }

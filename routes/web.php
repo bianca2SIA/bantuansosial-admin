@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\MediaController;
 use App\Http\Controllers\PendaftarController;
 use App\Http\Controllers\PenerimaController;
 use App\Http\Controllers\ProgramController;
@@ -10,42 +9,48 @@ use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\VerifikasiController;
 use App\Http\Controllers\WargaController;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('auth', [AuthController::class, 'index'])->name('auth');
+Route::post('auth/login', [AuthController::class, 'login'])->name('auth.login');
+Route::post('auth/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::resource('program', ProgramController::class);
-Route::get('/program/{id}/dokumen', [ProgramController::class, 'mediaList']) ->name('program.media.list');
-Route::delete('/media/{id}', [MediaController::class, 'destroy'])->name('media.destroy');
+Route::middleware(['checkislogin'])->group(function () {
 
-Route::resource('user', UserController::class);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
-Route::resource('warga', WargaController::class);
+    Route::middleware('checkrole:Super Admin')->group(function () {
+        Route::resource('user', UserController::class);
+        Route::resource('program', ProgramController::class);
 
-Route::get('/', [AuthController::class, 'index'])->name('auth.index');
-Route::post('/auth/login', [AuthController::class, 'login'])->name('auth.login');
+        Route::post('program/{id}/media', [ProgramController::class, 'uploadMedia'])->name('program.media.upload');
+        Route::get('program/media/{mediaId}/download', [ProgramController::class, 'downloadFile'])->name('program.media.download');
+        Route::delete('program/media/{mediaId}', [ProgramController::class, 'deleteFile'])->name('program.media.delete');
+    });
 
-Route::get('/auth', function () {return view('pages.admin.auth');})->name('auth');
+    Route::middleware('checkrole:Admin Bansos,Super Admin')->group(function () {
+        Route::resource('pendaftar', PendaftarController::class);
+        Route::resource('penerima', PenerimaController::class);
+        Route::resource('riwayat', RiwayatController::class);
 
-Route::post('/logout', function () {
-    Auth::logout();
-    request()->session()->invalidate();
-    request()->session()->regenerateToken();
-    return redirect()->route('auth');
-})->name('logout');
+        Route::post('riwayat/{id}/media', [RiwayatController::class, 'uploadMedia'])->name('riwayat.media.upload');
+        Route::get('riwayat/media/{mediaId}/download', [RiwayatController::class, 'downloadFile'])->name('riwayat.media.download');
+        Route::delete('riwayat/media/{mediaId}', [RiwayatController::class, 'deleteFile'])->name('riwayat.media.delete');
 
-Route::resource('pendaftar', PendaftarController::class);
-Route::get('/pendaftar/{id}/dokumen', [PendaftarController::class, 'mediaList']) ->name('pendaftar.media.list');
+        Route::post('pendaftar/{id}/media', [PendaftarController::class, 'uploadMedia'])->name('pendaftar.media.upload');
+        Route::get('pendaftar/media/{mediaId}/download', [PendaftarController::class, 'downloadFile'])->name('pendaftar.media.download');
+        Route::delete('pendaftar/media/{mediaId}', [PendaftarController::class, 'deleteFile'])->name('pendaftar.media.delete');
+    });
 
-Route::resource('verifikasi', VerifikasiController::class);
-Route::get('/verifikasi/{id}/dokumen', [VerifikasiController::class, 'mediaList']) ->name('verifikasi.media.list');
+    Route::middleware('checkrole:Petugas Lapangan,Admin Bansos,Super Admin')->group(function () {
+        Route::resource('verifikasi', VerifikasiController::class);
 
-Route::resource('penerima', PenerimaController::class);
+        Route::post('verifikasi/{id}/media', [VerifikasiController::class, 'uploadMedia'])->name('verifikasi.media.upload');
+        Route::get('verifikasi/media/{mediaId}/download', [VerifikasiController::class, 'downloadFile'])->name('verifikasi.media.download');
+        Route::delete('verifikasi/media/{mediaId}', [VerifikasiController::class, 'deleteFile'])->name('verifikasi.media.delete');
+    });
 
-Route::resource('riwayat', RiwayatController::class);
-Route::get('/riwayat/{id}/dokumen', [RiwayatController::class, 'mediaList']) ->name('riwayat.media.list');
+    Route::resource('warga', WargaController::class);
 
-Route::get('/media/view/{id}', [MediaController::class, 'view'])->name('media.view');
-Route::delete('/media/delete/{id}', [MediaController::class, 'delete'])->name('media.delete');
-Route::post('/media/update-caption/{id}', [MediaController::class, 'updateCaption'])->name('media.updateCaption');
+    Route::get('/profil', function () {return view('pages.admin.profil');})->name('profil.index')->middleware('auth');
+});

@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login - BINA DESA</title>
+    <title>Login | SIBANSOS</title>
+    <link rel="shortcut icon" href="{{ asset('assets-admin/images/favicon1.png') }}" />
 
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
@@ -50,7 +51,8 @@
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.4);
 
-            padding: 30px 25px;
+            padding: 10px 25px 30px;
+
 
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
         }
@@ -60,7 +62,9 @@
             text-align: center;
             font-weight: 700;
             color: #7b2cbf;
-            margin-top: 10px;
+            margin-top: 0;
+            /* sebelumnya 10px */
+            margin-bottom: 6px;
         }
 
         .desc {
@@ -68,15 +72,23 @@
             font-size: 12px;
             color: black;
             opacity: 0.85;
-            margin: 10px 0 20px;
-            line-height: 1.4;
+            margin: 6px 0 14px;
+            line-height: 1.35;
         }
 
-        .logo {
-            display: block;
-            margin: 0 auto 5px;
-            width: 75px;
+        .auth-logo {
+            text-align: center;
+            margin-top: 12px;
+
         }
+
+        .auth-logo img {
+            width: 120px;
+            height: auto;
+        }
+
+
+
 
         label {
             display: block;
@@ -93,7 +105,7 @@
             background: rgba(255, 255, 255, 0.9);
             border: 1px solid #d1b3ff;
             font-size: 14px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         input:focus {
@@ -117,7 +129,7 @@
 
         .footer {
             text-align: center;
-            margin-top: 15px;
+            margin-top: 10px;
             font-size: 12px;
             color: #7b2cbf;
         }
@@ -131,56 +143,14 @@
             border-radius: 8px;
             margin-bottom: 15px;
         }
-
-        @media (max-width: 450px) {
-            .card {
-                padding: 25px 18px;
-                border-radius: 16px;
-            }
-        }
     </style>
 </head>
 
 <body>
 
     <div class="overlay"></div>
+    @yield('content')
 
-    <div class="card">
-
-        <img src="{{ asset('assets-admin/images/logo-bina-desa.png') }}" class="logo">
-
-        <div class="title">BINA DESA</div>
-
-        <div class="desc">
-            Sistem Manajemen Bantuan Sosial Digital<br>
-            untuk mendukung transparansi penyaluran bantuan desa.
-        </div>
-
-        @if ($errors->any())
-            <div class="error-box">
-                <ul style="margin-left: 15px;">
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
-
-        <form action="{{ route('auth.login') }}" method="POST">
-            @csrf
-
-            <label>Email</label>
-            <input type="text" name="email" placeholder="Masukkan email" value="{{ old('email') }}">
-
-            <label>Password</label>
-            <input type="password" name="password" placeholder="Masukkan password">
-
-            <button type="submit">Masuk</button>
-        </form>
-
-        <div class="footer">© 2025 BINA DESA — Bantuan Sosial Digital</div>
-
-    </div>
 </body>
 
 </html>

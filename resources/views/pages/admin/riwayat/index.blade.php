@@ -25,7 +25,7 @@
                 <div class="card-body">
 
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="card-title mb-0">List Riwayat Penyaluran Bantuan</h4>
+                        <h4 class="card-title mb-0">List Data Riwayat Penyaluran Bantuan</h4>
 
                         <a href="{{ route('riwayat.create') }}" class="btn btn-gradient-primary text-white">
                             + Tambah Riwayat
@@ -112,8 +112,8 @@
                                             @endif
                                         </td>
 
-                                        <td class="text-center">
-                                            {{ \Carbon\Carbon::parse($item->tanggal)->locale('id')->translatedFormat('d F Y') }}
+                                      <td class="text-center">
+                                            {{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}
                                         </td>
 
                                         <td class="text-center">
@@ -122,18 +122,10 @@
 
                                         <td class="text-center">
 
-                                            @if ($item->media()->count() > 0)
-                                                <a href="javascript:void(0)"
-                                                    class="badge badge-gradient-info open-media-modal"
-                                                    data-id="{{ $item->riwayat_id }}" title="Lihat Bukti"
-                                                    style="border:none; outline:none; box-shadow:none;">
-                                                    <i class="mdi mdi-file-document"></i>
-                                                </a>
-                                            @else
-                                                <span class="badge badge-gradient-secondary" title="Tidak ada bukti">
-                                                    <i class="mdi mdi-file-remove"></i>
-                                                </span>
-                                            @endif
+                                            <a href="{{ route('riwayat.show', $item->riwayat_id) }}"
+                                                class="badge badge-gradient-info" title="Lihat Detail Program">
+                                                <i class="mdi mdi-file-document"></i>
+                                            </a>
 
                                             <a href="{{ route('riwayat.edit', $item->riwayat_id) }}"
                                                 class="badge badge-gradient-warning" title="Edit">
@@ -156,7 +148,7 @@
                                     </tr>
                                 @empty
                                     <tr>
-                                        <td colspan="8" class="text-center text-muted">Belum ada data riwayat</td>
+                                        <td colspan="7" class="text-center text-muted">Belum ada data riwayat</td>
                                     </tr>
                                 @endforelse
                             </tbody>
@@ -170,42 +162,5 @@
             </div>
         </div>
 
-        <div class="modal fade" id="mediaModal" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered" style="max-width: 550px;">
-                <div class="modal-content" style="border-radius: 12px; overflow: hidden;">
-
-                    <div class="modal-header bg-gradient-primary text-white">
-                        <h5 class="modal-title">Bukti Penyaluran</h5>
-                        <button type="button" class="btn-close text-white" data-bs-dismiss="modal"></button>
-                    </div>
-
-                    <div class="modal-body" id="mediaModalBody">
-                        <p class="text-muted">Memuat bukti...</p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <script>
-            document.querySelectorAll('.open-media-modal').forEach(btn => {
-                btn.addEventListener('click', function() {
-
-                    let id = this.getAttribute('data-id');
-                    let modalBody = document.getElementById('mediaModalBody');
-
-                    modalBody.innerHTML = "<p class='text-muted'>Memuat dokumen...</p>";
-
-                    fetch(`/riwayat/${id}/dokumen`)
-                        .then(res => res.json())
-                        .then(data => {
-                            modalBody.innerHTML = data.html;
-                        });
-
-                    let modal = new bootstrap.Modal(document.getElementById('mediaModal'));
-                    modal.show();
-                });
-            });
-        </script>
         {{-- end main content --}}
     @endsection

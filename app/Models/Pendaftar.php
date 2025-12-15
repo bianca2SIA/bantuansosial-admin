@@ -34,11 +34,8 @@ class Pendaftar extends Model
             return $query;
         }
 
-        return $query->where(function ($q) use ($keyword) {
-
-            $q->orWhereHas('warga', function ($w) use ($keyword) {
-                $w->where('nama', 'like', "%$keyword%");
-            });
+        return $query->whereHas('warga', function ($w) use ($keyword) {
+            $w->where('nama', 'like', "%{$keyword}%");
         });
     }
 
@@ -51,11 +48,11 @@ class Pendaftar extends Model
     {
         return $this->belongsTo(Warga::class, 'warga_id', 'warga_id');
     }
+
     public function media()
     {
-        return $this->hasMany(Media::class, 'ref_id')
-            ->where('ref_table', 'pendaftar_bantuan')
+        return $this->hasMany(Media::class, 'ref_id', 'pendaftar_id')
+            ->where('ref_table', 'pendaftar')
             ->orderBy('sort_order');
     }
-
 }
