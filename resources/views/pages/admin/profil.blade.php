@@ -21,7 +21,7 @@
                             <div class="row align-items-center">
                                 {{-- FOTO (KIRI) --}}
                                 <div class="col-md-4 text-center mb-4 mb-md-0">
-                                    <img src="{{ asset('assets-admin/images/foto-saya.jpg') }}" alt="Foto Profil"
+                                    <img src="{{ asset('assets-admin/images/foto-saya.JPG') }}" alt="Foto Profil"
                                         class="rounded-circle" width="180" style="border:5px solid #e5d9ff">
                                 </div>
 
