@@ -164,3 +164,50 @@
     display: flex;
     align-items: center;
 }
+
+/* ===============================
+   KECILKAN DONUT CHART (FINAL)
+   =============================== */
+
+/* Wrapper chart */
+.doughnutjs-wrapper {
+    height: 200px;              /* <- KECILKAN DI SINI */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Canvas donut */
+.doughnutjs-wrapper canvas {
+    max-width: 200px !important; /* <- ukuran donut */
+    max-height: 200px !important;
+}
+
+/* ===============================
+   RESPONSIVE USER DROPDOWN
+   =============================== */
+
+/* MOBILE: sembunyikan nama user */
+@media (max-width: 991.98px) {
+    .navbar .nav-profile-text {
+        display: none !important;
+    }
+}
+
+/* DESKTOP: tampilkan nama user */
+@media (min-width: 992px) {
+    .navbar .nav-profile-text {
+        display: flex !important;
+        align-items: center;
+    }
+}
+
+/* =====================================
+   HILANGKAN SEARCH NAVBAR DI MOBILE
+   (BERDASARKAN STRUKTUR ASLI)
+   ===================================== */
+@media (max-width: 991.98px) {
+    .navbar .navbar-menu-wrapper .search-field {
+        display: none !important;
+    }
+}

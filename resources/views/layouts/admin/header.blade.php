@@ -43,8 +43,9 @@
                         </div>
                         <div class="nav-profile-text d-flex align-items-center">
                             <p class="mb-1 text-black me-1">{{ Auth::user()->name }}</p>
-                            <i class="mdi mdi-chevron-down text-primary"></i>
+
                         </div>
+                        <i class="mdi mdi-chevron-down text-primary"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end navbar-dropdown" aria-labelledby="profileDropdown">
                         <a class="dropdown-item" href="{{ route('profil.index') }}">
