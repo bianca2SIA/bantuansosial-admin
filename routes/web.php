@@ -22,6 +22,7 @@ Route::middleware(['checkislogin'])->group(function () {
     Route::middleware('checkrole:Super Admin')->group(function () {
 
         Route::resource('program', ProgramController::class);
+        Route::resource('user', UserController::class);
 
         Route::post('program/{id}/media', [ProgramController::class, 'uploadMedia'])->name('program.media.upload');
         Route::get('program/media/{mediaId}/download', [ProgramController::class, 'downloadFile'])->name('program.media.download');
@@ -54,4 +55,3 @@ Route::middleware(['checkislogin'])->group(function () {
 
     Route::get('/profil', function () {return view('pages.admin.profil');})->name('profil.index')->middleware('auth');
 });
-    Route::resource('user', UserController::class);

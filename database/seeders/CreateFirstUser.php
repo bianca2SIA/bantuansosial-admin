@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use App\Models\User;
@@ -14,11 +15,33 @@ class CreateFirstUser extends Seeder
         $faker = Faker::create('id_ID');
 
         User::updateOrCreate(
-            ['email' => 'bianca24si@mahasiswa.pcr.ac.id'],
+            ['email' => 'super@gmail.com'],
             [
-                'name'              => 'Admin',
-                'password'          => Hash::make('bianca'),
+                'name'              => 'Super Admin',
+                'password'          => Hash::make('biancabahi'),
                 'role'              => 'Super Admin',
+                'email_verified_at' => now(),
+                'remember_token'    => Str::random(10),
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'admin@gmail.com'],
+            [
+                'name'              => 'Admin Bansos',
+                'password'          => Hash::make('biancabahi'),
+                'role'              => 'Admin Bansos',
+                'email_verified_at' => now(),
+                'remember_token'    => Str::random(10),
+            ]
+        );
+
+        User::updateOrCreate(
+            ['email' => 'petugas@gmail.com'],
+            [
+                'name'              => 'Petugas Lapangan',
+                'password'          => Hash::make('biancabahi'),
+                'role'              => 'Petugas Lapangan',
                 'email_verified_at' => now(),
                 'remember_token'    => Str::random(10),
             ]
@@ -26,9 +49,11 @@ class CreateFirstUser extends Seeder
 
         for ($i = 0; $i < 100; $i++) {
             User::create([
-                'name'              => $faker->name(),
-                'email' => $faker->unique()->userName . '@gmail.com',
-                'role'              => $faker->randomElement([
+                'name'  => $faker->name(),
+                'email' => strtolower(
+                    str_replace('.', '', $faker->unique()->userName)
+                ) . '@gmail.com',
+                'role'  => $faker->randomElement([
                     'Admin Bansos',
                     'Petugas Lapangan',
                 ]),
@@ -37,6 +62,5 @@ class CreateFirstUser extends Seeder
                 'remember_token'    => Str::random(10),
             ]);
         }
-
     }
 }
