@@ -39,10 +39,11 @@
    =============================== */
         @media (max-width: 768px) {
             body {
-                background-size: contain;
-                background-position: top center;
+                background-size: cover;
+                /* ⬅️ INI KUNCINYA */
+                background-position: center;
+                /* fokus tengah */
                 background-color: #f6f0fb;
-                /* fallback lembut */
             }
         }
 
