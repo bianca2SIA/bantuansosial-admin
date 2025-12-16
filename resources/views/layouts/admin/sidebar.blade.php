@@ -81,6 +81,14 @@
             </a>
         </li>
 
+        <li class="nav-item {{ request()->is('about-developer') ? 'active' : '' }}">
+    <a class="nav-link" href="{{ route('about.developer') }}">
+        <span class="menu-title">About Developer</span>
+        <i class="mdi mdi-account-star menu-icon"></i>
+    </a>
+</li>
+
+
 
     </ul>
 </nav>

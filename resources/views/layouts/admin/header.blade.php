@@ -48,10 +48,7 @@
                         <i class="mdi mdi-chevron-down text-primary"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end navbar-dropdown" aria-labelledby="profileDropdown">
-                        <a class="dropdown-item" href="{{ route('profil.index') }}">
-                            <i class="mdi mdi-account text-primary me-2"></i>
-                            Profil Saya
-                        </a>
+                       
 
                         <div class="dropdown-divider"></div>
                         {{-- LAST LOGIN --}}

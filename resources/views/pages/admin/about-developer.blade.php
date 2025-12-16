@@ -66,11 +66,16 @@
                                             <i class="mdi mdi-instagram"></i>
                                         </a>
                                     </div>
+
                                 </div>
+
                             </div>
+
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
     @endsection

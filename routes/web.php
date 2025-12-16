@@ -53,5 +53,6 @@ Route::middleware(['checkislogin'])->group(function () {
 
     Route::resource('warga', WargaController::class);
 
-    Route::get('/profil', function () {return view('pages.admin.profil');})->name('profil.index')->middleware('auth');
+    Route::get('/about-developer', function () {return view('pages.admin.about-developer');})->name('about.developer');
+
 });
