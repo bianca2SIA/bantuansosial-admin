@@ -18,7 +18,7 @@ class CreateFirstUser extends Seeder
             [
                 'name'              => 'Admin',
                 'password'          => Hash::make('bianca'),
-                'role'              => 'Admin',
+                'role'              => 'Super Admin',
                 'email_verified_at' => now(),
                 'remember_token'    => Str::random(10),
             ]
@@ -27,12 +27,16 @@ class CreateFirstUser extends Seeder
         for ($i = 0; $i < 100; $i++) {
             User::create([
                 'name'              => $faker->name(),
-                'email'             => $faker->unique()->safeEmail(),
-                'role'              => 'User',
+                'email' => $faker->unique()->userName . '@gmail.com',
+                'role'              => $faker->randomElement([
+                    'Admin Bansos',
+                    'Petugas Lapangan',
+                ]),
                 'email_verified_at' => now(),
                 'password'          => Hash::make('password123'),
                 'remember_token'    => Str::random(10),
             ]);
         }
+
     }
 }
