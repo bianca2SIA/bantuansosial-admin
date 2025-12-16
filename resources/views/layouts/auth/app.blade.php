@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
     <title>Login | SIBANSOS</title>
     <link rel="shortcut icon" href="{{ asset('assets-admin/images/favicon1.png') }}" />
 
@@ -18,7 +19,7 @@
         body {
             font-family: 'Poppins', sans-serif;
 
-            min-height: 100vh;
+            min-height: 100svh;
             width: 100%;
 
             display: flex;
@@ -39,10 +40,12 @@
         @media (max-width: 768px) {
             body {
                 background-size: contain;
-                /* FIT KE LAYAR */
                 background-position: top center;
+                background-color: #f6f0fb;
+                /* fallback lembut */
             }
         }
+
 
 
         .overlay {
