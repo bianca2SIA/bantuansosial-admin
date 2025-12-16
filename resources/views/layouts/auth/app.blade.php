@@ -17,17 +17,33 @@
 
         body {
             font-family: 'Poppins', sans-serif;
-            height: 100vh;
-            width: 100vw;
-            overflow: hidden;
+
+            min-height: 100vh;
+            width: 100%;
 
             display: flex;
             justify-content: center;
             align-items: center;
 
-            background: url('{{ asset('assets-admin/images/bansos.jpg') }}') center/cover no-repeat fixed;
+            background-image: url('{{ asset('assets-admin/images/bansos.jpg') }}');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+
             position: relative;
         }
+
+        /* ===============================
+   FIX BACKGROUND DI MOBILE
+   =============================== */
+        @media (max-width: 768px) {
+            body {
+                background-size: contain;
+                /* FIT KE LAYAR */
+                background-position: top center;
+            }
+        }
+
 
         .overlay {
             position: absolute;
