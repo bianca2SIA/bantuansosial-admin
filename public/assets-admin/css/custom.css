@@ -154,10 +154,10 @@
 }
 
 /* 2. Lepaskan tekanan dari parent */
-.navbar .navbar-brand-wrapper {
-    width: auto !important;
-    min-width: unset !important;
+.navbar {
+    align-items: center !important;
 }
+
 
 .navbar .brand-logo-mini {
     width: auto !important;
