@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use Faker\Factory as Faker;
@@ -20,21 +21,25 @@ class CreatePenerimaSeeder extends Seeder
         }
 
         for ($i = 0; $i < 100; $i++) {
+
+            // ⬅️ INI KUNCI UTAMA
+            $createdAt = $faker->dateTimeBetween('-8 months', 'now');
+
             DB::table('penerima')->insert([
                 'program_id' => $faker->randomElement($programList),
                 'warga_id'   => $faker->randomElement($wargaList),
                 'keterangan' => $faker->boolean(70)
                     ? $faker->randomElement([
-                    'Layak menerima bantuan',
-                    'Butuh verifikasi tambahan',
-                    'Data sesuai hasil survei',
-                    'Terverifikasi oleh petugas',
-                    'Dalam pemantauan lanjutan',
-                    'Disalurkan bulan ini',
-                ])
+                        'Layak menerima bantuan',
+                        'Butuh verifikasi tambahan',
+                        'Data sesuai hasil survei',
+                        'Terverifikasi oleh petugas',
+                        'Dalam pemantauan lanjutan',
+                        'Disalurkan bulan ini',
+                    ])
                     : null,
-                'created_at' => now(),
-                'updated_at' => now(),
+                'created_at' => $createdAt,
+                'updated_at' => $createdAt,
             ]);
         }
     }

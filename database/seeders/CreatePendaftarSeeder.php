@@ -19,7 +19,7 @@ class CreatePendaftarSeeder extends Seeder
                 'program_id'     => $faker->randomElement($programIds),
                 'warga_id'       => $faker->randomElement($wargaIds),
                 'status_seleksi' => $faker->randomElement(['Menunggu', 'Diterima', 'Ditolak']),
-                'created_at'     => now(),
+                'created_at'     => $faker->dateTimeBetween('-8 months', 'now'),
                 'updated_at'     => now(),
             ]);
         }

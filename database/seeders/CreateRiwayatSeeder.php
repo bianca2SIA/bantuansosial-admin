@@ -11,26 +11,37 @@ class CreateRiwayatSeeder extends Seeder
     {
         $faker = Faker::create('id_ID');
 
-        $programList  = DB::table('program')->pluck('program_id');
-        $penerimaList = DB::table('penerima')->pluck('penerima_id');
+        $programList  = DB::table('program')->pluck('program_id')->toArray();
+        $penerimaList = DB::table('penerima')->pluck('penerima_id')->toArray();
 
-        if ($programList->isEmpty() || $penerimaList->isEmpty()) {
+        if (empty($programList) || empty($penerimaList)) {
             echo "Program atau Penerima masih kosong. Seeder dihentikan.\n";
             return;
         }
 
         foreach ($penerimaList as $penerima_id) {
 
-            DB::table('riwayat')->insert([
-                'program_id'       => $faker->randomElement($programList),
-                'penerima_id'      => $penerima_id,
-                'tahap_ke'         => $faker->numberBetween(1, 3),
-                'tanggal'          => $faker->date(),
-                'nilai'            => $faker->numberBetween(100000, 2000000),
-                'bukti_penyaluran' => null,
-                'created_at'       => now(),
-                'updated_at'       => now(),
-            ]);
+            // Setiap penerima bisa punya 1–3 tahap penyaluran
+            $jumlahTahap = rand(1, 3);
+
+            for ($tahap = 1; $tahap <= $jumlahTahap; $tahap++) {
+
+                // ⬅️ INI KUNCI UTAMA
+                $tanggal = $faker->dateTimeBetween('-8 months', 'now');
+
+                DB::table('riwayat')->insert([
+                    'program_id'       => $faker->randomElement($programList),
+                    'penerima_id'      => $penerima_id,
+                    'tahap_ke'         => $tahap,
+                    'tanggal'          => $tanggal,
+                    'nilai'            => $faker->numberBetween(500000, 5000000),
+                    'bukti_penyaluran' => $faker->boolean(60)
+                        ? 'bukti_' . $faker->uuid . '.jpg'
+                        : null,
+                    'created_at'       => $tanggal,
+                    'updated_at'       => $tanggal,
+                ]);
+            }
         }
     }
 }

@@ -104,12 +104,16 @@
 }
 
 .alert-purple {
-    background-color: #f3e8ff;   /* ungu soft */
-    color: #6b21a8;              /* ungu utama */
+    background-color: #f3e8ff;
+    /* ungu soft */
+    color: #6b21a8;
+    /* ungu utama */
     border: 1px solid #d8b4fe;
     border-radius: 8px;
-    padding: 10px 14px;          /* INI yang bikin kecil */
-    font-size: 13px;             /* kecil & rapi */
+    padding: 10px 14px;
+    /* INI yang bikin kecil */
+    font-size: 13px;
+    /* kecil & rapi */
 }
 
 .alert-purple .alert-link {
@@ -125,12 +129,38 @@
 /* Link file dokumen */
 /* Link file dokumen */
 .doc-link {
-    color: #9b5cff !important;   /* ungu tema */
+    color: #9b5cff !important;
+    /* ungu tema */
     text-decoration: underline !important;
     font-weight: 500;
 }
 
 .doc-link:hover {
-    color: #7c3aed !important;   /* ungu lebih gelap */
+    color: #7c3aed !important;
+    /* ungu lebih gelap */
     text-decoration: underline !important;
+}
+
+/* ===============================
+   FIX LOGO MINI NAVBAR (MOBILE)
+   =============================== */
+
+/* 1. Paksa rasio logo */
+.navbar .brand-logo-mini img {
+    height: 30px !important;
+    width: auto !important;
+    max-width: none !important;
+    object-fit: contain;
+}
+
+/* 2. Lepaskan tekanan dari parent */
+.navbar .navbar-brand-wrapper {
+    width: auto !important;
+    min-width: unset !important;
+}
+
+.navbar .brand-logo-mini {
+    width: auto !important;
+    display: flex;
+    align-items: center;
 }

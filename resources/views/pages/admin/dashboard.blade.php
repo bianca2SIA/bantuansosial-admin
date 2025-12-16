@@ -28,8 +28,17 @@
                             <h4 class="font-weight-normal mb-3">Anggaran Tersalurkan<i
                                     class="mdi mdi-chart-line mdi-24px float-end"></i>
                             </h4>
-                            <h2 class="mb-5">Rp 3.425.000.000</h2>
-                            <h6 class="card-text">Meningkat 12% dari bulan lalu</h6>
+                            <h2 class="mb-5">
+                                Rp {{ number_format($totalAnggaran, 0, ',', '.') }}
+                            </h2>
+
+                            <h6 class="card-text">
+                                @if ($persenAnggaran >= 0)
+                                    Meningkat {{ $persenAnggaran }}% dari bulan lalu
+                                @else
+                                    Menurun {{ abs($persenAnggaran) }}% dari bulan lalu
+                                @endif
+                            </h6>
                         </div>
                     </div>
                 </div>
@@ -41,8 +50,15 @@
                             <h4 class="font-weight-normal mb-3">Jumlah Pendaftar Baru <i
                                     class="mdi mdi-bookmark-outline mdi-24px float-end"></i>
                             </h4>
-                            <h2 class="mb-5">1.284</h2>
-                            <h6 class="card-text">Meningkat 8%</h6>
+                            <h2 class="mb-5">{{ $pendaftarBaru }}</h2>
+
+                            <h6 class="card-text">
+                                @if ($persenPendaftar >= 0)
+                                    Meningkat {{ $persenPendaftar }}%
+                                @else
+                                    Menurun {{ abs($persenPendaftar) }}%
+                                @endif
+                            </h6>
                         </div>
                     </div>
                 </div>
@@ -54,8 +70,15 @@
                             <h4 class="font-weight-normal mb-3">Penerima Aktif Saat Ini <i
                                     class="mdi mdi-diamond mdi-24px float-end"></i>
                             </h4>
-                            <h2 class="mb-5">9.578</h2>
-                            <h6 class="card-text">Naik 3%</h6>
+                            <h2 class="mb-5">{{ $penerimaAktif }}</h2>
+
+                            <h6 class="card-text">
+                                @if ($persenPenerima >= 0)
+                                    Naik {{ $persenPenerima }}%
+                                @else
+                                    Turun {{ abs($persenPenerima) }}%
+                                @endif
+
                         </div>
                     </div>
                 </div>
@@ -64,8 +87,10 @@
                 <div class="col-md-7 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <div class="clearfix">
-                                <h4 class="card-title float-start">Visit And Sales Statistics</h4>
+                            <div class="mb-3">
+                                <h4 class="card-title mb-1">
+                                    Statistik Bantuan Sosial
+                                </h4>
                                 <div id="visit-sale-chart-legend"
                                     class="rounded-legend legend-horizontal legend-top-right float-end"></div>
                             </div>
@@ -76,7 +101,7 @@
                 <div class="col-md-5 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <h4 class="card-title">Traffic Sources</h4>
+                            <h4 class="card-title">Status Penyaluran Bantuan</h4>
                             <div class="doughnutjs-wrapper d-flex justify-content-center">
                                 <canvas id="traffic-chart"></canvas>
                             </div>
@@ -103,66 +128,47 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>
-                                                <img src="assets-admin/images/faces/face1.jpg" class="me-2"
-                                                    alt="image"> Wan Rania Salma
-                                            </td>
-                                            <td> Bantuan Usaha Mikro Desa </td>
-                                            <td>
-                                                <label class="badge badge-gradient-success">DONE</label>
-                                            </td>
-                                            <td> 2025 </td>
-                                            <td> 13 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="assets-admin/images/faces/face2.jpg" class="me-2"
-                                                    alt="image"> Naaila Raqila
-                                            </td>
-                                            <td> Pembangunan Jalan Desa </td>
-                                            <td>
-                                                <label class="badge badge-gradient-warning">PROGRESS</label>
-                                            </td>
-                                            <td> 2025 </td>
-                                            <td> 14 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="assets-admin/images/faces/face3.jpg" class="me-2"
-                                                    alt="image"> Haya Nur Rizky
-                                            </td>
-                                            <td> Beasiswa Anak Petani </td>
-                                            <td>
-                                                <label class="badge badge-gradient-info">ON HOLD</label>
-                                            </td>
-                                            <td> 2024 </td>
-                                            <td> 15 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="assets-admin/images/faces/face4.jpg" class="me-2"
-                                                    alt="image"> Geta Dwi Artika
-                                            </td>
-                                            <td> Renovasi Rumah Layak Huni </td>
-                                            <td>
-                                                <label class="badge badge-gradient-danger">REJECTED</label>
-                                            </td>
-                                            <td> 2025 </td>
-                                            <td> 16 </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <img src="assets-admin/images/faces/face2.jpg" class="me-2"
-                                                    alt="image"> Jihan Zahra
-                                            </td>
-                                            <td> Program Air Bersih </td>
-                                            <td>
-                                                <label class="badge badge-gradient-warning">PROGRESS</label>
-                                            </td>
-                                            <td> 2025 </td>
-                                            <td> 17 </td>
-                                        </tr>
+                                    <tbody>
+                                        @foreach ($permohonanTerakhir as $i => $item)
+                                            <tr>
+                                                {{-- FOTO PROFIL (STATIC) + NAMA (DINAMIS) --}}
+                                                <td>
+                                                    <img src="{{ asset('assets-admin/images/faces/face' . (($i % 4) + 1) . '.jpg') }}"
+                                                        class="me-2" alt="image">
+                                                    {{ $item->warga->nama ?? '-' }}
+                                                </td>
+
+                                                {{-- PROGRAM --}}
+                                                <td>
+                                                    {{ $item->program->nama_program ?? '-' }}
+                                                </td>
+
+                                                {{-- STATUS --}}
+                                                <td>
+                                                    @php
+                                                        $status = strtoupper($item->status_seleksi ?? 'ON HOLD');
+                                                    @endphp
+
+                                                    @if ($status == 'DITERIMA' || $status == 'DONE')
+                                                        <label class="badge badge-gradient-success">DONE</label>
+                                                    @elseif ($status == 'PROSES' || $status == 'PROGRESS')
+                                                        <label class="badge badge-gradient-warning">PROGRESS</label>
+                                                    @elseif ($status == 'DITOLAK' || $status == 'REJECTED')
+                                                        <label class="badge badge-gradient-danger">REJECTED</label>
+                                                    @else
+                                                        <label class="badge badge-gradient-info">ON HOLD</label>
+                                                    @endif
+                                                </td>
+
+                                                {{-- TAHUN --}}
+                                                <td>{{ $item->created_at->year }}</td>
+
+                                                {{-- ID --}}
+                                                <td>{{ $item->pendaftar_id }}</td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+
                                     </tbody>
                                 </table>
                             </div>
@@ -171,5 +177,25 @@
                 </div>
             </div>
         </div>
+        <script>
+            window.statusPenyaluran = {
+                disalurkan: {{ $disalurkan }},
+                dalamProses: {{ $dalamProses }},
+                belumDisalurkan: {{ $belumDisalurkan }},
+            };
+        </script>
+
+        <script>
+            window.grafikPendaftar = @json($grafikPendaftar);
+            window.grafikPenerima = @json($grafikPenerima);
+            window.grafikRiwayat = @json($grafikRiwayat);
+
+            console.log('Pendaftar:', window.grafikPendaftar);
+            console.log('Penerima:', window.grafikPenerima);
+            console.log('Riwayat:', window.grafikRiwayat);
+        </script>
+
+
+
         {{-- end main content --}}
     @endsection
