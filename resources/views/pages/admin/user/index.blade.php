@@ -63,7 +63,7 @@
                             <thead class="bg-gradient-primary text-white">
                                 <tr>
                                     <th class="text-center">No</th>
-                                    <th class="text-center">Profil</th>
+                                    <th class="text-center">Foto</th>
                                     <th class="text-center fw-bold">Nama</th>
                                     <th class="text-center fw-bold">Email</th>
                                     <th class="text-center fw-bold">Role</th>
