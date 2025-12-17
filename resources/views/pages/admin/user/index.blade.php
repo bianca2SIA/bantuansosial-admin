@@ -62,6 +62,8 @@
                         <table class="table table-bordered table-striped">
                             <thead class="bg-gradient-primary text-white">
                                 <tr>
+                                    <th class="text-center">No</th>
+                                    <th class="text-center">Profil</th>
                                     <th class="text-center fw-bold">Nama</th>
                                     <th class="text-center fw-bold">Email</th>
                                     <th class="text-center fw-bold">Role</th>
@@ -71,6 +73,12 @@
                             <tbody>
                                 @forelse ($dataUser as $item)
                                     <tr>
+                                        <td class="text-center">{{ $dataUser->firstItem() + $loop->index }}</td>
+                                        <td class="text-center">
+                                            <img src="{{ asset('assets-admin/images/faces/face' . (($loop->iteration % 16) + 1) . '.jpg') }}"
+                                                alt="Foto Profil" width="40" height="40" class="rounded-circle"
+                                                style="object-fit: cover;">
+                                        </td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td class="text-center">

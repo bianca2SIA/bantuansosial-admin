@@ -85,6 +85,7 @@
                         <table class="table table-bordered table-striped">
                             <thead class="bg-gradient-primary text-white">
                                 <tr>
+                                    <th class="text-center fw-bold">No</th>
                                     <th class="text-center fw-bold">No_KTP</th>
                                     <th class="text-center fw-bold">Nama</th>
                                     <th class="text-center fw-bold">Jenis Kelamin</th>
@@ -99,12 +100,13 @@
                             <tbody>
                                 @forelse ($dataWarga as $item)
                                     <tr>
+                                        <td class="text-center">{{ $loop->iteration }}</td>
                                         <td>{{ $item->no_ktp }}</td>
                                         <td>{{ $item->nama }}</td>
                                         <td>{{ $item->jenis_kelamin }}</td>
                                         <td>{{ $item->agama }}</td>
                                         <td>{{ $item->pekerjaan }}</td>
-                                        <td>{{ $item->telp }}</td>
+                                        <td class="text-center">{{ $item->telp }}</td>
                                         <td>{{ $item->email }}</td>
 
                                         <td class="text-center">

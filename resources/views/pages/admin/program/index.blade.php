@@ -88,15 +88,12 @@
                             <tbody>
                                 @forelse ($dataProgram as $item)
                                     <tr>
-                                        <td>{{ $item->program_id }}</td>
-                                        <td>
-                                            <span class="badge badge-gradient-warning">
-                                                {{ $item->kode }}
-                                            </span>
-
+                                        <td class="text-center">{{ $item->program_id }}</td>
+                                        <td class="text-center">
+                                            <span class="badge badge-gradient-warning">{{ $item->kode }}</span>
                                         </td>
                                         <td>{{ $item->nama_program }}</td>
-                                        <td>{{ $item->tahun }}</td>
+                                        <td class="text-center">{{ $item->tahun }}</td>
                                         <td>{{ $item->deskripsi }}</td>
                                         <td>Rp{{ number_format($item->anggaran, 0, ',', '.') }}</td>
                                         <td class="text-center">

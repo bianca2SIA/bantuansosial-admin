@@ -7,9 +7,12 @@
             {{-- JUDUL HALAMAN --}}
             <div class="page-header">
                 <h3 class="page-title">
-                    Profil Pengembang
+                    <span class="page-title-icon bg-gradient-primary text-white me-2">
+                        <i class="mdi mdi-account-circle"></i>
+                    </span> Profil Pengembang
                 </h3>
             </div>
+
 
             {{-- CARD PROFIL --}}
             <div class="row justify-content-center">

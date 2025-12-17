@@ -196,7 +196,7 @@
                     }
                 }
             },
-            
+
             plugins: [{
                 afterDatasetUpdate: function (chart, args, options) {
                     const chartId = chart.canvas.id;

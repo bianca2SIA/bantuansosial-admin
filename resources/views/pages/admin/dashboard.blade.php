@@ -4,7 +4,8 @@
     <!-- start main content -->
     <div class="main-panel">
         <div class="content-wrapper">
-            <div class="page-header">
+           <div class="page-header fade-up">
+
                 <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white me-2">
                         <i class="mdi mdi-home"></i>
@@ -20,7 +21,7 @@
                 </nav>
             </div>
             <div class="row">
-                <div class="col-md-4 stretch-card grid-margin">
+              <div class="col-md-4 stretch-card grid-margin fade-up fade-delay-1">
                     <div class="card bg-gradient-danger card-img-holder text-white">
                         <div class="card-body">
                             <img src="assets-admin/images/dashboard/circle.svg" class="card-img-absolute"
@@ -42,7 +43,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 stretch-card grid-margin">
+             <div class="col-md-4 stretch-card grid-margin fade-up fade-delay-2">
                     <div class="card bg-gradient-info card-img-holder text-white">
                         <div class="card-body">
                             <img src="assets-admin/images/dashboard/circle.svg" class="card-img-absolute"
@@ -62,7 +63,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4 stretch-card grid-margin">
+              <div class="col-md-4 stretch-card grid-margin fade-up fade-delay-3">
+
                     <div class="card bg-gradient-success card-img-holder text-white">
                         <div class="card-body">
                             <img src="assets-admin/images/dashboard/circle.svg" class="card-img-absolute"
@@ -84,7 +86,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-7 grid-margin stretch-card">
+             <div class="col-md-7 grid-margin stretch-card fade-up fade-delay-2">
+
                     <div class="card">
                         <div class="card-body">
                             <div class="mb-3">
@@ -98,7 +101,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5 grid-margin stretch-card">
+           <div class="col-md-5 grid-margin stretch-card fade-up fade-delay-3">
+
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Status Penyaluran Bantuan</h4>
@@ -112,7 +116,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-12 grid-margin">
+             <div class="col-12 grid-margin fade-up fade-delay-4">
+
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">Status Permohonan Bantuan Terakhir</h4>
@@ -196,6 +201,27 @@
         </script>
 
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const reveals = document.querySelectorAll(".reveal");
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("active");
+          observer.unobserve(entry.target); // animasi hanya sekali
+        }
+      });
+    },
+    {
+      threshold: 0.15
+    }
+  );
+
+  reveals.forEach(el => observer.observe(el));
+});
+</script>
 
         {{-- end main content --}}
     @endsection

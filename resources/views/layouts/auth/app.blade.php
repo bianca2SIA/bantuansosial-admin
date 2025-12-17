@@ -26,7 +26,7 @@
             justify-content: center;
             align-items: center;
 
-            background-image: url('{{ asset('assets-admin/images/bansos.jpg') }}');
+            background-image: url('{{ asset('assets-admin/images/bg.jpg') }}');
             background-repeat: no-repeat;
             background-position: center;
             background-size: cover;
@@ -109,6 +109,112 @@
 
 
 
+        /* ===============================
+   GLOBAL ANIMATION BASE
+   =============================== */
+
+        .login-card {
+            opacity: 0;
+            transform: translateY(40px);
+            animation: cardEnter 0.9s ease forwards;
+            animation-delay: 0.2s;
+        }
+
+        @keyframes cardEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===============================
+   LOGO ANIMATION
+   =============================== */
+
+        .animate-logo {
+            transform: scale(0.9);
+            opacity: 0;
+            animation: logoZoom 0.8s ease forwards;
+            animation-delay: 0.4s;
+        }
+
+        @keyframes logoZoom {
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ===============================
+   STAGGER TEXT & INPUT
+   =============================== */
+
+        .animate-1,
+        .animate-2,
+        .animate-3,
+        .animate-4,
+        .animate-5 {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .animate-1 {
+            animation-delay: 0.5s;
+        }
+
+        .animate-2 {
+            animation-delay: 0.6s;
+        }
+
+        .animate-3 {
+            animation-delay: 0.7s;
+        }
+
+        .animate-4 {
+            animation-delay: 0.8s;
+        }
+
+        .animate-5 {
+            animation-delay: 0.9s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===============================
+   BUTTON MICRO INTERACTION
+   =============================== */
+        .overlay {
+            animation: overlayFade 1s ease forwards;
+        }
+
+        @keyframes overlayFade {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        button {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(123, 44, 191, 0.35);
+        }
+
+        button:active {
+            transform: scale(0.97);
+        }
 
         label {
             display: block;
@@ -172,5 +278,6 @@
     @yield('content')
 
 </body>
+
 
 </html>

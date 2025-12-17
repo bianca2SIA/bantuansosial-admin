@@ -171,7 +171,8 @@
 
 /* Wrapper chart */
 .doughnutjs-wrapper {
-    height: 200px;              /* <- KECILKAN DI SINI */
+    height: 200px;
+    /* <- KECILKAN DI SINI */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -179,7 +180,8 @@
 
 /* Canvas donut */
 .doughnutjs-wrapper canvas {
-    max-width: 200px !important; /* <- ukuran donut */
+    max-width: 200px !important;
+    /* <- ukuran donut */
     max-height: 200px !important;
 }
 
@@ -212,3 +214,76 @@
     }
 }
 
+.sidebar {
+    position: fixed;
+    top: 70px;                 /* ⬅️ INI KUNCINYA */
+    left: 0;
+    height: calc(100vh - 70px);/* ⬅️ supaya pas sampai bawah */
+    width: 260px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+.main-panel {
+    margin-left: 260px; /* SAMA dengan width sidebar */
+    min-height: 100vh;
+}
+.content-wrapper {
+    padding: 1.5rem;
+}
+
+/* ===== GLOBAL ENTRANCE ===== */
+.fade-up {
+  opacity: 0;
+  transform: translateY(25px);
+  animation: fadeUp 0.7s ease forwards;
+}
+
+.fade-delay-1 { animation-delay: .1s; }
+.fade-delay-2 { animation-delay: .2s; }
+.fade-delay-3 { animation-delay: .3s; }
+.fade-delay-4 { animation-delay: .4s; }
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== CARD HOVER ===== */
+.card {
+  transition: transform .25s ease, box-shadow .25s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.12);
+}
+
+/* ===== TABLE ROW ===== */
+.table tbody tr {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: tableFade .5s ease forwards;
+}
+
+.table tbody tr:nth-child(1) { animation-delay: .1s }
+.table tbody tr:nth-child(2) { animation-delay: .15s }
+.table tbody tr:nth-child(3) { animation-delay: .2s }
+
+@keyframes tableFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== BADGE ===== */
+.badge {
+  animation: badgePulse 2s infinite;
+}
+
+@keyframes badgePulse {
+  0% { box-shadow: 0 0 0 0 rgba(0,0,0,.15); }
+  70% { box-shadow: 0 0 0 6px rgba(0,0,0,0); }
+  100% { box-shadow: 0 0 0 0 rgba(0,0,0,0); }
+}
