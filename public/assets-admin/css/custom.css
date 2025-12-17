@@ -214,23 +214,6 @@
     }
 }
 
-.sidebar {
-    position: fixed;
-    top: 70px;                 /* ⬅️ INI KUNCINYA */
-    left: 0;
-    height: calc(100vh - 70px);/* ⬅️ supaya pas sampai bawah */
-    width: 260px;
-    overflow-y: auto;
-    z-index: 1000;
-}
-.main-panel {
-    margin-left: 260px; /* SAMA dengan width sidebar */
-    min-height: 100vh;
-}
-.content-wrapper {
-    padding: 1.5rem;
-}
-
 /* ===== GLOBAL ENTRANCE ===== */
 .fade-up {
   opacity: 0;
