@@ -1,5 +1,4 @@
 <?php
-
 namespace Database\Seeders;
 
 use App\Models\User;
@@ -49,11 +48,11 @@ class CreateFirstUser extends Seeder
 
         for ($i = 0; $i < 100; $i++) {
             User::create([
-                'name'  => $faker->name(),
-                'email' => strtolower(
+                'name'              => $faker->name(),
+                'email'             => strtolower(
                     str_replace('.', '', $faker->unique()->userName)
                 ) . '@gmail.com',
-                'role'  => $faker->randomElement([
+                'role'              => $faker->randomElement([
                     'Admin Bansos',
                     'Petugas Lapangan',
                 ]),

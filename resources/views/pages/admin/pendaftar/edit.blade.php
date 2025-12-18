@@ -51,10 +51,7 @@
                                 @method('PUT')
 
                                 <div class="row">
-                                    {{-- KIRI --}}
                                     <div class="col-md-6">
-
-
                                         <div class="form-group">
                                             <label>Program Bantuan</label>
                                             <select name="program_id" class="form-control" required>
@@ -100,12 +97,8 @@
                                         </div>
                                     </div>
 
-                                    {{-- KANAN --}}
                                     <div class="col-md-6 d-flex flex-column">
-
-
-                                        {{-- DOKUMEN LAMA --}}
-                                       <div class="alert alert-purple small d-flex align-items-center mb-3 mt-3">
+                                        <div class="alert alert-purple small d-flex align-items-center mb-3 mt-3">
                                             <i class="mdi mdi-information-outline me-2"></i>
                                             <span>
                                                 Ingin melihat atau menghapus file sebelumnya?
@@ -116,18 +109,16 @@
                                             </span>
                                         </div>
 
-                                        {{-- TAMBAH BERKAS BARU --}}
                                         <div class="form-group mt-4">
                                             <label>Upload Berkas Pendaftaran</label>
                                             <input type="file" name="media[]" multiple class="form-control"
                                                 style="height: 45px;">
 
                                             <small class="text-muted">
-                                              *File yang diupload di sini akan ditambahkan ke daftar file yang sudah ada
+                                                *File yang diupload di sini akan ditambahkan ke daftar file yang sudah ada
                                             </small>
                                         </div>
 
-                                        {{-- TOMBOL --}}
                                         <div class="mt-auto d-flex justify-content-end">
                                             <a href="{{ route('pendaftar.index') }}" class="btn btn-light me-2">
                                                 <i class="mdi mdi-arrow-left"></i> Batal

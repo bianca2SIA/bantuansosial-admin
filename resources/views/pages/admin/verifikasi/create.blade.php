@@ -47,11 +47,7 @@
                                 @csrf
 
                                 <div class="row">
-
-                                    {{-- BAGIAN KIRI --}}
                                     <div class="col-md-6">
-
-
                                         <div class="form-group">
                                             <label>Pendaftar</label>
                                             <select name="pendaftar_id" class="form-control" required>
@@ -83,13 +79,7 @@
                                         </div>
                                     </div>
 
-                                    {{-- BAGIAN KANAN --}}
                                     <div class="col-md-6 d-flex flex-column">
-
-
-
-
-                                        {{-- SKOR --}}
                                         <div class="form-group">
                                             <label>Skor</label>
                                             <input type="number" name="skor" class="form-control"
@@ -97,7 +87,6 @@
                                                 min="0">
                                         </div>
 
-                                        {{-- FOTO --}}
                                         <div class="form-group mt-2">
                                             <label>Upload Foto Verifikasi</label>
                                             <input type="file" name="media[]" multiple class="form-control">
@@ -108,7 +97,6 @@
                                             </small>
                                         </div>
 
-                                        {{-- TOMBOL --}}
                                         <div class="mt-auto d-flex justify-content-end">
                                             <a href="/verifikasi" class="btn btn-light me-2">
                                                 <i class="mdi mdi-arrow-left"></i> Batal
@@ -123,7 +111,6 @@
                                 </div>
 
                             </form>
-
                         </div>
                     </div>
                 </div>

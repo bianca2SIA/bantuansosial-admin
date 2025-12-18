@@ -19,7 +19,6 @@
                 </nav>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
                     style="background-color: #d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
@@ -27,7 +26,6 @@
                 </div>
             @endif
 
-            {{-- Alert error --}}
             @if ($errors->any())
                 <div
                     style="background-color:#f8d7da; color:#842029; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
@@ -39,13 +37,10 @@
                 </div>
             @endif
 
-
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-
-
 
                             <form method="POST" action="{{ route('penerima.update', $penerima->penerima_id) }}">
                                 @csrf
@@ -53,11 +48,7 @@
 
                                 <div class="row">
 
-                                    {{-- ================= BAGIAN KIRI ================= --}}
                                     <div class="col-md-6">
-
-
-                                        {{-- Program --}}
                                         <div class="form-group">
                                             <label>Program Bantuan</label>
                                             <select name="program_id" class="form-control" required>
@@ -71,7 +62,6 @@
                                             </select>
                                         </div>
 
-                                        {{-- Warga --}}
                                         <div class="form-group">
                                             <label>Nama Warga</label>
                                             <select name="warga_id" class="form-control" required>
@@ -86,17 +76,13 @@
                                         </div>
                                     </div>
 
-                                    {{-- ================= BAGIAN KANAN ================= --}}
                                     <div class="col-md-6 d-flex flex-column">
-                                  
 
-                                        {{-- Keterangan --}}
                                         <div class="form-group">
                                             <label>Keterangan</label>
                                             <textarea name="keterangan" class="form-control" rows="5" placeholder="Isi keterangan">{{ old('keterangan', $penerima->keterangan) }}</textarea>
                                         </div>
 
-                                        {{-- Tombol --}}
                                         <div class="mt-auto d-flex justify-content-end">
                                             <a href="{{ route('penerima.index') }}" class="btn btn-light me-2">
                                                 <i class="mdi mdi-arrow-left"></i> Batal
@@ -107,15 +93,11 @@
                                             </button>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </form>
-
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     @endsection

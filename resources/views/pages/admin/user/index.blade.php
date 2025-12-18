@@ -29,7 +29,6 @@
                     </div>
 
                     <div class="table-responsive">
-                        <!-- Search + Clear -->
                         <div class="col-md-4 mb-3">
                             <div class="d-flex align-items-center gap-2">
                                 <form method="GET" action="{{ route('user.index') }}">

@@ -46,10 +46,7 @@
                                 @csrf
 
                                 <div class="row">
-                                    {{-- KIRI --}}
                                     <div class="col-md-6">
-                                    
-
                                         <div class="form-group">
                                             <label>No KTP</label>
                                             <input type="text" name="no_ktp" class="form-control"
@@ -84,10 +81,7 @@
                                         </div>
                                     </div>
 
-                                    {{-- KANAN --}}
                                     <div class="col-md-6 d-flex flex-column">
-
-
                                         <div class="form-group">
                                             <label>Pekerjaan</label>
                                             <input type="text" name="pekerjaan" class="form-control"

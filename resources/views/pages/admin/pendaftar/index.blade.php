@@ -34,15 +34,19 @@
                             <div class="row align-items-center">
 
                                 <div class="col-md-2">
-                                    <select name="status_seleksi" class="form-select filter-control" onchange="this.form.submit()">
+                                    <select name="status_seleksi" class="form-select filter-control"
+                                        onchange="this.form.submit()">
                                         <option value="">Status</option>
-                                        <option value="Menunggu" {{ request('status_seleksi') == 'Menunggu' ? 'selected' : '' }}>
+                                        <option value="Menunggu"
+                                            {{ request('status_seleksi') == 'Menunggu' ? 'selected' : '' }}>
                                             Menunggu
                                         </option>
-                                        <option value="Diterima" {{ request('status_seleksi') == 'Diterima' ? 'selected' : '' }}>
+                                        <option value="Diterima"
+                                            {{ request('status_seleksi') == 'Diterima' ? 'selected' : '' }}>
                                             Diterima
                                         </option>
-                                        <option value="Ditolak" {{ request('status_seleksi') == 'Ditolak' ? 'selected' : '' }}>
+                                        <option value="Ditolak"
+                                            {{ request('status_seleksi') == 'Ditolak' ? 'selected' : '' }}>
                                             Ditolak
                                         </option>
                                     </select>
@@ -103,7 +107,7 @@
                                         </td>
 
                                         <td class="text-center">
-                                           <a href="{{ route('pendaftar.show', $item->pendaftar_id) }}"
+                                            <a href="{{ route('pendaftar.show', $item->pendaftar_id) }}"
                                                 class="badge badge-gradient-info" title="Lihat Detail Program">
                                                 <i class="mdi mdi-file-document"></i>
                                             </a>

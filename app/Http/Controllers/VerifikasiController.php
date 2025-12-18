@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Media;
@@ -10,9 +9,7 @@ use Illuminate\Support\Facades\Storage;
 
 class VerifikasiController extends Controller
 {
-    /* =========================
-     * INDEX
-     * ========================= */
+
     public function index(Request $request)
     {
         $search = $request->search;
@@ -26,9 +23,6 @@ class VerifikasiController extends Controller
         return view('pages.admin.verifikasi.index', compact('verifikasi'));
     }
 
-    /* =========================
-     * CREATE
-     * ========================= */
     public function create()
     {
         $pendaftar = Pendaftar::with(['warga', 'program'])->get();
@@ -36,9 +30,6 @@ class VerifikasiController extends Controller
         return view('pages.admin.verifikasi.create', compact('pendaftar'));
     }
 
-    /* =========================
-     * STORE
-     * ========================= */
     public function store(Request $request)
     {
         $request->validate([
@@ -58,7 +49,6 @@ class VerifikasiController extends Controller
             'skor'
         ));
 
-        /* ===== MEDIA (SAMA PERSIS DENGAN PROGRAM) ===== */
         if ($request->hasFile('media')) {
             foreach ($request->file('media') as $i => $file) {
                 $fileName = uniqid() . '-' . $file->getClientOriginalName();
@@ -79,23 +69,17 @@ class VerifikasiController extends Controller
             ->with('success', 'Data verifikasi berhasil ditambahkan.');
     }
 
-    /* =========================
-     * SHOW
-     * ========================= */
     public function show($id)
     {
         $verifikasi = Verifikasi::with([
             'pendaftar.warga',
             'pendaftar.program',
-            'media'
+            'media',
         ])->findOrFail($id);
 
         return view('pages.admin.verifikasi.show', compact('verifikasi'));
     }
 
-    /* =========================
-     * EDIT
-     * ========================= */
     public function edit($id)
     {
         $verifikasi = Verifikasi::with('media')->findOrFail($id);
@@ -104,9 +88,6 @@ class VerifikasiController extends Controller
         return view('pages.admin.verifikasi.edit', compact('verifikasi', 'pendaftar'));
     }
 
-    /* =========================
-     * UPDATE
-     * ========================= */
     public function update(Request $request, $id)
     {
         $verifikasi = Verifikasi::findOrFail($id);
@@ -128,7 +109,6 @@ class VerifikasiController extends Controller
             'skor'
         ));
 
-        /* ===== TAMBAH MEDIA BARU (TIDAK HAPUS LAMA) ===== */
         if ($request->hasFile('media')) {
             foreach ($request->file('media') as $i => $file) {
                 $fileName = uniqid() . '-' . $file->getClientOriginalName();
@@ -149,9 +129,6 @@ class VerifikasiController extends Controller
             ->with('success', 'Data verifikasi berhasil diperbarui.');
     }
 
-    /* =========================
-     * DELETE DATA + MEDIA
-     * ========================= */
     public function destroy($id)
     {
         $verifikasi = Verifikasi::with('media')->findOrFail($id);
@@ -169,9 +146,6 @@ class VerifikasiController extends Controller
             ->with('success', 'Data verifikasi berhasil dihapus.');
     }
 
-    /* =========================
-     * UPLOAD MEDIA (HALAMAN SHOW)
-     * ========================= */
     public function uploadMedia(Request $request, $verifikasiId)
     {
         $request->validate([
@@ -194,9 +168,6 @@ class VerifikasiController extends Controller
         return back()->with('success', 'Dokumen berhasil diupload.');
     }
 
-    /* =========================
-     * DOWNLOAD FILE
-     * ========================= */
     public function downloadFile($mediaId)
     {
         $media = Media::findOrFail($mediaId);
@@ -208,9 +179,6 @@ class VerifikasiController extends Controller
         );
     }
 
-    /* =========================
-     * DELETE FILE
-     * ========================= */
     public function deleteFile($mediaId)
     {
         $media = Media::findOrFail($mediaId);

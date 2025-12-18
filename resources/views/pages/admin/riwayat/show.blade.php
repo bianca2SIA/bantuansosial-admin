@@ -4,7 +4,6 @@
     <div class="main-panel">
         <div class="content-wrapper">
 
-            {{-- HEADER --}}
             <div class="page-header">
                 <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white me-2">
@@ -60,8 +59,6 @@
 
                                     <div class="form-group">
                                         <label>Nilai Penyaluran</label>
-
-
                                         <p class="fw-bold text-primary">
                                             Rp{{ number_format($riwayat->nilai, 0, ',', '.') }}
 

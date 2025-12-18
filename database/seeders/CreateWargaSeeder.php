@@ -14,7 +14,7 @@ class CreateWargaSeeder extends Seeder
         for ($i = 1; $i <= 100; $i++) {
 
             DB::table('warga')->insert([
-                'no_ktp'        => $faker->unique()->nik(), 
+                'no_ktp'        => $faker->unique()->nik(),
                 'nama'          => $faker->name(),
                 'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan']),
                 'agama'         => $faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']),

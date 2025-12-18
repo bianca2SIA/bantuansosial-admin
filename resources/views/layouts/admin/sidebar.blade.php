@@ -14,7 +14,6 @@
             </a>
         </li>
 
-        {{-- Dashboard --}}
         <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('dashboard') }}">
                 <span class="menu-title">Dashboard</span>
@@ -22,7 +21,6 @@
             </a>
         </li>
 
-        {{-- User --}}
         <li class="nav-item {{ request()->is('user*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('user.index') }}">
                 <span class="menu-title">User</span>
@@ -31,7 +29,6 @@
             </a>
         </li>
 
-        {{-- Warga --}}
         <li class="nav-item {{ request()->is('warga*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('warga.index') }}">
                 <span class="menu-title">Warga</span>
@@ -39,8 +36,6 @@
             </a>
         </li>
 
-
-        {{-- Program Bantuan --}}
         <li class="nav-item {{ request()->is('program*') ? 'active' : '' }}">
             <a class="nav-link" href="{{ route('program.index') }}">
                 <span class="menu-title">Program Bantuan</span>
@@ -48,7 +43,6 @@
             </a>
         </li>
 
-        {{-- Pendaftar Bantuan --}}
         <li class="nav-item {{ request()->is('pendaftar*') ? 'active' : '' }}">
             <a class="nav-link" href="/pendaftar">
                 <span class="menu-title">Pendaftar Bantuan</span>
@@ -56,7 +50,6 @@
             </a>
         </li>
 
-        {{-- Verifikasi Lapangan --}}
         <li class="nav-item {{ request()->is('verifikasi*') ? 'active' : '' }}">
             <a class="nav-link" href="/verifikasi">
                 <span class="menu-title">Verifikasi Lapangan</span>
@@ -64,7 +57,6 @@
             </a>
         </li>
 
-        {{-- Penerima Bantuan --}}
         <li class="nav-item {{ request()->is('penerima*') ? 'active' : '' }}">
             <a class="nav-link" href="/penerima">
                 <span class="menu-title">Penerima Bantuan</span>
@@ -72,8 +64,6 @@
             </a>
         </li>
 
-
-        {{-- Riwayat Penyaluran Bantuan --}}
         <li class="nav-item {{ request()->is('riwayat*') ? 'active' : '' }}">
             <a class="nav-link" href="/riwayat">
                 <span class="menu-title">Riwayat Penyaluran Bantuan</span>
@@ -82,13 +72,10 @@
         </li>
 
         <li class="nav-item {{ request()->is('about-developer') ? 'active' : '' }}">
-    <a class="nav-link" href="{{ route('about.developer') }}">
-        <span class="menu-title">About Developer</span>
-        <i class="mdi mdi-account-star menu-icon"></i>
-    </a>
-</li>
-
-
-
+            <a class="nav-link" href="{{ route('about.developer') }}">
+                <span class="menu-title">About Developer</span>
+                <i class="mdi mdi-account-star menu-icon"></i>
+            </a>
+        </li>
     </ul>
 </nav>

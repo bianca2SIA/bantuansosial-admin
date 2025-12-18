@@ -18,7 +18,6 @@
                 </nav>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
                     style="background-color: #d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
@@ -26,7 +25,6 @@
                 </div>
             @endif
 
-            {{-- Alert error validasi --}}
             @if ($errors->any())
                 <div
                     style="background-color:#f8d7da; color:#842029; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
@@ -42,15 +40,12 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-
-
                             <form class="forms-sample" method="POST"
                                 action="{{ route('warga.update', $warga->warga_id) }}">
                                 @csrf
                                 @method('PUT')
 
                                 <div class="row">
-                                    {{-- KIRI --}}
                                     <div class="col-md-6">
 
 
@@ -90,9 +85,8 @@
                                         </div>
                                     </div>
 
-                                    {{-- KANAN --}}
                                     <div class="col-md-6 d-flex flex-column">
-                                       
+
 
                                         <div class="form-group">
                                             <label>Pekerjaan</label>

@@ -12,7 +12,6 @@
                 </h3>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div
                     style="background-color:#d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
@@ -20,10 +19,8 @@
                 </div>
             @endif
 
-
             <div class="card">
                 <div class="card-body">
-
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="card-title mb-0">List Data Penerima</h4>
                         <a href="{{ route('penerima.create') }}" class="btn btn-gradient-primary text-white">
@@ -32,8 +29,6 @@
                     </div>
 
                     <div class="table-responsive">
-
-                        {{-- Search Bar --}}
                         <div class="col-md-4 mb-3">
                             <div class="d-flex align-items-center gap-2">
 
@@ -123,8 +118,6 @@
                         <div class="mt-3">
                             {{ $penerima->links('pagination::bootstrap-5') }}
                         </div>
-
-
                     </div>
                 </div>
 

@@ -20,14 +20,12 @@
                 </nav>
             </div>
 
-            {{-- Alert sukses --}}
             @if (session('success'))
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
             @endif
 
-            {{-- Alert error --}}
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <strong>Terjadi kesalahan:</strong>
@@ -39,24 +37,15 @@
                 </div>
             @endif
 
-
             <div class="row">
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-
-
-
                             <form action="{{ route('penerima.store') }}" method="POST">
                                 @csrf
 
                                 <div class="row">
-
-                                    {{-- ================= BAGIAN KIRI ================= --}}
                                     <div class="col-md-6">
-
-
-                                        {{-- Program --}}
                                         <div class="form-group">
                                             <label>Program Bantuan</label>
                                             <select name="program_id" class="form-control" required>
@@ -69,7 +58,6 @@
                                             </select>
                                         </div>
 
-                                        {{-- Warga --}}
                                         <div class="form-group">
                                             <label>Nama Warga</label>
                                             <select name="warga_id" class="form-control" required>
@@ -83,17 +71,12 @@
                                         </div>
                                     </div>
 
-                                    {{-- ================= BAGIAN KANAN ================= --}}
                                     <div class="col-md-6 d-flex flex-column">
-                                    
-
-                                        {{-- Keterangan --}}
                                         <div class="form-group">
                                             <label>Keterangan</label>
                                             <textarea name="keterangan" class="form-control" rows="5" placeholder="Isi keterangan jika ada...">{{ old('keterangan') }}</textarea>
                                         </div>
 
-                                        {{-- Tombol --}}
                                         <div class="mt-auto d-flex justify-content-end">
                                             <a href="{{ route('penerima.index') }}" class="btn btn-light me-2">
                                                 <i class="mdi mdi-arrow-left"></i> Batal
@@ -104,16 +87,11 @@
                                             </button>
                                         </div>
                                     </div>
-
                                 </div>
-
                             </form>
-
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     @endsection

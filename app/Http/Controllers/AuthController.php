@@ -11,7 +11,6 @@ class AuthController extends Controller
     public function index()
     {
         if (Auth::check()) {
-            //Redirect ke halaman dashboard
             return redirect()->route('dashboard');
         }
         return view('auth.login');
@@ -37,8 +36,8 @@ class AuthController extends Controller
     public function logout(Request $request)
     {
         Auth::logout();
-        $request->session()->invalidate();      // Hapus semua session
-        $request->session()->regenerateToken(); // Cegah CSRF
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
         return redirect()->route('auth')->with('success', 'Anda berhasil logout!');
     }

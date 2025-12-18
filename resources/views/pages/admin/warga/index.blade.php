@@ -33,7 +33,6 @@
                         <form method="GET" action="{{ route('warga.index') }}" class="mb-3">
                             <div class="row align-items-center">
 
-                                <!-- Filter Gender -->
                                 <div class="col-md-2">
                                     <select name="jenis_kelamin" class="form-select filter-control"
                                         onchange="this.form.submit()">
@@ -48,14 +47,12 @@
                                     </select>
                                 </div>
 
-                                <!-- Search + Clear -->
                                 <div class="col-md-4">
                                     <div class="d-flex align-items-center gap-2">
 
                                         <div class="input-group">
                                             <input type="text" name="search" class="form-control"
                                                 value="{{ request('search') }}" placeholder="Nama Warga">
-
 
                                             <button type="submit"
                                                 class="btn btn-light border-0 d-flex align-items-center px-3">
@@ -65,8 +62,6 @@
                                                         clip-rule="evenodd" />
                                                 </svg>
                                             </button>
-
-
                                         </div>
 
                                         @if (request('search'))

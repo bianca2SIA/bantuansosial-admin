@@ -52,7 +52,7 @@
 
                                     {{-- SOSIAL MEDIA --}}
                                     <div class="d-flex gap-3">
-                                        <a href="https://www.linkedin.com/in/bianca-bahi-9aaa6a393" target="_blank"
+                                        <a href="https://www.linkedin.com/in/bianca-bahi/" target="_blank"
                                             class="btn btn-outline-primary btn-sm">
                                             <i class="mdi mdi-linkedin"></i>
                                         </a>
@@ -80,5 +80,4 @@
                 </div>
             </div>
         </div>
-
     @endsection

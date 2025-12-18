@@ -11,11 +11,9 @@
                     style="height:30px; width:auto;">
             </a>
         </div>
-
     </div>
 
     <div class="navbar-menu-wrapper d-flex align-items-stretch">
-        <!-- Tombol Sidebar -->
         <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
             <span class="mdi mdi-menu"></span>
         </button>
@@ -48,17 +46,15 @@
                         <i class="mdi mdi-chevron-down text-primary"></i>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end navbar-dropdown" aria-labelledby="profileDropdown">
-                       
+
 
                         <div class="dropdown-divider"></div>
-                        {{-- LAST LOGIN --}}
                         <a class="dropdown-item d-flex align-items-center">
                             <i class="mdi mdi-clock-outline text-primary me-2"></i>
                             {{ session('last_login') }}
                         </a>
 
                         <div class="dropdown-divider"></div>
-
                         <form action="{{ route('auth.logout') }}" method="POST" id="logout-form">
                             @csrf
                             <a href="#" class="dropdown-item"
@@ -149,14 +145,11 @@
             <a class= " btn btn-success" href="{{ route('auth') }}">Login</a>
             @endif
 
-
             <li class="nav-item d-none d-lg-block">
                 <a class="nav-link" href="javascript:void(0)" id="fullscreenToggle" title="Layar Penuh">
                     <i class="mdi mdi-fullscreen" id="fullscreen-button"></i>
                 </a>
             </li>
-
-
 
             <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
                 data-toggle="offcanvas">

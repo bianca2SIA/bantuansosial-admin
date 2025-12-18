@@ -21,12 +21,10 @@ class CreateRiwayatSeeder extends Seeder
 
         foreach ($penerimaList as $penerima_id) {
 
-            // Setiap penerima bisa punya 1–3 tahap penyaluran
             $jumlahTahap = rand(1, 3);
 
             for ($tahap = 1; $tahap <= $jumlahTahap; $tahap++) {
 
-                // ⬅️ INI KUNCI UTAMA
                 $tanggal = $faker->dateTimeBetween('-8 months', 'now');
 
                 DB::table('riwayat')->insert([

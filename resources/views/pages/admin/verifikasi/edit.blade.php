@@ -50,11 +50,7 @@
                                 @method('PUT')
 
                                 <div class="row">
-
-                                    {{-- ================= BAGIAN KIRI ================= --}}
                                     <div class="col-md-6">
-
-
                                         <div class="form-group">
                                             <label>Nama Pendaftar</label>
                                             <select name="pendaftar_id" class="form-control" required>
@@ -89,20 +85,12 @@
                                         </div>
 
                                     </div>
-
-                                    {{-- ================= BAGIAN KANAN ================= --}}
                                     <div class="col-md-6 d-flex flex-column">
-
-
-
                                         <div class="form-group">
                                             <label>Skor</label>
                                             <input type="number" name="skor" class="form-control"
                                                 value="{{ old('skor', $verifikasi->skor) }}" min="0" required>
                                         </div>
-
-
-
 
                                         <div class="alert alert-purple small d-flex align-items-center mb-3">
                                             <i class="mdi mdi-information-outline me-2"></i>
@@ -119,12 +107,11 @@
                                             <label>Upload Foto Verifikasi</label>
                                             <input type="file" name="media[]" multiple class="form-control"
                                                 style="height:45px;">
-                                                  <small class="text-muted">
+                                            <small class="text-muted">
                                                 *File yang diupload di sini akan ditambahkan ke daftar file yang sudah ada
                                             </small>
                                         </div>
 
-                                        {{-- TOMBOL --}}
                                         <div class="mt-auto d-flex justify-content-end">
                                             <a href="{{ route('verifikasi.index') }}" class="btn btn-light me-2">
                                                 <i class="mdi mdi-arrow-left"></i> Batal

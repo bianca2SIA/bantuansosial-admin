@@ -96,7 +96,7 @@
                                                                 </td>
                                                                 <td class="text-start py-1">
                                                                     <div>
-                                                                       {{ preg_replace('/^[^-]+-/', '', $file->file_name) }}
+                                                                        {{ preg_replace('/^[^-]+-/', '', $file->file_name) }}
                                                                     </div>
 
                                                                     <small class="text-muted">

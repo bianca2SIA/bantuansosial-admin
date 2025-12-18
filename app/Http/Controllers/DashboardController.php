@@ -22,9 +22,6 @@ class DashboardController extends Controller
 
         $jumlahProgram = Program::count();
 
-        // =======================
-        // DATASET 1: PENDAFTAR
-        // =======================
         $rawPendaftar = Pendaftar::selectRaw('MONTH(created_at) as bulan, COUNT(*) as total')
             ->whereYear('created_at', now()->year)
             ->groupBy('bulan')
@@ -35,9 +32,6 @@ class DashboardController extends Controller
             $grafikPendaftar[] = $rawPendaftar[$i] ?? 0;
         }
 
-        // =======================
-        // DATASET 2: PENERIMA
-        // =======================
         $rawPenerima = Penerima::selectRaw('MONTH(created_at) as bulan, COUNT(*) as total')
             ->whereYear('created_at', now()->year)
             ->groupBy('bulan')
@@ -48,9 +42,6 @@ class DashboardController extends Controller
             $grafikPenerima[] = $rawPenerima[$i] ?? 0;
         }
 
-        // =======================
-        // DATASET 3: RIWAYAT
-        // =======================
         $rawRiwayat = Riwayat::selectRaw('MONTH(created_at) as bulan, COUNT(*) as total')
             ->whereYear('created_at', now()->year)
             ->groupBy('bulan')

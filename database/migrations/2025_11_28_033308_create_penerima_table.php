@@ -23,7 +23,7 @@ return new class extends Migration
                 ->on('warga')
                 ->onDelete('cascade');
 
-            $table->string('keterangan')->nullable(); 
+            $table->string('keterangan')->nullable();
 
             $table->timestamps();
         });

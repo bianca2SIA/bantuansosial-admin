@@ -4,7 +4,6 @@
     <div class="main-panel">
         <div class="content-wrapper">
 
-            {{-- HEADER --}}
             <div class="page-header">
                 <h3 class="page-title">
                     <span class="page-title-icon bg-gradient-primary text-white me-2">
@@ -36,8 +35,6 @@
                         <div class="card-body">
 
                             <div class="row">
-
-                                {{-- ================= LEFT ================= --}}
                                 <div class="col-md-6">
 
                                     <div class="form-group">
@@ -77,7 +74,6 @@
 
                                 </div>
 
-                                {{-- ================= RIGHT ================= --}}
                                 <div class="col-md-6">
 
                                     <div class="form-group">
@@ -121,8 +117,6 @@
                                                                     </small>
                                                                 </td>
 
-
-
                                                                 <td>
                                                                     <a href="{{ route('verifikasi.media.download', $file->media_id) }}"
                                                                         class="badge badge-gradient-info me-1">
@@ -152,7 +146,6 @@
                                         @endif
                                     </div>
 
-                                    {{-- UPLOAD --}}
                                     <form method="POST"
                                         action="{{ route('verifikasi.media.upload', $verifikasi->verifikasi_id) }}"
                                         enctype="multipart/form-data">
@@ -176,8 +169,6 @@
                                                 *Anda dapat mengupload lebih dari satu file sekaligus.
                                             </small>
                                         </div>
-
-
                                     </form>
 
                                 </div>

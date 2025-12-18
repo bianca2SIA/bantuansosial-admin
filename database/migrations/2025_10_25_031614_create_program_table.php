@@ -16,7 +16,7 @@ return new class extends Migration
             $table->year('tahun');
             $table->text('deskripsi')->nullable();
             $table->decimal('anggaran', 15, 2)->default(0);
-            $table->timestamps();                          
+            $table->timestamps();
         });
     }
 

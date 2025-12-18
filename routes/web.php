@@ -52,7 +52,6 @@ Route::middleware(['checkislogin'])->group(function () {
     });
 
     Route::resource('warga', WargaController::class);
-
     Route::get('/about-developer', function () {return view('pages.admin.about-developer');})->name('about.developer');
 
 });

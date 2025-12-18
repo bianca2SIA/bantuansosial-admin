@@ -34,9 +34,6 @@
             position: relative;
         }
 
-        /* ===============================
-   FIX BACKGROUND DI MOBILE
-   =============================== */
         @media (max-width: 768px) {
             body {
                 background-size: cover;
@@ -46,8 +43,6 @@
                 background-color: #f6f0fb;
             }
         }
-
-
 
         .overlay {
             position: absolute;
@@ -83,7 +78,6 @@
             font-weight: 700;
             color: #7b2cbf;
             margin-top: 0;
-            /* sebelumnya 10px */
             margin-bottom: 6px;
         }
 
@@ -107,12 +101,6 @@
             height: auto;
         }
 
-
-
-        /* ===============================
-   GLOBAL ANIMATION BASE
-   =============================== */
-
         .login-card {
             opacity: 0;
             transform: translateY(40px);
@@ -127,10 +115,6 @@
             }
         }
 
-        /* ===============================
-   LOGO ANIMATION
-   =============================== */
-
         .animate-logo {
             transform: scale(0.9);
             opacity: 0;
@@ -144,10 +128,6 @@
                 opacity: 1;
             }
         }
-
-        /* ===============================
-   STAGGER TEXT & INPUT
-   =============================== */
 
         .animate-1,
         .animate-2,
@@ -186,9 +166,6 @@
             }
         }
 
-        /* ===============================
-   BUTTON MICRO INTERACTION
-   =============================== */
         .overlay {
             animation: overlayFade 1s ease forwards;
         }
@@ -278,6 +255,5 @@
     @yield('content')
 
 </body>
-
 
 </html>

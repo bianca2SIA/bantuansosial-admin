@@ -36,8 +36,6 @@
                         <div class="card-body">
 
                             <div class="row">
-
-                                {{-- ================= LEFT COLUMN ================= --}}
                                 <div class="col-md-6">
 
                                     <div class="form-group">
@@ -57,8 +55,6 @@
                                         </p>
                                     </div>
 
-
-
                                     <div class="form-group">
                                         <label class="text-muted">Program Bantuan</label>
                                         <p class="fw-bold">{{ $pendaftar->program->nama_program }}</p>
@@ -76,9 +72,7 @@
 
                                 </div>
 
-                                {{-- ================= RIGHT COLUMN ================= --}}
                                 <div class="col-md-6">
-
                                     <div class="form-group">
                                         <label class="text-muted small mb-1">
                                             Berkas Pendaftaran
@@ -111,7 +105,7 @@
                                                                 </td>
                                                                 <td class="text-start py-1">
                                                                     <div>
-                                                                    {{ preg_replace('/^[^-]+-/', '', $file->file_name) }}
+                                                                        {{ preg_replace('/^[^-]+-/', '', $file->file_name) }}
                                                                     </div>
 
                                                                     <small class="text-muted">
@@ -158,8 +152,8 @@
                                         @endif
                                     </div>
 
-                                    {{-- UPLOAD --}}
-                                    <form method="POST" action="{{ route('pendaftar.media.upload', $pendaftar->pendaftar_id) }}"
+                                    <form method="POST"
+                                        action="{{ route('pendaftar.media.upload', $pendaftar->pendaftar_id) }}"
                                         enctype="multipart/form-data">
                                         @csrf
 
@@ -190,8 +184,6 @@
 
                                 </div>
                             </div>
-
-
                         </div>
                     </div>
                 </div>

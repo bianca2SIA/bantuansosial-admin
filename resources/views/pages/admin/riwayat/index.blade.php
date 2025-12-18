@@ -112,7 +112,7 @@
                                             @endif
                                         </td>
 
-                                      <td class="text-center">
+                                        <td class="text-center">
                                             {{ \Carbon\Carbon::parse($item->tanggal)->format('d-m-Y') }}
                                         </td>
 

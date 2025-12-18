@@ -54,10 +54,7 @@
 
                                 <div class="row">
 
-                                    {{-- ======================== KIRI ======================== --}}
                                     <div class="col-md-6">
-
-
                                         <div class="form-group">
                                             <label>Program Bantuan</label>
                                             <select name="program_id" class="form-control" required>
@@ -98,10 +95,7 @@
 
 
                                     </div>
-
-                                    {{-- ======================== KANAN ======================== --}}
                                     <div class="col-md-6 d-flex flex-column">
-
 
                                         <div class="form-group">
                                             <label>Nilai Bantuan (Rp)</label>
@@ -109,9 +103,6 @@
                                                 value="{{ old('nilai', $riwayat->nilai) }}" required>
                                         </div>
 
-
-
-                                        {{-- FILE LAMA --}}
                                         <div class="alert alert-purple small d-flex align-items-center mb-3">
                                             <i class="mdi mdi-information-outline me-2"></i>
                                             <span>
@@ -123,7 +114,6 @@
                                             </span>
                                         </div>
 
-                                        {{-- TAMBAH FILE BARU --}}
                                         <div class="form-group mt-3">
                                             <label>Upload Bukti Penyaluran</label>
                                             <input type="file" name="media[]" multiple class="form-control"
@@ -131,7 +121,6 @@
                                             <small class="text-muted">*Anda dapat upload lebih dari satu file.</small>
                                         </div>
 
-                                        {{-- BUTTON --}}
                                         <div class="mt-auto d-flex justify-content-end">
                                             <a href="{{ route('riwayat.index') }}" class="btn btn-light me-2">
                                                 <i class="mdi mdi-arrow-left"></i> Batal
