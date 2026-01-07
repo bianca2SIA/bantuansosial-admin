@@ -62,7 +62,8 @@ class WargaController extends Controller
         $warga = Warga::findOrFail($id);
 
         $request->validate([
-            'no_ktp'        => 'required|max:20|unique:warga,no_ktp,' . $warga->warga_id . ',warga_id',
+            'no_ktp'        => 'required|max:20|unique:warga,no_ktp,' .
+                                $warga->warga_id . ',warga_id',
             'nama'          => 'required|string|max:100',
             'jenis_kelamin' => 'nullable|in:Laki-laki,Perempuan',
             'agama'         => 'nullable|string|max:50',

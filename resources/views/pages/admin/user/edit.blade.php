@@ -20,14 +20,16 @@
 
             @if (session('success'))
                 <div
-                    style="background-color: #d1e7dd; color:#0f5132; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
+                    style="background-color: #d1e7dd; color:#0f5132; border-radius:8px;
+                    padding:10px 15px; margin-bottom:20px;">
                     {{ session('success') }}
                 </div>
             @endif
 
             @if ($errors->any())
                 <div
-                    style="background-color:#f8d7da; color:#842029; border-radius:8px; padding:10px 15px; margin-bottom:20px;">
+                    style="background-color:#f8d7da; color:#842029; border-radius:8px;
+                    padding:10px 15px; margin-bottom:20px;">
                     <ul class="mb-0">
                         @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>

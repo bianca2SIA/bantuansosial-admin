@@ -13,7 +13,6 @@
                 </h3>
             </div>
 
-
             {{-- CARD PROFIL --}}
             <div class="row justify-content-center">
                 <div class="col-12 col-xl-16 grid-margin stretch-card">
@@ -24,8 +23,10 @@
                             <div class="row align-items-center">
                                 {{-- FOTO (KIRI) --}}
                                 <div class="col-md-4 text-center mb-4 mb-md-0">
-                                    <img src="{{ asset('assets-admin/images/foto-saya.JPG') }}" alt="Foto Profil"
-                                        class="rounded-circle" width="180" style="border:5px solid #e5d9ff">
+                                    <img src="{{ asset('assets-admin/images/foto-saya.JPG') }}"
+                                    alt="Foto Profil"
+                                        class="rounded-circle" width="180"
+                                        style="border:5px solid #e5d9ff">
                                 </div>
 
                                 {{-- IDENTITAS (KANAN) --}}
@@ -41,7 +42,8 @@
 
                                     <div class="mb-3">
                                         <p class="mb-1"><strong>NIM</strong> : 2457301026</p>
-                                        <p class="mb-1"><strong>Program Studi</strong> : D4 Sistem Informasi</p>
+                                        <p class="mb-1"><strong>Program Studi</strong>
+                                             : D4 Sistem Informasi</p>
                                     </div>
 
                                     <p class="text-muted mb-4">
@@ -61,7 +63,8 @@
                                             class="btn btn-outline-dark btn-sm">
                                             <i class="mdi mdi-github"></i>
                                         </a>
-                                        <a href="mailto:biancabahi02@gmail.com" class="btn btn-outline-info btn-sm">
+                                        <a href="mailto:biancabahi02@gmail.com"
+                                        class="btn btn-outline-info btn-sm">
                                             <i class="mdi mdi-email"></i>
                                         </a>
                                         <a href="https://instagram.com/biiancaa.aa" target="_blank"

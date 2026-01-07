@@ -17,7 +17,8 @@ class CreateWargaSeeder extends Seeder
                 'no_ktp'        => $faker->unique()->nik(),
                 'nama'          => $faker->name(),
                 'jenis_kelamin' => $faker->randomElement(['Laki-laki', 'Perempuan']),
-                'agama'         => $faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu', 'Buddha', 'Konghucu']),
+                'agama'         => $faker->randomElement(['Islam', 'Kristen', 'Katolik', 'Hindu',
+                                                          'Buddha', 'Konghucu']),
                 'pekerjaan'     => $faker->randomElement([
                     'Petani', 'Guru', 'Mahasiswa', 'Pedagang', 'Nelayan',
                     'Karyawan Swasta', 'Ibu Rumah Tangga', 'Wiraswasta',

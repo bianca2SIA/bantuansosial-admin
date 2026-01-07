@@ -109,7 +109,8 @@
                             <div class="doughnutjs-wrapper d-flex justify-content-center">
                                 <canvas id="traffic-chart"></canvas>
                             </div>
-                            <div id="traffic-chart-legend" class="rounded-legend legend-vertical legend-bottom-left pt-4">
+                            <div id="traffic-chart-legend" class="rounded-legend legend-vertical
+                            legend-bottom-left pt-4">
                             </div>
                         </div>
                     </div>
@@ -210,7 +211,7 @@
                         entries.forEach(entry => {
                             if (entry.isIntersecting) {
                                 entry.target.classList.add("active");
-                                observer.unobserve(entry.target); 
+                                observer.unobserve(entry.target);
                             }
                         });
                     }, {
