@@ -21,25 +21,15 @@ class CreateRiwayatSeeder extends Seeder
 
         foreach ($penerimaList as $penerima_id) {
 
-            $jumlahTahap = rand(1, 3);
-
-            for ($tahap = 1; $tahap <= $jumlahTahap; $tahap++) {
-
-                $tanggal = $faker->dateTimeBetween('-8 months', 'now');
-
-                DB::table('riwayat')->insert([
-                    'program_id'       => $faker->randomElement($programList),
-                    'penerima_id'      => $penerima_id,
-                    'tahap_ke'         => $tahap,
-                    'tanggal'          => $tanggal,
-                    'nilai'            => $faker->numberBetween(500000, 5000000),
-                    'bukti_penyaluran' => $faker->boolean(60)
-                        ? 'bukti_' . $faker->uuid . '.jpg'
-                        : null,
-                    'created_at'       => $tanggal,
-                    'updated_at'       => $tanggal,
-                ]);
-            }
+            DB::table('riwayat')->insert([
+                'program_id'  => $faker->randomElement($programList),
+                'penerima_id' => $penerima_id,
+                'tahap_ke'    => 1,
+                'tanggal'     => now(),
+                'nilai'       => $faker->numberBetween(500000, 5000000),
+                'created_at'  => now(),
+                'updated_at'  => now(),
+            ]);
         }
     }
 }

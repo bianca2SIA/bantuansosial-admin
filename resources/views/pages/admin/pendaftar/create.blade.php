@@ -28,7 +28,6 @@
                     <div class="card">
                         <div class="card-body">
 
-
                             <form class="forms-sample" method="POST" action="{{ route('pendaftar.store') }}"
                                 enctype="multipart/form-data">
                                 @csrf
